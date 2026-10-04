@@ -5,18 +5,18 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.narf.lana.deb
 Size: 5087596
-MD5sum: 8cccb63f50648e65e9b60b91f9f0ca27
-SHA1: 81e80346348d04ad3d0770763692a0da13389d5f
-SHA256: 344ae67daa593a1825058ab6a634cfe77cd443a88ffd872655e98d0950e67af8
+MD5sum: 0907ebdeeeaea9a6db3e412e315e57fd
+SHA1: bae0b460fa891550da1af7fffbff728496dc9d81
+SHA256: f2d78d9f9f6063ff03afab618ac75940406adc4afc5d3cc2fd365816dd01f42b
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
 Author: Narf
 Name: Lana
-Depiction: https://narf-alt.github.io/depiction/web/com.narf.lana.html
-SileoDepiction: https://narf-alt.github.io/depiction/native/com.narf.lana.json
-ModernDepiction: https://narf-alt.github.io/depiction/native/com.narf.lana.json
-Icon: https://narf-alt.github.io/assets/com.narf.lana/icon.png
+Depiction: https:///repo/depiction/web/com.narf.lana.html
+SileoDepiction: https:///repo/depiction/native/com.narf.lana.json
+ModernDepiction: https:///repo/depiction/native/com.narf.lana.json
+Icon: https:///repo/assets/com.narf.lana/icon.png
 
 Package: com.narf.lana
 Version: 1.3
@@ -25,18 +25,18 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64e.deb
 Size: 5079420
-MD5sum: 244905a6424c42b7713dd5dcb1a6473f
-SHA1: c812f422cb52b6166e342b28a7aa03e6034c3fba
-SHA256: 73279e367c0bc141046035924319fc5593020f785ebdae333cef34b049a55bf3
+MD5sum: 02a22cc19bc9df085000330746d64b1e
+SHA1: 09a1d787e0a137219a0fc209cfda3507d297e924
+SHA256: bf62f47fc59f55541ce31900b7232197e185926fe6ebc9874ab6a4045904aadb
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
 Author: Narf
 Name: Lana
-Depiction: https://narf-alt.github.io/depiction/web/com.narf.lana.html
-SileoDepiction: https://narf-alt.github.io/depiction/native/com.narf.lana.json
-ModernDepiction: https://narf-alt.github.io/depiction/native/com.narf.lana.json
-Icon: https://narf-alt.github.io/assets/com.narf.lana/icon.png
+Depiction: https:///repo/depiction/web/com.narf.lana.html
+SileoDepiction: https:///repo/depiction/native/com.narf.lana.json
+ModernDepiction: https:///repo/depiction/native/com.narf.lana.json
+Icon: https:///repo/assets/com.narf.lana/icon.png
 
 Package: im.mjh.wclocate
 Version: 4.0.0
@@ -46,14 +46,14 @@ Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
 Size: 34796
-MD5sum: 3d252a183f48f3c8ed247ad584a616f9
-SHA1: c19c4cb72b3b5cb7c8cdbcfecc1518c1e116be47
-SHA256: cf46c9467b6e92ee251994e3d94effdb0894e9e3c5941fe434cd19b81ea96d42
+MD5sum: 96a67ac2503efadce890533829c4670c
+SHA1: fd0dabf03de2cdf09e0d8ab7332d879b9851658d
+SHA256: 48f53045f2ddb93e64511465ada9e51022c8b12567d54d3b594a4a2bcd6a58fd
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
 Name: WCLocate
-Depiction: https://narf-alt.github.io/depiction/web/im.mjh.wclocate.html
-SileoDepiction: https://narf-alt.github.io/depiction/native/im.mjh.wclocate.json
-ModernDepiction: https://narf-alt.github.io/depiction/native/im.mjh.wclocate.json
-Icon: https://narf-alt.github.io/assets/im.mjh.wclocate/icon.png
+Depiction: https:///repo/depiction/web/im.mjh.wclocate.html
+SileoDepiction: https:///repo/depiction/native/im.mjh.wclocate.json
+ModernDepiction: https:///repo/depiction/native/im.mjh.wclocate.json
+Icon: https:///repo/assets/im.mjh.wclocate/icon.png
