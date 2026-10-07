@@ -70,6 +70,11 @@ jobs:
           cd silex
           python3 index.py
 
+      - name: Add Narf brand logo
+        run: |
+          mkdir -p silex/docs/assets
+          cp Styles/narf-brand.png silex/docs/assets/narf-brand.png
+
       - name: Fix Release architectures
         run: |
           python3 - <<'PY'
