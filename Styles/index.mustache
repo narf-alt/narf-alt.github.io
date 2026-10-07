@@ -2,1773 +2,759 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-
-<title>Narf Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>NARF</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
     color-scheme: dark;
-
-    --black: #000000;
-    --panel: #090909;
-    --panel-2: #101010;
-    --border: #242424;
-
-    --white: #ffffff;
+    --bg: #000;
+    --surface: #0a0a0a;
+    --surface-2: #121212;
+    --line: #232323;
+    --line-2: #333;
     --text: #f5f5f7;
-    --muted: #8e8e93;
-
+    --text-2: #b4b4b9;
+    --muted: #7d7d83;
     --orange: #ff7a00;
-    --orange-bright: #ff8a00;
+    --orange-hi: #ff9124;
+    --orange-soft: rgba(255,122,0,.10);
+    --orange-line: rgba(255,122,0,.32);
+    --r-lg: 22px;
+    --r-md: 16px;
+    --ease: cubic-bezier(.2,.8,.2,1);
 }
 
-html {
-    background: #000;
-}
+html { background: var(--bg); -webkit-text-size-adjust: 100%; }
 
 body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "Helvetica Neue",
-        sans-serif;
-
-    background: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
     color: var(--text);
-
     min-height: 100vh;
-    padding: 18px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    padding:
+        calc(14px + env(safe-area-inset-top))
+        calc(16px + env(safe-area-inset-right))
+        calc(14px + env(safe-area-inset-bottom))
+        calc(16px + env(safe-area-inset-left));
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
+a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+button, input { font: inherit; color: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+.page { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+.sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
 }
 
-button,
-input {
-    font-family: inherit;
-}
-
-.page {
-    width: 100%;
-    max-width: 1120px;
-    margin: 0 auto;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
+/* ---------- Header ---------- */
 
 .topbar {
-    height: 58px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 12px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative;
 }
 
 .brand {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    font-size: 20px;
-    font-weight: 850;
-    letter-spacing: -0.4px;
-}
-
-.brand img {
-    width: 38px;
-    height: 38px;
-
-    border-radius: 10px;
-
-    object-fit: cover;
-
-    background: #111;
-
-    border: 1px solid #242424;
-}
-
-.brand-name {
+    display: inline-flex; align-items: center; gap: 11px;
+    font-size: 24px; font-weight: 900; letter-spacing: -.02em;
     color: #fff;
+    min-height: 44px;
 }
 
-.account-area {
-    display: flex;
-    align-items: center;
+.brand-mark {
+    height: 32px; width: auto; max-width: 56px;
+    display: block;
+    object-fit: contain;
 }
 
-.account-button {
-    width: 40px;
-    height: 40px;
+.account-wrap { position: relative; }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.icon-btn {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
     border-radius: 50%;
-
-    background: #0b0b0b;
-
-    border: 1px solid #292929;
-
-    color: #fff;
-
+    background: var(--surface);
+    border: 1px solid var(--line-2);
     cursor: pointer;
-
-    transition: .18s ease;
+    transition: border-color .18s var(--ease), transform .12s var(--ease);
 }
+.icon-btn:hover { border-color: var(--orange); }
+.icon-btn:active { transform: scale(.94); }
+.icon-btn svg { width: 21px; height: 21px; }
 
-.account-button:hover {
-    border-color: var(--orange);
-
-    box-shadow:
-        0 0 0 3px rgba(255,122,0,.08);
+.account-menu {
+    position: absolute; right: 0; top: calc(100% + 8px);
+    width: 260px; z-index: 20;
+    background: var(--surface-2);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-md);
+    padding: 8px;
+    box-shadow: 0 18px 40px rgba(0,0,0,.7);
 }
-
-.account-icon {
-    width: 20px;
-    height: 20px;
-
-    opacity: .9;
+.account-menu[hidden] { display: none; }
+.account-menu-head { padding: 10px 10px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+.account-menu-head strong { display: block; font-size: 15px; }
+.account-menu-head span { font-size: 12px; color: var(--muted); }
+.account-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 10px; border-radius: 10px;
+    font-size: 14px; color: var(--text-2);
 }
+.account-item small { font-size: 11px; color: var(--muted); }
 
+/* ---------- Search ---------- */
 
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.search-area {
-    margin-bottom: 22px;
-}
+.search { margin: 6px 0 22px; }
 
 .search-box {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-
-    height: 48px;
-
-    background: #090909;
-
-    border: 1px solid #292929;
-
-    border-radius: 15px;
-
-    overflow: hidden;
-
-    transition: .18s ease;
+    display: flex; align-items: center; gap: 6px;
+    height: 54px; padding: 0 5px 0 18px;
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
 }
-
 .search-box:focus-within {
-    border-color: rgba(255,122,0,.75);
-
-    box-shadow:
-        0 0 0 3px rgba(255,122,0,.07);
+    border-color: var(--orange);
+    box-shadow: 0 0 0 4px rgba(255,122,0,.10);
 }
-
 .search-input {
-    flex: 1;
-
-    height: 100%;
-
-    padding: 0 15px;
-
-    border: 0;
-    outline: 0;
-
-    background: transparent;
-
-    color: #fff;
-
-    font-size: 14px;
+    flex: 1; min-width: 0; height: 100%;
+    background: transparent; border: 0; outline: 0;
+    font-size: 16px; /* 16px stops iOS zoom on focus */
 }
+.search-input::placeholder { color: #6c6c72; }
+.search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
 
-.search-input::placeholder {
-    color: #707070;
+.search-btn {
+    height: 44px; padding: 0 20px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange); color: #000;
+    border: 0; border-radius: 999px;
+    font-weight: 800; font-size: 14px; cursor: pointer;
+    transition: background .18s var(--ease), transform .12s var(--ease);
 }
+.search-btn:hover { background: var(--orange-hi); }
+.search-btn:active { transform: scale(.96); }
+.search-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
 
-.search-button {
-    width: 42px;
-    height: 42px;
+/* ---------- Section headers ---------- */
 
-    margin-right: 3px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: var(--orange);
-
-    color: #000;
-
-    cursor: pointer;
-
-    flex-shrink: 0;
-
-    transition: .18s ease;
+.head {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+    margin-bottom: 14px;
 }
+.head h2 { font-size: 26px; font-weight: 850; letter-spacing: -.03em; }
+.head p { color: var(--muted); font-size: 13px; margin-top: 2px; }
 
-.search-button:hover {
-    background: var(--orange-bright);
+.arrows { display: none; gap: 8px; }
+@media (hover: hover) and (pointer: fine) { .arrows { display: flex; } }
+.arrow { width: 38px; height: 38px; }
+.arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
-    transform: scale(1.03);
-}
+/* ---------- Featured ---------- */
 
-.search-icon {
-    width: 18px;
-    height: 18px;
+.featured { margin-bottom: 26px; }
+.featured[hidden] { display: none; }
 
-    stroke: currentColor;
-
-    stroke-width: 2.5;
-
-    fill: none;
-}
-
-
-/* =========================================================
-   FEATURED STORE
-========================================================= */
-
-.featured {
-    margin-bottom: 25px;
-}
-
-.featured-head {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 11px;
-}
-
-.featured-title {
-    color: var(--orange);
-
-    font-size: 23px;
-
-    font-weight: 800;
-
-    letter-spacing: -.5px;
-}
-
-.featured-subtitle {
-    color: #777;
-
-    font-size: 12px;
-}
-
-.featured-wrapper {
-    position: relative;
-}
-
-.featured-track {
-    display: flex;
-
-    gap: 14px;
-
-    overflow-x: auto;
-
-    scroll-behavior: smooth;
-
-    scrollbar-width: none;
-
-    padding: 2px 2px 7px;
-
+.feat-track {
+    display: flex; gap: 14px;
+    overflow-x: auto; overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-}
-
-.featured-track::-webkit-scrollbar {
-    display: none;
-}
-
-.featured-card {
-    position: relative;
-
-    flex: 0 0 360px;
-
-    min-height: 190px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    padding: 19px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #111 0%,
-            #090909 65%,
-            #0c0703 100%
-        );
-
-    border: 1px solid #292929;
-
-    border-radius: 22px;
-
-    overflow: hidden;
-
-    scroll-snap-align: start;
-
-    transition: .18s ease;
-}
-
-.featured-card:hover {
-    border-color: rgba(255,122,0,.55);
-
-    transform: translateY(-2px);
-}
-
-.featured-card::after {
-    content: "";
-
-    position: absolute;
-
-    width: 170px;
-    height: 170px;
-
-    right: -70px;
-    bottom: -90px;
-
-    background: rgba(255,122,0,.08);
-
-    border-radius: 50%;
-
-    pointer-events: none;
-}
-
-.featured-icon {
-    width: 112px;
-    height: 112px;
-
-    flex-shrink: 0;
-
-    object-fit: cover;
-
-    border-radius: 25px;
-
-    background: #151515;
-
-    border: 1px solid #303030;
-
-    box-shadow:
-        0 12px 28px rgba(0,0,0,.45);
-}
-
-.featured-content {
-    min-width: 0;
-
-    position: relative;
-
-    z-index: 1;
-}
-
-.featured-name {
-    font-size: 22px;
-
-    font-weight: 850;
-
-    color: #fff;
-
-    margin-bottom: 4px;
-
-    overflow-wrap: anywhere;
-}
-
-.featured-developer {
-    color: var(--orange);
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    margin-bottom: 9px;
-}
-
-.featured-description {
-    color: #b9b9b9;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    display: -webkit-box;
-
-    -webkit-line-clamp: 3;
-
-    -webkit-box-orient: vertical;
-
-    overflow: hidden;
-}
-
-.featured-badge {
-    display: inline-flex;
-
-    margin-top: 10px;
-
-    padding: 5px 8px;
-
-    border-radius: 999px;
-
-    background: rgba(255,122,0,.10);
-
-    border: 1px solid rgba(255,122,0,.28);
-
-    color: var(--orange);
-
-    font-size: 10px;
-
-    font-weight: 800;
-}
-
-
-/* =========================================================
-   CATEGORY NAVIGATION
-========================================================= */
-
-.nav {
-    display: flex;
-
-    gap: 8px;
-
-    overflow-x: auto;
-
-    padding: 2px 1px 15px;
-
     scrollbar-width: none;
+    margin: 0 calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
+    padding: 4px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
+    scroll-padding-inline: 16px;
+    -webkit-overflow-scrolling: touch;
 }
-
-.nav::-webkit-scrollbar {
-    display: none;
-}
-
-.category-btn {
-    flex-shrink: 0;
-
-    border: 1px solid #303030;
-
-    background: #080808;
-
-    color: var(--orange);
-
-    border-radius: 999px;
-
-    padding: 10px 15px;
-
-    font-size: 13px;
-
-    font-weight: 750;
-
-    white-space: nowrap;
-
-    cursor: pointer;
-
-    transition: .18s ease;
-}
-
-.category-btn:hover {
-    border-color: var(--orange);
-
-    background: #120b05;
-}
-
-.category-btn.active {
-    background: var(--orange);
-
-    color: #000;
-
-    border-color: var(--orange);
-
-    box-shadow:
-        0 5px 18px rgba(255,122,0,.15);
-}
-
-
-/* =========================================================
-   PRODUCT VIEWS
-========================================================= */
-
-.view {
-    display: block;
-}
-
-.view[hidden] {
-    display: none;
-}
-
-.section-head {
-    display: flex;
-
-    align-items: end;
-
-    justify-content: space-between;
-
-    margin-bottom: 12px;
-}
-
-.section-head h2 {
-    color: var(--orange);
-
-    font-size: 23px;
-
-    font-weight: 800;
-
-    letter-spacing: -.4px;
-}
-
-.section-head p {
-    color: #777;
-
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   PRODUCT CARDS
-========================================================= */
-
-.package-list {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(290px, 1fr)
-        );
-
-    gap: 14px;
-}
-
-.package-card {
-    display: block;
-
-    padding: 15px;
-
-    background: #090909;
-
-    border: 1px solid #242424;
-
-    border-radius: 20px;
-
-    transition: .18s ease;
-}
-
-.package-card:hover {
-    transform: translateY(-2px);
-
-    border-color:
-        rgba(255,122,0,.55);
-
-    box-shadow:
-        0 12px 28px rgba(0,0,0,.55),
-        0 0 0 1px rgba(255,122,0,.06);
-}
-
-.package-card[hidden] {
-    display: none;
-}
-
-.package-card-top {
-    display: flex;
-
-    gap: 14px;
-}
-
-.package-icon {
-    width: 68px;
-    height: 68px;
-
-    flex-shrink: 0;
-
-    object-fit: cover;
-
-    border-radius: 17px;
-
-    background: #111;
-
-    border: 1px solid #252525;
-}
-
-.package-main {
-    min-width: 0;
-}
-
-.package-name {
-    color: #fff;
-
-    font-size: 18px;
-
-    font-weight: 800;
-
-    margin-bottom: 3px;
-
-    overflow-wrap: anywhere;
-}
-
-.package-meta {
-    color: #858585;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-    margin-bottom: 8px;
-}
-
-.package-summary {
-    color: #d0d0d0;
-
-    font-size: 13px;
-
-    line-height: 1.55;
-
-    overflow-wrap: anywhere;
-}
-
-.package-badges {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 6px;
-
-    margin-top: 10px;
-}
-
-.tag {
-    padding: 6px 8px;
-
-    border-radius: 999px;
-
+.feat-track::-webkit-scrollbar { display: none; }
+
+.feat {
+    position: relative; flex: 0 0 min(86vw, 380px);
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; gap: 18px;
+    padding: 20px; min-height: 236px;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line-2);
     background:
-        rgba(255,122,0,.10);
+        radial-gradient(120% 90% at 100% 100%, rgba(255,122,0,.16), transparent 60%),
+        var(--surface);
+    overflow: hidden;
+    transition: transform .22s var(--ease), border-color .22s var(--ease);
+}
+.feat:hover { transform: translateY(-3px); border-color: var(--orange-line); }
+.feat:active { transform: scale(.985); }
 
-    border:
-        1px solid rgba(255,122,0,.28);
+.feat-top { display: flex; gap: 16px; align-items: center; }
+.feat .icon { width: 92px; height: 92px; border-radius: 21px; }
+.feat-name { font-size: 22px; font-weight: 850; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.feat-dev { color: var(--orange); font-size: 13px; font-weight: 700; margin-top: 2px; }
+.feat-desc {
+    color: var(--text-2); font-size: 14px; line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    overflow-wrap: anywhere;
+}
+.feat-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; }
 
-    color: var(--orange);
+/* ---------- Category nav ---------- */
 
-    font-size: 11px;
+.cats {
+    position: sticky; top: 0; z-index: 10;
+    margin: 0 calc(-16px - env(safe-area-inset-right)) 18px calc(-16px - env(safe-area-inset-left));
+    padding: 8px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
+    background: linear-gradient(#000 70%, rgba(0,0,0,0));
+}
+.cats-row {
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.cats-row::-webkit-scrollbar { display: none; }
 
-    font-weight: 750;
+.cat {
+    flex: 0 0 auto; min-height: 44px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0 18px;
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    color: var(--text-2);
+    font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer;
+    transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), transform .12s var(--ease);
+}
+.cat:hover { border-color: var(--orange-line); color: #fff; }
+.cat:active { transform: scale(.96); }
+.cat[aria-pressed="true"] {
+    background: var(--orange); border-color: var(--orange); color: #000;
 }
 
+/* ---------- Product grid ---------- */
 
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty {
-    display: none;
-
-    padding: 30px;
-
-    text-align: center;
-
-    color: #888;
-
-    background: #090909;
-
-    border: 1px solid #242424;
-
-    border-radius: 18px;
+.list {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
 }
+.list[hidden] { display: none; }
 
-.category-empty {
-    display: none;
-
-    padding: 42px 28px;
-
-    text-align: center;
-
-    color: #888;
-
-    background: #090909;
-
-    border: 1px solid #242424;
-
-    border-radius: 20px;
+.pkg {
+    display: flex; flex-direction: column; gap: 14px;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    transition: transform .2s var(--ease), border-color .2s var(--ease), box-shadow .2s var(--ease);
 }
+.pkg[hidden] { display: none; }
+.pkg:hover {
+    transform: translateY(-3px);
+    border-color: var(--orange-line);
+    box-shadow: 0 16px 34px rgba(0,0,0,.6);
+}
+.pkg:active { transform: scale(.985); }
 
-.category-empty strong {
+.pkg-top { display: flex; align-items: center; gap: 14px; }
+.pkg .icon { width: 68px; height: 68px; border-radius: 16px; }
+.pkg-main { flex: 1; min-width: 0; }
+.pkg-name { font-size: 18px; font-weight: 800; letter-spacing: -.015em; overflow-wrap: anywhere; }
+.pkg-dev { color: var(--muted); font-size: 13px; margin-top: 1px; }
+.pkg-desc {
+    color: var(--text-2); font-size: 14px; line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    overflow-wrap: anywhere;
+}
+.pkg-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Shared bits */
+
+.icon {
+    flex-shrink: 0; object-fit: cover;
+    background: var(--surface-2);
+    border: 1px solid var(--line-2);
+    box-shadow: 0 10px 24px rgba(0,0,0,.45);
     display: block;
-
-    color: var(--orange);
-
-    font-size: 18px;
-
-    margin-bottom: 7px;
+}
+.icon.ph {
+    display: grid; place-items: center;
+    font-weight: 900; font-size: 28px; color: var(--orange);
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
 }
 
-.category-empty span {
-    font-size: 13px;
+.chip {
+    display: inline-flex; align-items: center;
+    padding: 5px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; line-height: 1.2;
+    color: var(--text-2);
+    background: var(--surface-2); border: 1px solid var(--line);
+}
+.chip.cat-chip { color: var(--orange); background: var(--orange-soft); border-color: var(--orange-line); }
+
+.cta {
+    flex-shrink: 0; min-width: 68px; min-height: 36px;
+    display: inline-grid; place-items: center;
+    padding: 0 16px; border-radius: 999px;
+    background: var(--orange-soft); border: 1px solid var(--orange-line);
+    color: var(--orange); font-size: 14px; font-weight: 850; letter-spacing: .01em;
+    transition: background .18s var(--ease), color .18s var(--ease);
+}
+.pkg:hover .cta, .feat:hover .cta { background: var(--orange); color: #000; }
+.cta.paid { font-variant-numeric: tabular-nums; }
+
+/* ---------- Empty states ---------- */
+
+.state {
+    display: none; text-align: center;
+    padding: 56px 24px;
+    background: var(--surface);
+    border: 1px dashed var(--line-2);
+    border-radius: var(--r-lg);
+}
+.state.on { display: block; }
+.state svg { width: 40px; height: 40px; margin-bottom: 14px; fill: none; stroke: var(--orange); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.state strong { display: block; font-size: 18px; margin-bottom: 6px; }
+.state span { color: var(--muted); font-size: 14px; }
+.state button {
+    margin-top: 18px; min-height: 44px; padding: 0 20px;
+    background: transparent; border: 1px solid var(--orange-line); border-radius: 999px;
+    color: var(--orange); font-weight: 700; cursor: pointer;
+}
+.state button[hidden] { display: none; }
+
+/* ---------- Footer ---------- */
+
+.footer { margin-top: 56px; padding-top: 30px; border-top: 1px solid var(--line); }
+.footer-grid {
+    display: grid; gap: 26px 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+.footer h3 { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+.footer-col a, .footer-col span {
+    display: block; padding: 6px 0; font-size: 14px; color: var(--muted);
+    transition: color .18s var(--ease);
+}
+.footer-col a:hover { color: var(--orange); }
+.footer-col .soon { opacity: .55; cursor: default; }
+.footer-bottom {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+    margin-top: 28px; padding: 18px 0 6px;
+    border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 12px;
+}
+.x-link {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+    color: var(--text-2); font-size: 14px; font-weight: 600;
+    transition: color .18s var(--ease);
+}
+.x-link:hover { color: var(--orange); }
+.x-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ---------- Larger screens ---------- */
+
+@media (min-width: 700px) {
+    body { padding-left: 28px; padding-right: 28px; }
+    .feat-track { margin: 0; padding-left: 0; padding-right: 0; scroll-padding-inline: 0; }
+    .cats { margin: 0 0 18px; padding-left: 0; padding-right: 0; }
+    .footer-grid { grid-template-columns: repeat(5, 1fr); }
+    .head h2 { font-size: 30px; }
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-    margin-top: 35px;
-
-    padding:
-        28px
-        10px
-        18px;
-
-    text-align: center;
-
-    color: #707070;
-
-    font-size: 12px;
-
-    border-top: 1px solid #151515;
+@media (max-width: 420px) {
+    .search-btn span { display: none; }
+    .search-btn { padding: 0; width: 44px; justify-content: center; }
+    .feat .icon { width: 78px; height: 78px; border-radius: 18px; }
 }
 
-.footer-links {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 18px;
-
-    margin-bottom: 15px;
-}
-
-.footer-link {
-    color: #aaa;
-
-    transition: .18s ease;
-}
-
-.footer-link:hover {
-    color: var(--orange);
-}
-
-.footer-x {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    color: #aaa;
-
-    transition: .18s ease;
-}
-
-.footer-x:hover {
-    color: var(--orange);
-}
-
-.x-icon {
-    width: 14px;
-    height: 14px;
-
-    fill: currentColor;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:650px) {
-
-    body {
-        padding: 12px;
-    }
-
-    .topbar {
-        height: 52px;
-    }
-
-    .brand {
-        font-size: 18px;
-    }
-
-    .brand img {
-        width: 36px;
-        height: 36px;
-    }
-
-    .search-box {
-        height: 46px;
-    }
-
-    .featured-card {
-        flex-basis: 88vw;
-
-        min-height: 175px;
-
-        padding: 15px;
-
-        gap: 14px;
-    }
-
-    .featured-icon {
-        width: 92px;
-        height: 92px;
-
-        border-radius: 21px;
-    }
-
-    .featured-name {
-        font-size: 19px;
-    }
-
-    .package-list {
-        grid-template-columns: 1fr;
-    }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
 </style>
-
-<meta name="theme-color" content="#000000">
 </head>
 
-
 <body>
-
 <div class="page">
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
+<!-- ================= HEADER ================= -->
 <header class="topbar">
 
-<a
-    class="brand"
-    href="https://{{repo_url}}"
-    aria-label="NARF Store">
+    <a class="brand" href="https://{{repo_url}}" aria-label="NARF home">
+        <img class="brand-mark" src="narf-logo.png" alt="" width="56" height="32"
+             onerror="this.style.display='none'">
+        <span>NARF</span>
+    </a>
 
-    <img
-        src="icon.png"
-        alt="NARF">
-
-    <span class="brand-name">
-        NARF
-    </span>
-
-</a>
-
-
-<!-- Account area.
-     This is intentionally kept separate from X.
-     Sileo/account integration can use this area later. -->
-
-<div class="account-area">
-
-<button
-    class="account-button"
-    type="button"
-    aria-label="Account">
-
-    <svg
-        class="account-icon"
-        viewBox="0 0 24 24"
-        aria-hidden="true">
-
-        <circle
-            cx="12"
-            cy="8"
-            r="3.5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"/>
-
-        <path
-            d="M5.5 19.2c.8-3.1 3-4.7 6.5-4.7s5.7 1.6 6.5 4.7"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"/>
-
-    </svg>
-
-</button>
-
-</div>
+    <!-- Account: UI shell only. No sign-in state is claimed until real authentication exists. -->
+    <div class="account-wrap">
+        <button class="icon-btn" id="account-btn" type="button"
+                aria-label="Account" aria-haspopup="true" aria-expanded="false" aria-controls="account-menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M5.4 19.4c.9-3.2 3.2-4.9 6.6-4.9s5.7 1.7 6.6 4.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <div class="account-menu" id="account-menu" role="menu" hidden>
+            <div class="account-menu-head">
+                <strong>Account</strong>
+                <span>Sign-in is not available yet.</span>
+            </div>
+            <div class="account-item" role="menuitem" aria-disabled="true">Subscription <small>Soon</small></div>
+            <div class="account-item" role="menuitem" aria-disabled="true">Purchases <small>Soon</small></div>
+            <div class="account-item" role="menuitem" aria-disabled="true">Entitlements <small>Soon</small></div>
+            <div class="account-item" role="menuitem" aria-disabled="true">Settings <small>Soon</small></div>
+        </div>
+    </div>
 
 </header>
 
-
-<!-- =====================================================
-     SEARCH
-===================================================== -->
-
-<section class="search-area">
-
-<form
-    id="search-form"
-    class="search-box">
-
-    <input
-        id="search-input"
-        class="search-input"
-        type="search"
-        autocomplete="off"
-        placeholder="Search Narf Store...">
-
-    <button
-        class="search-button"
-        type="submit"
-        aria-label="Search">
-
-        <svg
-            class="search-icon"
-            viewBox="0 0 24 24"
-            aria-hidden="true">
-
-            <circle
-                cx="10.8"
-                cy="10.8"
-                r="6.2"/>
-
-            <path
-                d="M15.5 15.5L21 21"/>
-
-        </svg>
-
-    </button>
-
-</form>
-
+<!-- ================= SEARCH ================= -->
+<section class="search" aria-label="Search">
+    <form id="search-form" class="search-box" role="search">
+        <label class="sr-only" for="search-input">Search packages</label>
+        <input id="search-input" class="search-input" type="search"
+               placeholder="Search packages, developers, bundle IDs"
+               autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search">
+        <button class="search-btn" type="submit" aria-label="Search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="M15.5 15.5L21 21"/></svg>
+            <span>Search</span>
+        </button>
+    </form>
 </section>
 
-
-<!-- =====================================================
-     FEATURED PRODUCTS
-===================================================== -->
-
-<section class="featured">
-
-<div class="featured-head">
-
-<h2 class="featured-title">
-Featured
-</h2>
-
-<span class="featured-subtitle">
-Discover products
-</span>
-
-</div>
-
-
-<div
-    id="featured-track"
-    class="featured-track">
-
-{{#sections}}
-
-{{#packages}}
-
-<a
-    class="featured-card"
-    href="depiction/web/{{bundle_id}}.html"
-
-    data-name="{{name}}"
-    data-bundle="{{bundle_id}}"
-    data-developer="{{developer.name}}"
-    data-section="{{section}}">
-
-    <img
-        class="featured-icon"
-        src="assets/{{bundle_id}}/icon.png"
-        alt="{{name}}">
-
-    <div class="featured-content">
-
-        <div class="featured-name">
-            {{name}}
+<!-- ================= FEATURED (auto-built from Source) ================= -->
+<section class="featured" id="featured" aria-labelledby="featured-title">
+    <div class="head">
+        <div>
+            <h2 id="featured-title">Featured</h2>
+            <p>Hand-picked from the Source</p>
         </div>
-
-        <div class="featured-developer">
-            {{developer.name}}
+        <div class="arrows">
+            <button class="icon-btn arrow" id="feat-prev" type="button" aria-label="Previous">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <button class="icon-btn arrow" id="feat-next" type="button" aria-label="Next">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
         </div>
-
-        <div class="featured-description">
-            {{summary}}
-        </div>
-
-        <span class="featured-badge">
-            {{section}}
-        </span>
-
     </div>
 
-</a>
-
+    <div class="feat-track" id="feat-track" tabindex="0" aria-label="Featured packages">
+{{#sections}}
+{{#packages}}
+        <a class="feat" href="depiction/web/{{bundle_id}}.html">
+            <div class="feat-top">
+                <img class="icon" src="assets/{{bundle_id}}/icon.png" alt="" width="92" height="92" loading="lazy">
+                <div>
+                    <div class="feat-name">{{name}}</div>
+                    <div class="feat-dev">{{developer.name}}</div>
+                </div>
+            </div>
+            <div class="feat-desc">{{summary}}</div>
+            <div class="feat-foot">
+                <div class="pkg-meta">
+                    <span class="chip cat-chip">{{section}}</span>
+                    <span class="chip">v{{version}}</span>
+                </div>
+                <span class="cta {{#price}}paid{{/price}}">{{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}</span>
+            </div>
+        </a>
 {{/packages}}
-
 {{/sections}}
-
-</div>
-
+    </div>
 </section>
 
-
-<!-- =====================================================
-     CATEGORIES
-===================================================== -->
-
-<nav class="nav">
-
-<button
-    class="category-btn active"
-    data-category="popular">
-
-🔥 Popular
-
-</button>
-
-
-<button
-    class="category-btn"
-    data-category="Themes">
-
-🪶 Themes
-
-</button>
-
-
-<button
-    class="category-btn"
-    data-category="Tweaks">
-
-🛠️ Tweaks
-
-</button>
-
-
-<button
-    class="category-btn"
-    data-category="Wallpapers">
-
-🖼️ Wallpapers
-
-</button>
-
-
-<button
-    class="category-btn"
-    data-category="Apps">
-
-📱 Apps
-
-</button>
-
+<!-- ================= CATEGORIES (built by JS from package sections) ================= -->
+<nav class="cats" aria-label="Categories">
+    <div class="cats-row" id="cats-row">
+        <button class="cat" type="button" data-cat="popular" aria-pressed="true">
+            <span aria-hidden="true">🔥</span>Popular
+        </button>
+    </div>
 </nav>
 
+<!-- ================= PRODUCTS ================= -->
+<main>
+    <div class="head">
+        <div>
+            <h2 id="view-title">Popular</h2>
+            <p id="view-sub"></p>
+        </div>
+    </div>
 
-<!-- =====================================================
-     POPULAR
-===================================================== -->
-
-<section
-    id="popular-view"
-    class="view">
-
-<div class="section-head">
-
-<div>
-
-<h2>
-Popular
-</h2>
-
-<p>
-Products across Narf Store
-</p>
-
-</div>
-
-</div>
-
-
-<div class="package-list">
-
+    <div class="list" id="list" aria-live="polite">
 {{#sections}}
-
 {{#packages}}
-
-<a
-    class="package-card package-entry"
-
-    href="depiction/web/{{bundle_id}}.html"
-
-    data-name="{{name}}"
-    data-bundle="{{bundle_id}}"
-    data-developer="{{developer.name}}"
-    data-section="{{section}}">
-
-
-<div class="package-card-top">
-
-
-<img
-    class="package-icon"
-    src="assets/{{bundle_id}}/icon.png"
-    alt="{{name}}">
-
-
-<div class="package-main">
-
-
-<div class="package-name">
-{{name}}
-</div>
-
-
-<div class="package-meta">
-
-{{developer.name}}
-· v{{version}}
-· iOS {{works_min}}–{{works_max}}
-
-</div>
-
-
-<div class="package-summary">
-{{summary}}
-</div>
-
-
-<div class="package-badges">
-
-<span class="tag">
-{{section}}
-</span>
-
-</div>
-
-
-</div>
-
-</div>
-
-</a>
-
+        <a class="pkg"
+           href="depiction/web/{{bundle_id}}.html"
+           data-name="{{name}}"
+           data-bundle="{{bundle_id}}"
+           data-developer="{{developer.name}}"
+           data-section="{{section}}"
+           data-summary="{{summary}}">
+            <div class="pkg-top">
+                <img class="icon" src="assets/{{bundle_id}}/icon.png" alt="" width="68" height="68" loading="lazy">
+                <div class="pkg-main">
+                    <div class="pkg-name">{{name}}</div>
+                    <div class="pkg-dev">{{developer.name}}</div>
+                </div>
+                <span class="cta {{#price}}paid{{/price}}">{{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}</span>
+            </div>
+            <div class="pkg-desc">{{summary}}</div>
+            <div class="pkg-meta">
+                <span class="chip cat-chip">{{section}}</span>
+                <span class="chip">v{{version}}</span>
+                <span class="chip">iOS {{works_min}}–{{works_max}}</span>
+            </div>
+        </a>
 {{/packages}}
-
 {{/sections}}
+    </div>
 
-</div>
+    <div class="state" id="state">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/>
+        </svg>
+        <strong id="state-title">No products yet</strong>
+        <span id="state-text">This category is ready for future releases.</span>
+        <div><button type="button" id="state-clear" hidden>Clear search</button></div>
+    </div>
+</main>
 
-</section>
-
-
-<!-- =====================================================
-     REAL PACKAGE SECTIONS
-===================================================== -->
-
-{{#sections}}
-
-<section
-    class="view category-view"
-    data-category-view="{{section_name}}"
-    hidden>
-
-
-<div class="section-head">
-
-<div>
-
-<h2>
-{{section_name}}
-</h2>
-
-<p>
-Browse {{section_name}} products
-</p>
-
-</div>
-
-</div>
-
-
-<div class="package-list">
-
-{{#packages}}
-
-<a
-    class="package-card package-entry"
-
-    href="depiction/web/{{bundle_id}}.html"
-
-    data-name="{{name}}"
-    data-bundle="{{bundle_id}}"
-    data-developer="{{developer.name}}"
-    data-section="{{section}}">
-
-
-<div class="package-card-top">
-
-
-<img
-    class="package-icon"
-    src="assets/{{bundle_id}}/icon.png"
-    alt="{{name}}">
-
-
-<div class="package-main">
-
-
-<div class="package-name">
-{{name}}
-</div>
-
-
-<div class="package-meta">
-
-{{developer.name}}
-· v{{version}}
-· iOS {{works_min}}–{{works_max}}
-
-</div>
-
-
-<div class="package-summary">
-{{summary}}
-</div>
-
-
-<div class="package-badges">
-
-<span class="tag">
-{{section}}
-</span>
-
-</div>
-
-
-</div>
-
-</div>
-
-</a>
-
-{{/packages}}
-
-</div>
-
-</section>
-
-{{/sections}}
-
-
-<!-- =====================================================
-     EMPTY CATEGORY
-===================================================== -->
-
-<div
-    id="category-empty"
-    class="category-empty">
-
-<strong id="category-empty-title">
-No products yet
-</strong>
-
-<span id="category-empty-text">
-This category is ready for future products.
-</span>
-
-</div>
-
-
-<div
-    id="empty-state"
-    class="empty">
-
-No products match your search.
-
-</div>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
+<!-- ================= FOOTER ================= -->
 <footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3>Store</h3>
+            <a href="https://{{repo_url}}">Home</a>
+        </div>
+        <div class="footer-col">
+            <h3>Account</h3>
+            <span class="soon">Sign in</span>
+        </div>
+        <div class="footer-col">
+            <h3>Purchases</h3>
+            <span class="soon">Order history</span>
+        </div>
+        <div class="footer-col">
+            <h3>Support</h3>
+            <a href="https://x.com/narf_ios" target="_blank" rel="noopener">Contact on X</a>
+        </div>
+        <div class="footer-col">
+            <h3>Developers</h3>
+            <span class="soon">Publish with NARF</span>
+        </div>
+    </div>
 
-<div class="footer-links">
-
-<a
-    class="footer-link"
-    href="https://{{repo_url}}">
-
-Store
-
-</a>
-
-
-<a
-    class="footer-link"
-    href="#">
-
-Account
-
-</a>
-
-
-<a
-    class="footer-link"
-    href="#">
-
-Purchases
-
-</a>
-
-
-<a
-    class="footer-link"
-    href="#">
-
-Support
-
-</a>
-
-
-<a
-    class="footer-link"
-    href="#">
-
-Developers
-
-</a>
-
-
-<a
-    class="footer-x"
-    href="https://x.com/narf_ios"
-    target="_blank"
-    rel="noopener">
-
-<svg
-    class="x-icon"
-    viewBox="0 0 24 24"
-    aria-hidden="true">
-
-<path
-    d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.4L6.47 22H3.36l7.24-8.28L2.8 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.8h1.73L8.27 4.07H6.42L17.8 19.8Z"/>
-
-</svg>
-
-@narf_ios
-
-</a>
-
-</div>
-
-
-<div>
-{{footer}}
-· Narf Store
-</div>
-
+    <div class="footer-bottom">
+        <a class="x-link" href="https://x.com/narf_ios" target="_blank" rel="noopener" aria-label="NARF on X, @narf_ios">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.4L6.47 22H3.36l7.24-8.28L2.8 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.8h1.73L8.27 4.07H6.42L17.8 19.8Z"/></svg>
+            @narf_ios
+        </a>
+        <span>{{footer}}</span>
+    </div>
 </footer>
 
-
 </div>
 
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
 <script>
+(function () {
+    var cards = [].slice.call(document.querySelectorAll('.pkg'));
+    var list = document.getElementById('list');
+    var state = document.getElementById('state');
+    var stateTitle = document.getElementById('state-title');
+    var stateText = document.getElementById('state-text');
+    var stateClear = document.getElementById('state-clear');
+    var viewTitle = document.getElementById('view-title');
+    var viewSub = document.getElementById('view-sub');
+    var catsRow = document.getElementById('cats-row');
+    var form = document.getElementById('search-form');
+    var input = document.getElementById('search-input');
+    var featured = document.getElementById('featured');
+    var track = document.getElementById('feat-track');
 
-(function() {
+    /* ---------- Icon fallback (missing assets never show a broken image) ---------- */
+    function placeholder(img) {
+        if (img.dataset.ph) return;
+        img.dataset.ph = '1';
+        var d = document.createElement('div');
+        d.className = img.className + ' ph';
+        d.setAttribute('aria-hidden', 'true');
+        d.style.width = img.getAttribute('width') + 'px';
+        d.style.height = img.getAttribute('height') + 'px';
+        var host = img.closest('.pkg, .feat');
+        var n = host && (host.dataset.name || (host.querySelector('.feat-name') || {}).textContent) || '';
+        d.textContent = (n.trim().charAt(0) || '·').toUpperCase();
+        img.parentNode.replaceChild(d, img);
+    }
+    [].slice.call(document.querySelectorAll('img.icon')).forEach(function (img) {
+        if (img.complete && img.naturalWidth === 0) placeholder(img);
+    });
+    document.addEventListener('error', function (e) {
+        if (e.target && e.target.tagName === 'IMG' && e.target.classList.contains('icon')) placeholder(e.target);
+    }, true);
 
+    /* ---------- Categories: preferred order + anything new found in the data ---------- */
+    var ICONS = { themes: '🪶', tweaks: '🛠️', wallpapers: '🖼️', apps: '📱' };
+    var ORDER = ['Themes', 'Tweaks', 'Wallpapers', 'Apps'];
+    var cats = [];
+    var seen = {};
 
-var buttons =
-    [].slice.call(
-        document.querySelectorAll('.category-btn')
-    );
+    function addCat(label) {
+        var key = label.toLowerCase();
+        if (!label || seen[key]) return;
+        seen[key] = true;
+        cats.push({ key: key, label: label });
+    }
+    ORDER.forEach(addCat);
+    cards.forEach(function (c) { addCat((c.dataset.section || '').trim()); });
 
-
-var popular =
-    document.getElementById('popular-view');
-
-
-var views =
-    [].slice.call(
-        document.querySelectorAll('.category-view')
-    );
-
-
-var search =
-    document.getElementById('search-input');
-
-
-var searchForm =
-    document.getElementById('search-form');
-
-
-var empty =
-    document.getElementById('empty-state');
-
-
-var categoryEmpty =
-    document.getElementById('category-empty');
-
-
-var categoryEmptyTitle =
-    document.getElementById(
-        'category-empty-title'
-    );
-
-
-var categoryEmptyText =
-    document.getElementById(
-        'category-empty-text'
-    );
-
-
-var featuredTrack =
-    document.getElementById(
-        'featured-track'
-    );
-
-
-function findView(category) {
-
-    var result = null;
-
-    views.forEach(function(view) {
-
-        if (
-            view.dataset.categoryView === category
-        ) {
-
-            result = view;
-
-        }
-
+    cats.forEach(function (c) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cat';
+        b.dataset.cat = c.key;
+        b.setAttribute('aria-pressed', 'false');
+        b.innerHTML = '<span aria-hidden="true">' + (ICONS[c.key] || '📦') + '</span>';
+        b.appendChild(document.createTextNode(c.label));
+        catsRow.appendChild(b);
     });
 
-    return result;
+    function labelFor(key) {
+        for (var i = 0; i < cats.length; i++) if (cats[i].key === key) return cats[i].label;
+        return key;
+    }
 
-}
-
-
-function activate(category) {
-
-
-    buttons.forEach(function(button) {
-
-        button.classList.toggle(
-            'active',
-            button.dataset.category === category
-        );
-
+    /* ---------- Search index ---------- */
+    cards.forEach(function (c) {
+        c.dataset.hay = [
+            c.dataset.name, c.dataset.bundle, c.dataset.developer,
+            c.dataset.section, c.dataset.summary
+        ].join(' ').toLowerCase();
     });
 
+    /* ---------- Render ---------- */
+    var cat = 'popular';   /* 'popular' | category key | 'all' (search mode) */
+    var query = '';
 
-    popular.hidden =
-        category !== 'popular';
+    function render() {
+        var q = query.toLowerCase();
+        var shown = 0;
 
+        cards.forEach(function (c) {
+            var inCat = cat === 'popular' || cat === 'all' ||
+                (c.dataset.section || '').toLowerCase() === cat;
+            var ok = inCat && (!q || c.dataset.hay.indexOf(q) !== -1);
+            c.hidden = !ok;
+            if (ok) shown++;
+        });
 
-    var selectedView =
-        findView(category);
+        [].slice.call(catsRow.children).forEach(function (b) {
+            b.setAttribute('aria-pressed', String(b.dataset.cat === cat));
+        });
 
+        featured.hidden = !(cat === 'popular' && !q && track && track.children.length);
 
-    views.forEach(function(view) {
-
-        view.hidden =
-            view !== selectedView;
-
-    });
-
-
-    if (
-        category !== 'popular' &&
-        !selectedView
-    ) {
-
-        categoryEmpty.style.display =
-            'block';
-
-
-        categoryEmptyTitle.textContent =
-            category + ' is coming soon';
-
-
-        categoryEmptyText.textContent =
-            'This category is ready for future products.';
-
-    }
-
-    else {
-
-        categoryEmpty.style.display =
-            'none';
-
-    }
-
-
-    filter();
-
-}
-
-
-function filter() {
-
-
-    var query =
-        (search.value || '')
-        .trim()
-        .toLowerCase();
-
-
-    var activeButton =
-        document.querySelector(
-            '.category-btn.active'
-        );
-
-
-    if (!activeButton) {
-        return;
-    }
-
-
-    var active =
-        activeButton.dataset.category;
-
-
-    var root;
-
-
-    if (active === 'popular') {
-
-        root = popular;
-
-    }
-
-    else {
-
-        root = findView(active);
-
-    }
-
-
-    if (!root) {
-
-        empty.style.display =
-            'none';
-
-        return;
-
-    }
-
-
-    var cards =
-        [].slice.call(
-            root.querySelectorAll(
-                '.package-entry'
-            )
-        );
-
-
-    var count = 0;
-
-
-    cards.forEach(function(card) {
-
-
-        var haystack = [
-
-            card.dataset.name || '',
-            card.dataset.bundle || '',
-            card.dataset.developer || '',
-            card.dataset.section || ''
-
-        ]
-        .join(' ')
-        .toLowerCase();
-
-
-        var show =
-            !query ||
-            haystack.indexOf(query) !== -1;
-
-
-        card.hidden =
-            !show;
-
-
-        if (show) {
-            count++;
+        if (q) {
+            viewTitle.textContent = 'Results';
+            viewSub.textContent = shown + (shown === 1 ? ' product' : ' products') + ' for \u201C' + query + '\u201D';
+        } else if (cat === 'popular') {
+            viewTitle.textContent = 'Popular';
+            viewSub.textContent = shown ? 'Everything in the Source' : '';
+        } else {
+            viewTitle.textContent = labelFor(cat);
+            viewSub.textContent = shown ? shown + (shown === 1 ? ' product' : ' products') : '';
         }
 
-    });
-
-
-    if (count === 0) {
-
-
-        if (active === 'popular') {
-
-
-            empty.textContent =
-                query
-                ? 'No products match your search.'
-                : 'No products are available yet.';
-
-
-            empty.style.display =
-                'block';
-
-        }
-
-        else {
-
-
-            categoryEmpty.style.display =
-                'block';
-
-
-            categoryEmptyTitle.textContent =
-                query
-                ? 'No products match your search.'
-                : active + ' is coming soon';
-
-
-            categoryEmptyText.textContent =
-                query
-                ? 'Try another search term.'
-                : 'This category is ready for future products.';
-
-        }
-
-    }
-
-    else {
-
-
-        empty.style.display =
-            'none';
-
-
-        if (active !== 'popular') {
-
-            categoryEmpty.style.display =
-                'none';
-
-        }
-
-    }
-
-}
-
-
-buttons.forEach(function(button) {
-
-
-    button.addEventListener(
-        'click',
-        function() {
-
-            activate(
-                button.dataset.category
-            );
-
-        }
-    );
-
-});
-
-
-/*
-    Search is intentionally NOT live.
-
-    The user writes the search term,
-    then presses the magnifying-glass button
-    or Enter.
-*/
-
-searchForm.addEventListener(
-    'submit',
-    function(event) {
-
-        event.preventDefault();
-
-        filter();
-
-    }
-);
-
-
-/*
-    Featured carousel:
-    horizontal swipe/scroll is native on iPhone.
-*/
-
-if (featuredTrack) {
-
-    featuredTrack.addEventListener(
-        'wheel',
-        function(event) {
-
-            if (
-                Math.abs(event.deltaY) >
-                Math.abs(event.deltaX)
-            ) {
-
-                event.preventDefault();
-
-                featuredTrack.scrollLeft +=
-                    event.deltaY;
-
+        list.hidden = shown === 0;
+        state.classList.toggle('on', shown === 0);
+        stateClear.hidden = !q;
+        if (shown === 0) {
+            if (q) {
+                stateTitle.textContent = 'No results';
+                stateText.textContent = 'Check the spelling or try a name, developer or bundle ID.';
+            } else if (cat === 'popular') {
+                stateTitle.textContent = 'No products yet';
+                stateText.textContent = 'New releases will show up here.';
+            } else {
+                stateTitle.textContent = 'No products yet';
+                stateText.textContent = 'This category is ready for future releases.';
             }
+        }
+    }
 
-        },
-        { passive: false }
-    );
+    catsRow.addEventListener('click', function (e) {
+        var b = e.target.closest('.cat');
+        if (!b) return;
+        cat = b.dataset.cat;
+        query = '';
+        input.value = '';
+        render();
+        b.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    });
 
-}
+    /* Search runs only on button press or Enter, never per keystroke */
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        query = input.value.trim();
+        cat = query ? 'all' : 'popular';
+        render();
+        input.blur();
+    });
 
+    /* Emptying the field (native clear) resets the view */
+    input.addEventListener('input', function () {
+        if (input.value === '' && query) {
+            query = '';
+            cat = 'popular';
+            render();
+        }
+    });
 
-activate('popular');
+    stateClear.addEventListener('click', function () {
+        query = '';
+        cat = 'popular';
+        input.value = '';
+        render();
+    });
 
+    /* ---------- Featured carousel arrows (desktop) ---------- */
+    function step(dir) {
+        track.scrollBy({ left: dir * Math.max(280, track.clientWidth * 0.8), behavior: 'smooth' });
+    }
+    document.getElementById('feat-prev').addEventListener('click', function () { step(-1); });
+    document.getElementById('feat-next').addEventListener('click', function () { step(1); });
 
+    /* ---------- Account menu ---------- */
+    var acBtn = document.getElementById('account-btn');
+    var acMenu = document.getElementById('account-menu');
+    function closeMenu() {
+        acMenu.hidden = true;
+        acBtn.setAttribute('aria-expanded', 'false');
+    }
+    acBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = acMenu.hidden;
+        acMenu.hidden = !open;
+        acBtn.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', function (e) {
+        if (!acMenu.hidden && !acMenu.contains(e.target)) closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !acMenu.hidden) { closeMenu(); acBtn.focus(); }
+    });
+
+    render();
 })();
-
 </script>
 
-
 <script src="web/index.js"></script>
-
 </body>
 </html>
