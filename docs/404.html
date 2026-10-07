@@ -63,18 +63,22 @@ button { -webkit-tap-highlight-color: transparent; }
 .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; position: relative; }
 
 .brand {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-    font-size: 25px; font-weight: 800; letter-spacing: -0.02em;
-    color: #fff; min-height: 48px;
+    display: inline-flex; align-items: center;
+    min-height: 48px;
 }
 
-/* Narf Original Hooded Mask Logo */
-.brand-mark-svg {
-    height: 32px; width: 32px;
-    display: block;
-    fill: #ffffff;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,0.25));
+/* Official Narf logo (assets/narf-brand.png).
+   The PNG has transparent padding around the artwork, so this wrapper only
+   crops the view to the artwork box (x189 y245, 1290x480 of the 1672x940 file).
+   The image itself is not redrawn, stretched or altered. */
+.brand-logo {
+    position: relative; display: block; overflow: hidden;
+    height: 40px; aspect-ratio: 1290 / 480;
+}
+.brand-logo img {
+    position: absolute; display: block;
+    width: 129.61%; height: auto; max-width: none;
+    left: -14.65%; top: -51.04%;
 }
 
 .account-wrap { position: relative; }
@@ -344,11 +348,10 @@ button { -webkit-tap-highlight-color: transparent; }
 <header class="topbar">
 
     <a class="brand" href="https://narf-alt.github.io" aria-label="NARF home">
-        <!-- Narf Logo SVG matched to image -->
-        <svg class="brand-mark-svg" viewBox="0 0 100 100" aria-hidden="true">
-            <path d="M50,8 C30,8 14,24 14,48 C14,64 24,80 38,90 C45,95 55,95 62,90 C76,80 86,64 86,48 C86,24 70,8 50,8 Z M32,36 C39,36 44,43 40,54 C37,62 26,60 25,50 C24,42 27,36 32,36 Z M68,36 C73,36 76,42 75,50 C74,60 63,62 60,54 C56,43 61,36 68,36 Z"/>
-        </svg>
-        <span>Narf</span>
+        <!-- Official Narf logo -->
+        <span class="brand-logo">
+            <img src="assets/narf-brand.png" alt="Narf" width="1672" height="940" decoding="async">
+        </span>
     </a>
 
     <div class="account-wrap">
