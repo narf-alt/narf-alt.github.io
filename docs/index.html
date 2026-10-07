@@ -60,20 +60,32 @@ button { -webkit-tap-highlight-color: transparent; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- Header ---------- */
-.topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+/* Mobile: row 1 = brand + account, row 2 = search. Desktop: brand | search | account in one row. */
+.topbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "brand account" "search search";
+    grid-template-rows: 60px auto;
+    align-items: center;
+    row-gap: 4px;
+    margin-bottom: 24px;
+    position: relative;
+}
 
 .brand {
+    grid-area: brand; justify-self: start;
     display: inline-flex; align-items: center;
-    min-height: 48px;
+    min-height: 48px; border-radius: 12px;
 }
 
 /* Official Narf logo (assets/narf-brand.png).
    The PNG has transparent padding around the artwork, so this wrapper only
    crops the view to the artwork box (x189 y245, 1290x480 of the 1672x940 file).
-   The image itself is not redrawn, stretched or altered. */
+   The image itself is not redrawn, stretched or altered. Size it with --logo-h only. */
 .brand-logo {
-    position: relative; display: block; overflow: hidden;
-    height: 40px; aspect-ratio: 1290 / 480;
+    --logo-h: 36px;
+    position: relative; display: block; overflow: hidden; flex: 0 0 auto;
+    height: var(--logo-h); width: calc(var(--logo-h) * 2.6875); /* 1290:480 artwork ratio */
 }
 .brand-logo img {
     position: absolute; display: block;
@@ -92,6 +104,17 @@ button { -webkit-tap-highlight-color: transparent; }
 .icon-btn:hover, .icon-btn.on { border-color: var(--orange); }
 .icon-btn:active { transform: scale(.94); }
 .icon-btn svg { width: 21px; height: 21px; }
+
+.account-wrap { grid-area: account; justify-self: end; }
+.account-btn {
+    background: rgba(255,255,255,.04);
+    border-color: rgba(255,255,255,.10);
+    color: var(--text-2);
+    transition: border-color .18s var(--ease), background .18s var(--ease), color .18s var(--ease), transform .12s var(--ease);
+}
+.account-btn:active { background: rgba(255,255,255,.08); color: #fff; }
+.account-btn.on { background: var(--orange-soft); border-color: var(--orange-line); color: var(--orange); }
+@media (hover: hover) { .account-btn:hover { background: rgba(255,255,255,.07); border-color: var(--orange-line); color: #fff; } }
 
 .account-menu {
     position: absolute; right: 0; top: calc(100% + 8px);
@@ -113,29 +136,51 @@ button { -webkit-tap-highlight-color: transparent; }
 .account-item small { font-size: 11px; color: var(--muted); }
 
 /* ---------- Search ---------- */
-.search { margin: 4px 0 24px; }
+.search { grid-area: search; min-width: 0; }
 .search-box {
     display: flex; align-items: center; gap: 6px;
-    height: 56px; padding: 0 5px 0 20px;
-    background: var(--surface); border: 1px solid var(--line-2); border-radius: 999px;
-    transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+    height: 52px; padding: 0 4px 0 18px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 999px;
+    transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
 }
-.search-box:focus-within { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(255,122,0,.12); }
+.search-box:focus-within {
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,122,0,.75);
+    box-shadow: 0 0 0 3px rgba(255,122,0,.14);
+}
 .search-input {
     flex: 1; min-width: 0; height: 100%;
-    background: transparent; border: 0; outline: 0; font-size: 16px;
+    background: transparent; border: 0; outline: 0;
+    font-size: 16px; /* 16px stops iOS Safari from zooming on focus */
+    text-overflow: ellipsis;
 }
-.search-input::placeholder { color: #6c6c72; }
+.search-input::placeholder { color: var(--muted); }
 .search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
 .search-btn {
-    height: 46px; padding: 0 22px; display: inline-flex; align-items: center; gap: 8px;
+    height: 44px; min-width: 44px; padding: 0 20px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     background: var(--orange); color: #000; border: 0; border-radius: 999px;
     font-weight: 800; font-size: 14px; cursor: pointer;
     transition: background .18s var(--ease), transform .12s var(--ease);
 }
-.search-btn:hover { background: var(--orange-hi); }
+@media (hover: hover) { .search-btn:hover { background: var(--orange-hi); } }
 .search-btn:active { transform: scale(.96); }
 .search-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
+
+/* Header: phone = compact icon-only search button, larger screens = one balanced row */
+@media (max-width: 699px) {
+    .search-btn span { display: none; }
+    .search-btn { padding: 0; width: 44px; }
+}
+@media (min-width: 700px) {
+    .topbar {
+        grid-template-columns: minmax(110px, 1fr) minmax(0, 560px) minmax(110px, 1fr);
+        grid-template-areas: "brand search account";
+        grid-template-rows: 72px;
+        column-gap: 20px; row-gap: 0;
+        margin-bottom: 28px;
+    }
+    .brand-logo { --logo-h: 40px; }
+}
 
 /* ---------- Section headers ---------- */
 .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
@@ -331,8 +376,6 @@ button { -webkit-tap-highlight-color: transparent; }
     .head h2 { font-size: 32px; }
 }
 @media (max-width: 420px) {
-    .search-btn span { display: none; }
-    .search-btn { padding: 0; width: 46px; justify-content: center; }
     .feat .icon { width: 78px; height: 78px; border-radius: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -355,7 +398,7 @@ button { -webkit-tap-highlight-color: transparent; }
     </a>
 
     <div class="account-wrap">
-        <button class="icon-btn" id="account-btn" type="button"
+        <button class="icon-btn account-btn" id="account-btn" type="button"
                 aria-label="Account" aria-haspopup="true" aria-expanded="false" aria-controls="account-menu">
             <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/>
@@ -374,21 +417,21 @@ button { -webkit-tap-highlight-color: transparent; }
         </div>
     </div>
 
-</header>
+    <!-- Search (same form and ids as before; only moved into the header) -->
+    <section class="search" aria-label="Search">
+        <form id="search-form" class="search-box" role="search">
+            <label class="sr-only" for="search-input">Search packages</label>
+            <input id="search-input" class="search-input" type="search"
+                   placeholder="Search themes, tweaks, developers"
+                   autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search">
+            <button class="search-btn" type="submit" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="M15.5 15.5L21 21"/></svg>
+                <span>Search</span>
+            </button>
+        </form>
+    </section>
 
-<!-- ================= SEARCH ================= -->
-<section class="search" aria-label="Search">
-    <form id="search-form" class="search-box" role="search">
-        <label class="sr-only" for="search-input">Search packages</label>
-        <input id="search-input" class="search-input" type="search"
-               placeholder="Search packages, developers, bundle IDs"
-               autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search">
-        <button class="search-btn" type="submit" aria-label="Search">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="M15.5 15.5L21 21"/></svg>
-            <span>Search</span>
-        </button>
-    </form>
-</section>
+</header>
 
 <!-- ================= FEATURED ================= -->
 <section class="featured" id="featured" aria-labelledby="featured-title">
