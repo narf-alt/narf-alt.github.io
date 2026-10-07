@@ -15,14 +15,18 @@
 
 :root {
     color-scheme: dark;
+
+    --black: #000000;
+    --panel: #090909;
+    --panel-2: #101010;
+    --border: #242424;
+
+    --white: #ffffff;
+    --text: #f5f5f7;
+    --muted: #8e8e93;
+
     --orange: #ff7a00;
     --orange-bright: #ff8a00;
-    --black: #000000;
-    --panel: #0b0b0b;
-    --panel-2: #111111;
-    --border: #242424;
-    --text: #ffffff;
-    --muted: #9a9a9a;
 }
 
 html {
@@ -30,17 +34,23 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-        "Helvetica Neue", sans-serif;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "Helvetica Neue",
+        sans-serif;
+
     background: #000;
     color: var(--text);
+
     min-height: 100vh;
     padding: 18px;
 }
 
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
 button,
@@ -49,133 +59,406 @@ input {
 }
 
 .page {
+    width: 100%;
     max-width: 1120px;
-    margin: auto;
+    margin: 0 auto;
 }
 
-/* =========================
+
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 .topbar {
-    height: 64px;
+    height: 58px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 18px;
+
+    margin-bottom: 12px;
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-weight: 800;
+
+    gap: 10px;
+
     font-size: 20px;
+    font-weight: 850;
+    letter-spacing: -0.4px;
 }
 
 .brand img {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    object-fit: cover;
+
+    background: #111;
+
+    border: 1px solid #242424;
+}
+
+.brand-name {
+    color: #fff;
+}
+
+.account-area {
+    display: flex;
+    align-items: center;
+}
+
+.account-button {
     width: 40px;
     height: 40px;
-    border-radius: 11px;
-    object-fit: cover;
-    background: #111;
-}
 
-.brand small {
-    display: block;
-    font-size: 11px;
-    font-weight: 600;
-    color: #8e8e93;
-    margin-top: 2px;
-}
-
-.toplinks {
     display: flex;
-    gap: 10px;
-}
+    align-items: center;
+    justify-content: center;
 
-.toplink {
-    padding: 9px 13px;
-    border-radius: 12px;
+    border-radius: 50%;
+
     background: #0b0b0b;
-    border: 1px solid #242424;
+
+    border: 1px solid #292929;
+
     color: #fff;
-    font-size: 13px;
-    font-weight: 650;
+
+    cursor: pointer;
+
     transition: .18s ease;
 }
 
-.toplink:hover {
+.account-button:hover {
     border-color: var(--orange);
-    color: var(--orange);
+
+    box-shadow:
+        0 0 0 3px rgba(255,122,0,.08);
 }
 
-/* =========================
-   HERO
-========================= */
+.account-icon {
+    width: 20px;
+    height: 20px;
 
-.hero {
-    border-radius: 30px;
-    padding: 34px;
+    opacity: .9;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-area {
+    margin-bottom: 22px;
+}
+
+.search-box {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    height: 48px;
+
+    background: #090909;
+
+    border: 1px solid #292929;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    transition: .18s ease;
+}
+
+.search-box:focus-within {
+    border-color: rgba(255,122,0,.75);
+
+    box-shadow:
+        0 0 0 3px rgba(255,122,0,.07);
+}
+
+.search-input {
+    flex: 1;
+
+    height: 100%;
+
+    padding: 0 15px;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: #fff;
+
+    font-size: 14px;
+}
+
+.search-input::placeholder {
+    color: #707070;
+}
+
+.search-button {
+    width: 42px;
+    height: 42px;
+
+    margin-right: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: var(--orange);
+
+    color: #000;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: .18s ease;
+}
+
+.search-button:hover {
+    background: var(--orange-bright);
+
+    transform: scale(1.03);
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+
+    stroke: currentColor;
+
+    stroke-width: 2.5;
+
+    fill: none;
+}
+
+
+/* =========================================================
+   FEATURED STORE
+========================================================= */
+
+.featured {
+    margin-bottom: 25px;
+}
+
+.featured-head {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 11px;
+}
+
+.featured-title {
+    color: var(--orange);
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    letter-spacing: -.5px;
+}
+
+.featured-subtitle {
+    color: #777;
+
+    font-size: 12px;
+}
+
+.featured-wrapper {
+    position: relative;
+}
+
+.featured-track {
+    display: flex;
+
+    gap: 14px;
+
+    overflow-x: auto;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+
+    padding: 2px 2px 7px;
+
+    scroll-snap-type: x mandatory;
+}
+
+.featured-track::-webkit-scrollbar {
+    display: none;
+}
+
+.featured-card {
+    position: relative;
+
+    flex: 0 0 360px;
+
+    min-height: 190px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 19px;
+
     background:
         linear-gradient(
             145deg,
-            #090909 0%,
-            #050505 55%,
-            #0b0703 100%
+            #111 0%,
+            #090909 65%,
+            #0c0703 100%
         );
-    color: #fff;
-    border: 1px solid #252525;
-    box-shadow:
-        0 20px 55px rgba(0,0,0,.55),
-        inset 0 1px 0 rgba(255,255,255,.025);
-    margin-bottom: 24px;
+
+    border: 1px solid #292929;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    scroll-snap-align: start;
+
+    transition: .18s ease;
 }
 
-.hero h1 {
-    font-size: 40px;
-    letter-spacing: -1.2px;
+.featured-card:hover {
+    border-color: rgba(255,122,0,.55);
+
+    transform: translateY(-2px);
+}
+
+.featured-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    right: -70px;
+    bottom: -90px;
+
+    background: rgba(255,122,0,.08);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.featured-icon {
+    width: 112px;
+    height: 112px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 25px;
+
+    background: #151515;
+
+    border: 1px solid #303030;
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.45);
+}
+
+.featured-content {
+    min-width: 0;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+.featured-name {
+    font-size: 22px;
+
+    font-weight: 850;
+
+    color: #fff;
+
+    margin-bottom: 4px;
+
+    overflow-wrap: anywhere;
+}
+
+.featured-developer {
+    color: var(--orange);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
     margin-bottom: 9px;
 }
 
-.hero p {
-    max-width: 680px;
-    color: rgba(255,255,255,.78);
-    line-height: 1.6;
-    font-size: 16px;
+.featured-description {
+    color: #b9b9b9;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
 }
 
-.hero-meta {
-    display: flex;
-    gap: 9px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
+.featured-badge {
+    display: inline-flex;
 
-.pill {
-    padding: 8px 12px;
+    margin-top: 10px;
+
+    padding: 5px 8px;
+
     border-radius: 999px;
-    background: #111;
-    border: 1px solid #292929;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
+
+    background: rgba(255,122,0,.10);
+
+    border: 1px solid rgba(255,122,0,.28);
+
+    color: var(--orange);
+
+    font-size: 10px;
+
+    font-weight: 800;
 }
 
-.pill:first-child {
-    border-color: rgba(255,122,0,.45);
-    color: var(--orange-bright);
-}
 
-/* =========================
-   CATEGORY NAV
-========================= */
+/* =========================================================
+   CATEGORY NAVIGATION
+========================================================= */
 
 .nav {
     display: flex;
+
     gap: 8px;
-    overflow: auto;
-    padding: 3px 1px 15px;
+
+    overflow-x: auto;
+
+    padding: 2px 1px 15px;
+
     scrollbar-width: none;
 }
 
@@ -183,66 +466,51 @@ input {
     display: none;
 }
 
-.nav button {
+.category-btn {
+    flex-shrink: 0;
+
     border: 1px solid #303030;
+
     background: #080808;
+
     color: var(--orange);
+
     border-radius: 999px;
+
     padding: 10px 15px;
+
     font-size: 13px;
+
     font-weight: 750;
+
     white-space: nowrap;
+
     cursor: pointer;
+
     transition: .18s ease;
 }
 
-.nav button:hover {
+.category-btn:hover {
     border-color: var(--orange);
+
     background: #120b05;
-    color: var(--orange-bright);
 }
 
-.nav button.active {
+.category-btn.active {
     background: var(--orange);
+
     color: #000;
+
     border-color: var(--orange);
-    box-shadow: 0 5px 18px rgba(255,122,0,.16);
+
+    box-shadow:
+        0 5px 18px rgba(255,122,0,.15);
 }
 
-/* =========================
-   SEARCH
-========================= */
 
-.toolbar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.toolbar input {
-    flex: 1;
-    border: 1px solid #282828;
-    border-radius: 15px;
-    background: #080808;
-    padding: 14px 16px;
-    font-size: 14px;
-    outline: none;
-    color: #fff;
-    transition: .18s ease;
-}
-
-.toolbar input::placeholder {
-    color: #777;
-}
-
-.toolbar input:focus {
-    border-color: var(--orange);
-    box-shadow: 0 0 0 3px rgba(255,122,0,.08);
-}
-
-/* =========================
-   VIEWS
-========================= */
+/* =========================================================
+   PRODUCT VIEWS
+========================================================= */
 
 .view {
     display: block;
@@ -252,53 +520,72 @@ input {
     display: none;
 }
 
-/* =========================
-   SECTION
-========================= */
-
 .section-head {
     display: flex;
-    justify-content: space-between;
+
     align-items: end;
+
+    justify-content: space-between;
+
     margin-bottom: 12px;
 }
 
 .section-head h2 {
-    font-size: 23px;
-    letter-spacing: -.4px;
     color: var(--orange);
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    letter-spacing: -.4px;
 }
 
 .section-head p {
-    font-size: 13px;
-    color: #888;
+    color: #777;
+
+    font-size: 12px;
 }
 
-/* =========================
-   PRODUCTS
-========================= */
+
+/* =========================================================
+   PRODUCT CARDS
+========================================================= */
 
 .package-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(290px, 1fr)
+        );
+
     gap: 14px;
 }
 
 .package-card {
     display: block;
-    background: #090909;
-    border: 1px solid #242424;
-    border-radius: 20px;
+
     padding: 15px;
+
+    background: #090909;
+
+    border: 1px solid #242424;
+
+    border-radius: 20px;
+
     transition: .18s ease;
 }
 
 .package-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(255,122,0,.55);
+
+    border-color:
+        rgba(255,122,0,.55);
+
     box-shadow:
         0 12px 28px rgba(0,0,0,.55),
-        0 0 0 1px rgba(255,122,0,.08);
+        0 0 0 1px rgba(255,122,0,.06);
 }
 
 .package-card[hidden] {
@@ -307,17 +594,23 @@ input {
 
 .package-card-top {
     display: flex;
+
     gap: 14px;
 }
 
 .package-icon {
     width: 68px;
     height: 68px;
-    border-radius: 17px;
-    object-fit: cover;
+
     flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 17px;
+
     background: #111;
-    border: 1px solid #242424;
+
+    border: 1px solid #252525;
 }
 
 .package-main {
@@ -325,72 +618,109 @@ input {
 }
 
 .package-name {
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 3px;
     color: #fff;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    margin-bottom: 3px;
+
     overflow-wrap: anywhere;
 }
 
 .package-meta {
-    font-size: 12px;
     color: #858585;
+
+    font-size: 12px;
+
     line-height: 1.5;
+
     margin-bottom: 8px;
 }
 
 .package-summary {
-    font-size: 13px;
-    line-height: 1.55;
     color: #d0d0d0;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
     overflow-wrap: anywhere;
 }
 
 .package-badges {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 6px;
+
     margin-top: 10px;
 }
 
 .tag {
-    font-size: 11px;
-    font-weight: 750;
     padding: 6px 8px;
+
     border-radius: 999px;
-    background: rgba(255,122,0,.10);
-    border: 1px solid rgba(255,122,0,.28);
+
+    background:
+        rgba(255,122,0,.10);
+
+    border:
+        1px solid rgba(255,122,0,.28);
+
     color: var(--orange);
+
+    font-size: 11px;
+
+    font-weight: 750;
 }
 
-/* =========================
+
+/* =========================================================
    EMPTY
-========================= */
+========================================================= */
 
 .empty {
     display: none;
-    padding: 28px;
+
+    padding: 30px;
+
     text-align: center;
+
     color: #888;
+
     background: #090909;
+
     border: 1px solid #242424;
+
     border-radius: 18px;
 }
 
 .category-empty {
     display: none;
+
     padding: 42px 28px;
+
     text-align: center;
+
     color: #888;
+
     background: #090909;
+
     border: 1px solid #242424;
+
     border-radius: 20px;
 }
 
 .category-empty strong {
     display: block;
+
     color: var(--orange);
+
     font-size: 18px;
+
     margin-bottom: 7px;
 }
 
@@ -398,28 +728,79 @@ input {
     font-size: 13px;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 .footer {
+    margin-top: 35px;
+
+    padding:
+        28px
+        10px
+        18px;
+
     text-align: center;
-    padding: 30px 10px 15px;
-    color: #777;
+
+    color: #707070;
+
     font-size: 12px;
+
+    border-top: 1px solid #151515;
 }
 
-.footer a {
+.footer-links {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-bottom: 15px;
+}
+
+.footer-link {
+    color: #aaa;
+
+    transition: .18s ease;
+}
+
+.footer-link:hover {
     color: var(--orange);
 }
 
-.footer a:hover {
-    color: var(--orange-bright);
+.footer-x {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #aaa;
+
+    transition: .18s ease;
 }
 
-/* =========================
+.footer-x:hover {
+    color: var(--orange);
+}
+
+.x-icon {
+    width: 14px;
+    height: 14px;
+
+    fill: currentColor;
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:650px) {
 
@@ -427,17 +808,42 @@ input {
         padding: 12px;
     }
 
-    .hero {
-        padding: 25px 20px;
-        border-radius: 24px;
+    .topbar {
+        height: 52px;
     }
 
-    .hero h1 {
-        font-size: 32px;
+    .brand {
+        font-size: 18px;
     }
 
-    .toplinks .toplink:not(:last-child) {
-        display: none;
+    .brand img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .search-box {
+        height: 46px;
+    }
+
+    .featured-card {
+        flex-basis: 88vw;
+
+        min-height: 175px;
+
+        padding: 15px;
+
+        gap: 14px;
+    }
+
+    .featured-icon {
+        width: 92px;
+        height: 92px;
+
+        border-radius: 21px;
+    }
+
+    .featured-name {
+        font-size: 19px;
     }
 
     .package-list {
@@ -449,99 +855,307 @@ input {
 <meta name="theme-color" content="#000000">
 </head>
 
+
 <body>
 
 <div class="page">
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header class="topbar">
 
-<a class="brand" href="https://narf-alt.github.io">
+<a
+    class="brand"
+    href="https://narf-alt.github.io"
+    aria-label="NARF Store">
 
-<img src="icon.png" alt="NARF">
+    <img
+        src="icon.png"
+        alt="NARF">
 
-<span>
-NARF
-<small>Official Store</small>
-</span>
+    <span class="brand-name">
+        NARF
+    </span>
 
 </a>
 
-<div class="toplinks">
 
-<a class="toplink" href="https://x.com/narf_ios">
-X @narf_ios
-</a>
+<!-- Account area.
+     This is intentionally kept separate from X.
+     Sileo/account integration can use this area later. -->
+
+<div class="account-area">
+
+<button
+    class="account-button"
+    type="button"
+    aria-label="Account">
+
+    <svg
+        class="account-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true">
+
+        <circle
+            cx="12"
+            cy="8"
+            r="3.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+
+        <path
+            d="M5.5 19.2c.8-3.1 3-4.7 6.5-4.7s5.7 1.6 6.5 4.7"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"/>
+
+    </svg>
+
+</button>
 
 </div>
 
 </header>
 
 
-<section class="hero">
+<!-- =====================================================
+     SEARCH
+===================================================== -->
 
-<h1>Narf Store</h1>
+<section class="search-area">
 
-<p>
-Discover themes, tweaks, apps and wallpapers from Narf
-and independent developers — organized in one modern iOS marketplace.
-</p>
+<form
+    id="search-form"
+    class="search-box">
 
-<div class="hero-meta">
+    <input
+        id="search-input"
+        class="search-input"
+        type="search"
+        autocomplete="off"
+        placeholder="Search Narf Store...">
 
-<span class="pill">
-3 products
+    <button
+        class="search-button"
+        type="submit"
+        aria-label="Search">
+
+        <svg
+            class="search-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true">
+
+            <circle
+                cx="10.8"
+                cy="10.8"
+                r="6.2"/>
+
+            <path
+                d="M15.5 15.5L21 21"/>
+
+        </svg>
+
+    </button>
+
+</form>
+
+</section>
+
+
+<!-- =====================================================
+     FEATURED PRODUCTS
+===================================================== -->
+
+<section class="featured">
+
+<div class="featured-head">
+
+<h2 class="featured-title">
+Featured
+</h2>
+
+<span class="featured-subtitle">
+Discover products
 </span>
 
-<span class="pill">
-iOS 15–26
-</span>
+</div>
 
-<span class="pill">
-Themes · Tweaks · Wallpapers · Apps
-</span>
+
+<div
+    id="featured-track"
+    class="featured-track">
+
+
+
+<a
+    class="featured-card"
+    href="depiction/web/com.example.package.html"
+
+    data-name="Example Package"
+    data-bundle="com.example.package"
+    data-developer="Example Developer"
+    data-section="Tweaks">
+
+    <img
+        class="featured-icon"
+        src="assets/com.example.package/icon.png"
+        alt="Example Package">
+
+    <div class="featured-content">
+
+        <div class="featured-name">
+            Example Package
+        </div>
+
+        <div class="featured-developer">
+            Example Developer
+        </div>
+
+        <div class="featured-description">
+            An example package used to demonstrate modern Silex metadata, compatibility labels, and depictions.
+        </div>
+
+        <span class="featured-badge">
+            Tweaks
+        </span>
+
+    </div>
+
+</a>
+
+
+<a
+    class="featured-card"
+    href="depiction/web/im.mjh.wclocate.html"
+
+    data-name="WCLocate"
+    data-bundle="im.mjh.wclocate"
+    data-developer="junhong"
+    data-section="Tweaks">
+
+    <img
+        class="featured-icon"
+        src="assets/im.mjh.wclocate/icon.png"
+        alt="WCLocate">
+
+    <div class="featured-content">
+
+        <div class="featured-name">
+            WCLocate
+        </div>
+
+        <div class="featured-developer">
+            junhong
+        </div>
+
+        <div class="featured-description">
+            微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
+        </div>
+
+        <span class="featured-badge">
+            Tweaks
+        </span>
+
+    </div>
+
+</a>
+
+
+
+
+<a
+    class="featured-card"
+    href="depiction/web/com.narf.lana.html"
+
+    data-name="Lana"
+    data-bundle="com.narf.lana"
+    data-developer="Narf"
+    data-section="Themes">
+
+    <img
+        class="featured-icon"
+        src="assets/com.narf.lana/icon.png"
+        alt="Lana">
+
+    <div class="featured-content">
+
+        <div class="featured-name">
+            Lana
+        </div>
+
+        <div class="featured-developer">
+            Narf
+        </div>
+
+        <div class="featured-description">
+            Lana iOS Theme
+        </div>
+
+        <span class="featured-badge">
+            Themes
+        </span>
+
+    </div>
+
+</a>
+
+
 
 </div>
 
 </section>
 
 
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
 <nav class="nav">
 
 <button
-class="category-btn active"
-data-category="popular">
+    class="category-btn active"
+    data-category="popular">
 
 🔥 Popular
 
 </button>
 
+
 <button
-class="category-btn"
-data-category="Themes">
+    class="category-btn"
+    data-category="Themes">
 
 🪶 Themes
 
 </button>
 
+
 <button
-class="category-btn"
-data-category="Tweaks">
+    class="category-btn"
+    data-category="Tweaks">
 
 🛠️ Tweaks
 
 </button>
 
+
 <button
-class="category-btn"
-data-category="Wallpapers">
+    class="category-btn"
+    data-category="Wallpapers">
 
 🖼️ Wallpapers
 
 </button>
 
+
 <button
-class="category-btn"
-data-category="Apps">
+    class="category-btn"
+    data-category="Apps">
 
 📱 Apps
 
@@ -550,26 +1164,24 @@ data-category="Apps">
 </nav>
 
 
-<div class="toolbar">
+<!-- =====================================================
+     POPULAR
+===================================================== -->
 
-<input
-id="search-input"
-type="search"
-placeholder="Search products, developers or bundle IDs...">
-
-</div>
-
-
-<section id="popular-view" class="view">
+<section
+    id="popular-view"
+    class="view">
 
 <div class="section-head">
 
 <div>
 
-<h2>Popular</h2>
+<h2>
+Popular
+</h2>
 
 <p>
-Products across the Narf Store
+Products across Narf Store
 </p>
 
 </div>
@@ -582,35 +1194,47 @@ Products across the Narf Store
 
 
 <a
-class="package-card package-entry"
-href="depiction/web/com.example.package.html"
-data-name="Example Package"
-data-bundle="com.example.package"
-data-developer="Example Developer"
-data-section="Tweaks">
+    class="package-card package-entry"
+
+    href="depiction/web/com.example.package.html"
+
+    data-name="Example Package"
+    data-bundle="com.example.package"
+    data-developer="Example Developer"
+    data-section="Tweaks">
+
 
 <div class="package-card-top">
 
+
 <img
-class="package-icon"
-src="assets/com.example.package/icon.png"
-alt="Example Package">
+    class="package-icon"
+    src="assets/com.example.package/icon.png"
+    alt="Example Package">
+
 
 <div class="package-main">
+
 
 <div class="package-name">
 Example Package
 </div>
 
+
 <div class="package-meta">
-Example Developer · v1.0.0 ·
-iOS 15.0–17.0
+
+Example Developer
+· v1.0.0
+· iOS 15.0–17.0
+
 </div>
+
 
 <div class="package-summary">
 An example package used to demonstrate modern Silex metadata, compatibility labels, and depictions.
 </div>
 
+
 <div class="package-badges">
 
 <span class="tag">
@@ -618,6 +1242,7 @@ Tweaks
 </span>
 
 </div>
+
 
 </div>
 
@@ -627,34 +1252,46 @@ Tweaks
 
 
 <a
-class="package-card package-entry"
-href="depiction/web/im.mjh.wclocate.html"
-data-name="WCLocate"
-data-bundle="im.mjh.wclocate"
-data-developer="junhong"
-data-section="Tweaks">
+    class="package-card package-entry"
+
+    href="depiction/web/im.mjh.wclocate.html"
+
+    data-name="WCLocate"
+    data-bundle="im.mjh.wclocate"
+    data-developer="junhong"
+    data-section="Tweaks">
+
 
 <div class="package-card-top">
 
+
 <img
-class="package-icon"
-src="assets/im.mjh.wclocate/icon.png"
-alt="WCLocate">
+    class="package-icon"
+    src="assets/im.mjh.wclocate/icon.png"
+    alt="WCLocate">
+
 
 <div class="package-main">
+
 
 <div class="package-name">
 WCLocate
 </div>
 
+
 <div class="package-meta">
-junhong · v4.0.0 ·
-iOS 15.0–18.0
+
+junhong
+· v4.0.0
+· iOS 15.0–18.0
+
 </div>
+
 
 <div class="package-summary">
 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 </div>
+
 
 <div class="package-badges">
 
@@ -663,6 +1300,7 @@ Tweaks
 </span>
 
 </div>
+
 
 </div>
 
@@ -674,34 +1312,46 @@ Tweaks
 
 
 <a
-class="package-card package-entry"
-href="depiction/web/com.narf.lana.html"
-data-name="Lana"
-data-bundle="com.narf.lana"
-data-developer="Narf"
-data-section="Themes">
+    class="package-card package-entry"
+
+    href="depiction/web/com.narf.lana.html"
+
+    data-name="Lana"
+    data-bundle="com.narf.lana"
+    data-developer="Narf"
+    data-section="Themes">
+
 
 <div class="package-card-top">
 
+
 <img
-class="package-icon"
-src="assets/com.narf.lana/icon.png"
-alt="Lana">
+    class="package-icon"
+    src="assets/com.narf.lana/icon.png"
+    alt="Lana">
+
 
 <div class="package-main">
+
 
 <div class="package-name">
 Lana
 </div>
 
+
 <div class="package-meta">
-Narf · v1.3 ·
-iOS 15.0–26.0
+
+Narf
+· v1.3
+· iOS 15.0–26.0
+
 </div>
+
 
 <div class="package-summary">
 Lana iOS Theme
 </div>
+
 
 <div class="package-badges">
 
@@ -710,6 +1360,7 @@ Themes
 </span>
 
 </div>
+
 
 </div>
 
@@ -724,11 +1375,16 @@ Themes
 </section>
 
 
+<!-- =====================================================
+     REAL PACKAGE SECTIONS
+===================================================== -->
+
 
 <section
-class="view category-view"
-data-category-view="Tweaks"
-hidden>
+    class="view category-view"
+    data-category-view="Tweaks"
+    hidden>
+
 
 <div class="section-head">
 
@@ -751,34 +1407,46 @@ Browse Tweaks products
 
 
 <a
-class="package-card package-entry"
-href="depiction/web/com.example.package.html"
-data-name="Example Package"
-data-bundle="com.example.package"
-data-developer="Example Developer"
-data-section="Tweaks">
+    class="package-card package-entry"
+
+    href="depiction/web/com.example.package.html"
+
+    data-name="Example Package"
+    data-bundle="com.example.package"
+    data-developer="Example Developer"
+    data-section="Tweaks">
+
 
 <div class="package-card-top">
 
+
 <img
-class="package-icon"
-src="assets/com.example.package/icon.png"
-alt="Example Package">
+    class="package-icon"
+    src="assets/com.example.package/icon.png"
+    alt="Example Package">
+
 
 <div class="package-main">
+
 
 <div class="package-name">
 Example Package
 </div>
 
+
 <div class="package-meta">
-Example Developer · v1.0.0 ·
-iOS 15.0–17.0
+
+Example Developer
+· v1.0.0
+· iOS 15.0–17.0
+
 </div>
+
 
 <div class="package-summary">
 An example package used to demonstrate modern Silex metadata, compatibility labels, and depictions.
 </div>
+
 
 <div class="package-badges">
 
@@ -787,6 +1455,7 @@ Tweaks
 </span>
 
 </div>
+
 
 </div>
 
@@ -796,34 +1465,46 @@ Tweaks
 
 
 <a
-class="package-card package-entry"
-href="depiction/web/im.mjh.wclocate.html"
-data-name="WCLocate"
-data-bundle="im.mjh.wclocate"
-data-developer="junhong"
-data-section="Tweaks">
+    class="package-card package-entry"
+
+    href="depiction/web/im.mjh.wclocate.html"
+
+    data-name="WCLocate"
+    data-bundle="im.mjh.wclocate"
+    data-developer="junhong"
+    data-section="Tweaks">
+
 
 <div class="package-card-top">
 
+
 <img
-class="package-icon"
-src="assets/im.mjh.wclocate/icon.png"
-alt="WCLocate">
+    class="package-icon"
+    src="assets/im.mjh.wclocate/icon.png"
+    alt="WCLocate">
+
 
 <div class="package-main">
+
 
 <div class="package-name">
 WCLocate
 </div>
 
+
 <div class="package-meta">
-junhong · v4.0.0 ·
-iOS 15.0–18.0
+
+junhong
+· v4.0.0
+· iOS 15.0–18.0
+
 </div>
+
 
 <div class="package-summary">
 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 </div>
+
 
 <div class="package-badges">
 
@@ -832,6 +1513,7 @@ Tweaks
 </span>
 
 </div>
+
 
 </div>
 
@@ -846,9 +1528,10 @@ Tweaks
 
 
 <section
-class="view category-view"
-data-category-view="Themes"
-hidden>
+    class="view category-view"
+    data-category-view="Themes"
+    hidden>
+
 
 <div class="section-head">
 
@@ -871,34 +1554,46 @@ Browse Themes products
 
 
 <a
-class="package-card package-entry"
-href="depiction/web/com.narf.lana.html"
-data-name="Lana"
-data-bundle="com.narf.lana"
-data-developer="Narf"
-data-section="Themes">
+    class="package-card package-entry"
+
+    href="depiction/web/com.narf.lana.html"
+
+    data-name="Lana"
+    data-bundle="com.narf.lana"
+    data-developer="Narf"
+    data-section="Themes">
+
 
 <div class="package-card-top">
 
+
 <img
-class="package-icon"
-src="assets/com.narf.lana/icon.png"
-alt="Lana">
+    class="package-icon"
+    src="assets/com.narf.lana/icon.png"
+    alt="Lana">
+
 
 <div class="package-main">
+
 
 <div class="package-name">
 Lana
 </div>
 
+
 <div class="package-meta">
-Narf · v1.3 ·
-iOS 15.0–26.0
+
+Narf
+· v1.3
+· iOS 15.0–26.0
+
 </div>
+
 
 <div class="package-summary">
 Lana iOS Theme
 </div>
+
 
 <div class="package-badges">
 
@@ -907,6 +1602,7 @@ Themes
 </span>
 
 </div>
+
 
 </div>
 
@@ -921,9 +1617,13 @@ Themes
 
 
 
+<!-- =====================================================
+     EMPTY CATEGORY
+===================================================== -->
+
 <div
-id="category-empty"
-class="category-empty">
+    id="category-empty"
+    class="category-empty">
 
 <strong id="category-empty-title">
 No products yet
@@ -937,82 +1637,185 @@ This category is ready for future products.
 
 
 <div
-id="empty-state"
-class="empty">
+    id="empty-state"
+    class="empty">
 
 No products match your search.
 
 </div>
 
 
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer class="footer">
 
-Narf
-· Narf Store ·
+<div class="footer-links">
 
-<a href="https://x.com/narf_ios">
-@narf_ios
+<a
+    class="footer-link"
+    href="https://narf-alt.github.io">
+
+Store
+
 </a>
 
-</footer>
+
+<a
+    class="footer-link"
+    href="#">
+
+Account
+
+</a>
+
+
+<a
+    class="footer-link"
+    href="#">
+
+Purchases
+
+</a>
+
+
+<a
+    class="footer-link"
+    href="#">
+
+Support
+
+</a>
+
+
+<a
+    class="footer-link"
+    href="#">
+
+Developers
+
+</a>
+
+
+<a
+    class="footer-x"
+    href="https://x.com/narf_ios"
+    target="_blank"
+    rel="noopener">
+
+<svg
+    class="x-icon"
+    viewBox="0 0 24 24"
+    aria-hidden="true">
+
+<path
+    d="M18.9 2H22l-6.77 7.74L23.2 22h-6.24l-4.89-6.4L6.47 22H3.36l7.24-8.28L2.8 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.8h1.73L8.27 4.07H6.42L17.8 19.8Z"/>
+
+</svg>
+
+@narf_ios
+
+</a>
 
 </div>
 
 
+<div>
+Narf
+· Narf Store
+</div>
+
+</footer>
+
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script>
 
-(function(){
+(function() {
+
 
 var buttons =
-[].slice.call(
-document.querySelectorAll('.category-btn')
-);
+    [].slice.call(
+        document.querySelectorAll('.category-btn')
+    );
+
 
 var popular =
-document.getElementById('popular-view');
+    document.getElementById('popular-view');
+
 
 var views =
-[].slice.call(
-document.querySelectorAll('.category-view')
-);
+    [].slice.call(
+        document.querySelectorAll('.category-view')
+    );
+
 
 var search =
-document.getElementById('search-input');
+    document.getElementById('search-input');
+
+
+var searchForm =
+    document.getElementById('search-form');
+
 
 var empty =
-document.getElementById('empty-state');
+    document.getElementById('empty-state');
+
 
 var categoryEmpty =
-document.getElementById('category-empty');
+    document.getElementById('category-empty');
+
 
 var categoryEmptyTitle =
-document.getElementById('category-empty-title');
+    document.getElementById(
+        'category-empty-title'
+    );
+
 
 var categoryEmptyText =
-document.getElementById('category-empty-text');
+    document.getElementById(
+        'category-empty-text'
+    );
 
 
-function findView(category){
+var featuredTrack =
+    document.getElementById(
+        'featured-track'
+    );
+
+
+function findView(category) {
 
     var result = null;
 
-    views.forEach(function(view){
+    views.forEach(function(view) {
 
         if (
             view.dataset.categoryView === category
         ) {
+
             result = view;
+
         }
 
     });
 
     return result;
+
 }
 
 
-function activate(category){
+function activate(category) {
 
-    buttons.forEach(function(button){
+
+    buttons.forEach(function(button) {
 
         button.classList.toggle(
             'active',
@@ -1030,7 +1833,7 @@ function activate(category){
         findView(category);
 
 
-    views.forEach(function(view){
+    views.forEach(function(view) {
 
         view.hidden =
             view !== selectedView;
@@ -1043,17 +1846,23 @@ function activate(category){
         !selectedView
     ) {
 
-        categoryEmpty.style.display = 'block';
+        categoryEmpty.style.display =
+            'block';
+
 
         categoryEmptyTitle.textContent =
             category + ' is coming soon';
 
+
         categoryEmptyText.textContent =
             'This category is ready for future products.';
 
-    } else {
+    }
 
-        categoryEmpty.style.display = 'none';
+    else {
+
+        categoryEmpty.style.display =
+            'none';
 
     }
 
@@ -1063,7 +1872,8 @@ function activate(category){
 }
 
 
-function filter(){
+function filter() {
+
 
     var query =
         (search.value || '')
@@ -1093,7 +1903,9 @@ function filter(){
 
         root = popular;
 
-    } else {
+    }
+
+    else {
 
         root = findView(active);
 
@@ -1102,7 +1914,8 @@ function filter(){
 
     if (!root) {
 
-        empty.style.display = 'none';
+        empty.style.display =
+            'none';
 
         return;
 
@@ -1111,14 +1924,17 @@ function filter(){
 
     var cards =
         [].slice.call(
-            root.querySelectorAll('.package-entry')
+            root.querySelectorAll(
+                '.package-entry'
+            )
         );
 
 
     var count = 0;
 
 
-    cards.forEach(function(card){
+    cards.forEach(function(card) {
+
 
         var haystack = [
 
@@ -1137,7 +1953,8 @@ function filter(){
             haystack.indexOf(query) !== -1;
 
 
-        card.hidden = !show;
+        card.hidden =
+            !show;
 
 
         if (show) {
@@ -1149,23 +1966,33 @@ function filter(){
 
     if (count === 0) {
 
+
         if (active === 'popular') {
+
 
             empty.textContent =
                 query
                 ? 'No products match your search.'
                 : 'No products are available yet.';
 
-            empty.style.display = 'block';
 
-        } else {
+            empty.style.display =
+                'block';
 
-            categoryEmpty.style.display = 'block';
+        }
+
+        else {
+
+
+            categoryEmpty.style.display =
+                'block';
+
 
             categoryEmptyTitle.textContent =
                 query
                 ? 'No products match your search.'
                 : active + ' is coming soon';
+
 
             categoryEmptyText.textContent =
                 query
@@ -1174,12 +2001,20 @@ function filter(){
 
         }
 
-    } else {
+    }
 
-        empty.style.display = 'none';
+    else {
+
+
+        empty.style.display =
+            'none';
+
 
         if (active !== 'popular') {
-            categoryEmpty.style.display = 'none';
+
+            categoryEmpty.style.display =
+                'none';
+
         }
 
     }
@@ -1187,11 +2022,12 @@ function filter(){
 }
 
 
-buttons.forEach(function(button){
+buttons.forEach(function(button) {
+
 
     button.addEventListener(
         'click',
-        function(){
+        function() {
 
             activate(
                 button.dataset.category
@@ -1203,13 +2039,58 @@ buttons.forEach(function(button){
 });
 
 
-search.addEventListener(
-    'input',
-    filter
+/*
+    Search is intentionally NOT live.
+
+    The user writes the search term,
+    then presses the magnifying-glass button
+    or Enter.
+*/
+
+searchForm.addEventListener(
+    'submit',
+    function(event) {
+
+        event.preventDefault();
+
+        filter();
+
+    }
 );
 
 
+/*
+    Featured carousel:
+    horizontal swipe/scroll is native on iPhone.
+*/
+
+if (featuredTrack) {
+
+    featuredTrack.addEventListener(
+        'wheel',
+        function(event) {
+
+            if (
+                Math.abs(event.deltaY) >
+                Math.abs(event.deltaX)
+            ) {
+
+                event.preventDefault();
+
+                featuredTrack.scrollLeft +=
+                    event.deltaY;
+
+            }
+
+        },
+        { passive: false }
+    );
+
+}
+
+
 activate('popular');
+
 
 })();
 

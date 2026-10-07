@@ -5,9 +5,9 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.narf.lana.deb
 Size: 5087596
-MD5sum: b81c3b9a4c3ab85207f5422ae6d64809
-SHA1: e5495f4306e8a7539aa81237e213924e954d450a
-SHA256: 61aa959458b8856a84dc3688746ce6986ca52fa4e58e591ef00552e8070e9ee9
+MD5sum: f894d6e74ba4ee07344eafeb35fa0ec7
+SHA1: c0ed49ccaca72fe922a2d05af294efaad9432468
+SHA256: 0c4024794fdb18edc4a4fd1e3d993a8a6ea370b1eae3b67175f5689a1ecf16e4
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -25,9 +25,9 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64e.deb
 Size: 5079420
-MD5sum: 5b6a24f9d505970a2f2ee70970ba4e8f
-SHA1: 00bb72ddd56be2a506711f69d6d53db325e99dc7
-SHA256: 64435f29c8d905543840ec0ea476fd6bdf41fd0d27f246686b418e779c9ef440
+MD5sum: bc88ad47c488940848e76706ad89657f
+SHA1: 1b9342b6603589ab6b5b323b1caa48f15b04f49e
+SHA256: b7e0bcdb703596230307c8d95b95cfa960019bb612a597edde9d855162ea4965
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -46,9 +46,9 @@ Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
 Size: 34796
-MD5sum: f1a85d76dc91e99d3ace4304a606cf25
-SHA1: 744ed5ed77aaabe0fd38f5fe7931e44af5fcb571
-SHA256: f88302b9985211a81adae5973e08a76c13e72e5c95d2c2c8f3ce7c56db3c6eaf
+MD5sum: 5ebe67dd0b9a17af62262eec1944f7ff
+SHA1: c9debd0df71809a872d1d29e6219bae310e146d8
+SHA256: 5dfaf47bd4ca6d1cb7f4b912ec0732b87a0e13826b4adfd600ac30fa72b325bc
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
