@@ -32,7 +32,11 @@
     --ease: cubic-bezier(.2,.8,.2,1);
 }
 
-html { background: var(--bg); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html {
+    background: var(--bg);
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
@@ -51,16 +55,44 @@ body {
         calc(16px + env(safe-area-inset-left));
 }
 
-a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
-button, input { font: inherit; color: inherit; }
-button { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
 
-.page { width: 100%; max-width: 1180px; margin: 0 auto; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+}
+
+.page {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
 
 /* ---------- Header ---------- */
-/* Mobile: row 1 = brand + account, row 2 = search. Desktop: brand | search | account in one row. */
+
 .topbar {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -73,177 +105,483 @@ button { -webkit-tap-highlight-color: transparent; }
 }
 
 .brand {
-    grid-area: brand; justify-self: start;
-    display: inline-flex; align-items: center;
-    min-height: 48px; border-radius: 12px;
+    grid-area: brand;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    border-radius: 12px;
 }
 
-/* Official Narf logo (assets/narf-brand.png).
-   The PNG has transparent padding around the artwork, so this wrapper only
-   crops the view to the artwork box (x189 y245, 1290x480 of the 1672x940 file).
-   The image itself is not redrawn, stretched or altered. Size it with --logo-h only. */
+/* Official Narf logo */
 .brand-logo {
     --logo-h: 36px;
-    position: relative; display: block; overflow: hidden; flex: 0 0 auto;
-    height: var(--logo-h); width: calc(var(--logo-h) * 2.6875); /* 1290:480 artwork ratio */
-}
-.brand-logo img {
-    position: absolute; display: block;
-    width: 129.61%; height: auto; max-width: none;
-    left: -14.65%; top: -51.04%;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    flex: 0 0 auto;
+    height: var(--logo-h);
+    width: calc(var(--logo-h) * 2.6875);
 }
 
-.account-wrap { position: relative; }
+.brand-logo img {
+    position: absolute;
+    display: block;
+    width: 129.61%;
+    height: auto;
+    max-width: none;
+    left: -14.65%;
+    top: -51.04%;
+}
+
+.account-wrap {
+    position: relative;
+}
 
 .icon-btn {
-    width: 44px; height: 44px; display: grid; place-items: center;
-    border-radius: 50%; background: var(--surface);
-    border: 1px solid var(--line-2); cursor: pointer;
-    transition: border-color .18s var(--ease), transform .12s var(--ease);
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    cursor: pointer;
+    transition:
+        border-color .18s var(--ease),
+        transform .12s var(--ease);
 }
-.icon-btn:hover, .icon-btn.on { border-color: var(--orange); }
-.icon-btn:active { transform: scale(.94); }
-.icon-btn svg { width: 21px; height: 21px; }
 
-.account-wrap { grid-area: account; justify-self: end; }
+.icon-btn:hover,
+.icon-btn.on {
+    border-color: var(--orange);
+}
+
+.icon-btn:active {
+    transform: scale(.94);
+}
+
+.icon-btn svg {
+    width: 21px;
+    height: 21px;
+}
+
+.account-wrap {
+    grid-area: account;
+    justify-self: end;
+}
+
 .account-btn {
     background: rgba(255,255,255,.04);
     border-color: rgba(255,255,255,.10);
     color: var(--text-2);
-    transition: border-color .18s var(--ease), background .18s var(--ease), color .18s var(--ease), transform .12s var(--ease);
+    transition:
+        border-color .18s var(--ease),
+        background .18s var(--ease),
+        color .18s var(--ease),
+        transform .12s var(--ease);
 }
-.account-btn:active { background: rgba(255,255,255,.08); color: #fff; }
-.account-btn.on { background: var(--orange-soft); border-color: var(--orange-line); color: var(--orange); }
-@media (hover: hover) { .account-btn:hover { background: rgba(255,255,255,.07); border-color: var(--orange-line); color: #fff; } }
+
+.account-btn:active {
+    background: rgba(255,255,255,.08);
+    color: #fff;
+}
+
+.account-btn.on {
+    background: var(--orange-soft);
+    border-color: var(--orange-line);
+    color: var(--orange);
+}
+
+@media (hover: hover) {
+    .account-btn:hover {
+        background: rgba(255,255,255,.07);
+        border-color: var(--orange-line);
+        color: #fff;
+    }
+}
 
 .account-menu {
-    position: absolute; right: 0; top: calc(100% + 8px);
-    width: 270px; z-index: 30;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: 270px;
+    z-index: 30;
     background: var(--surface-2);
     border: 1px solid var(--line-2);
     border-radius: var(--r-md);
     padding: 8px;
     box-shadow: 0 18px 40px rgba(0,0,0,.75);
 }
-.account-menu[hidden] { display: none; }
-.account-menu-head { padding: 10px 10px 12px; border-bottom: 1px solid var(--line); margin-bottom: 6px; }
-.account-menu-head strong { display: block; font-size: 15px; }
-.account-menu-head span { font-size: 12px; color: var(--muted); }
-.account-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 10px; border-radius: 10px; font-size: 14px; color: var(--text-2);
+
+.account-menu[hidden] {
+    display: none;
 }
-.account-item small { font-size: 11px; color: var(--muted); }
+
+.account-menu-head {
+    padding: 10px 10px 12px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 6px;
+}
+
+.account-menu-head strong {
+    display: block;
+    font-size: 15px;
+}
+
+.account-menu-head span {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.account-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--text-2);
+}
+
+.account-item small {
+    font-size: 11px;
+    color: var(--muted);
+}
 
 /* ---------- Search ---------- */
-.search { grid-area: search; min-width: 0; }
-.search-box {
-    display: flex; align-items: center; gap: 6px;
-    height: 52px; padding: 0 4px 0 18px;
-    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 999px;
-    transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+
+.search {
+    grid-area: search;
+    min-width: 0;
 }
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 52px;
+    padding: 0 4px 0 18px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 999px;
+    transition:
+        border-color .2s var(--ease),
+        box-shadow .2s var(--ease),
+        background .2s var(--ease);
+}
+
 .search-box:focus-within {
     background: rgba(255,255,255,.06);
     border-color: rgba(255,122,0,.75);
     box-shadow: 0 0 0 3px rgba(255,122,0,.14);
 }
+
 .search-input {
-    flex: 1; min-width: 0; height: 100%;
-    background: transparent; border: 0; outline: 0;
-    font-size: 16px; /* 16px stops iOS Safari from zooming on focus */
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 16px;
     text-overflow: ellipsis;
 }
-.search-input::placeholder { color: var(--muted); }
-.search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
-.search-btn {
-    height: 44px; min-width: 44px; padding: 0 20px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    background: var(--orange); color: #000; border: 0; border-radius: 999px;
-    font-weight: 800; font-size: 14px; cursor: pointer;
-    transition: background .18s var(--ease), transform .12s var(--ease);
-}
-@media (hover: hover) { .search-btn:hover { background: var(--orange-hi); } }
-.search-btn:active { transform: scale(.96); }
-.search-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
 
-/* Header: phone = compact icon-only search button, larger screens = one balanced row */
-@media (max-width: 699px) {
-    .search-btn span { display: none; }
-    .search-btn { padding: 0; width: 44px; }
+.search-input::placeholder {
+    color: var(--muted);
 }
+
+.search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+.search-btn {
+    height: 44px;
+    min-width: 44px;
+    padding: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--orange);
+    color: #000;
+    border: 0;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        background .18s var(--ease),
+        transform .12s var(--ease);
+}
+
+@media (hover: hover) {
+    .search-btn:hover {
+        background: var(--orange-hi);
+    }
+}
+
+.search-btn:active {
+    transform: scale(.96);
+}
+
+.search-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+}
+
+@media (max-width: 699px) {
+    .search-btn span {
+        display: none;
+    }
+
+    .search-btn {
+        padding: 0;
+        width: 44px;
+    }
+}
+
 @media (min-width: 700px) {
     .topbar {
         grid-template-columns: minmax(110px, 1fr) minmax(0, 560px) minmax(110px, 1fr);
         grid-template-areas: "brand search account";
         grid-template-rows: 72px;
-        column-gap: 20px; row-gap: 0;
+        column-gap: 20px;
+        row-gap: 0;
         margin-bottom: 28px;
     }
-    .brand-logo { --logo-h: 40px; }
+
+    .brand-logo {
+        --logo-h: 40px;
+    }
 }
 
 /* ---------- Section headers ---------- */
-.head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.head h2 { font-size: 28px; font-weight: 850; letter-spacing: -.03em; }
-.head p { color: var(--muted); font-size: 13px; margin-top: 2px; }
 
-.arrows { display: none; gap: 8px; }
-@media (hover: hover) and (pointer: fine) { .arrows { display: flex; } }
-.arrow { width: 38px; height: 38px; }
-.arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.head h2 {
+    font-size: 28px;
+    font-weight: 850;
+    letter-spacing: -.03em;
+}
+
+.head p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.arrows {
+    display: none;
+    gap: 8px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .arrows {
+        display: flex;
+    }
+}
+
+.arrow {
+    width: 38px;
+    height: 38px;
+}
+
+.arrow svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
 /* ---------- Featured ---------- */
-.featured { margin-bottom: 26px; }
-.featured[hidden] { display: none; }
+
+.featured {
+    margin-bottom: 26px;
+}
+
+.featured[hidden] {
+    display: none;
+}
+
 .feat-track {
-    display: flex; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scrollbar-width: none;
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     margin: 0 calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
     padding: 4px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
-    scroll-padding-inline: 16px; -webkit-overflow-scrolling: touch;
+    scroll-padding-inline: 16px;
+    -webkit-overflow-scrolling: touch;
 }
-.feat-track::-webkit-scrollbar { display: none; }
+
+.feat-track::-webkit-scrollbar {
+    display: none;
+}
+
 .feat {
-    position: relative; flex: 0 0 min(86vw, 380px); scroll-snap-align: start;
-    display: flex; flex-direction: column; gap: 18px; padding: 20px; min-height: 236px;
-    border-radius: var(--r-lg); border: 1px solid var(--line-2);
-    background: radial-gradient(120% 90% at 100% 100%, rgba(255,122,0,.2), transparent 60%), var(--surface);
+    position: relative;
+    flex: 0 0 min(86vw, 380px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+    min-height: 236px;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--line-2);
+    background:
+        radial-gradient(
+            120% 90% at 100% 100%,
+            rgba(255,122,0,.2),
+            transparent 60%
+        ),
+        var(--surface);
     overflow: hidden;
-    transition: transform .22s var(--ease), border-color .22s var(--ease);
+    transition:
+        transform .22s var(--ease),
+        border-color .22s var(--ease);
 }
-.feat:hover { transform: translateY(-3px); border-color: var(--orange-line); }
-.feat:active { transform: scale(.985); }
-.feat-top { display: flex; gap: 16px; align-items: center; }
-.feat .icon { width: 92px; height: 92px; border-radius: 21px; }
-.feat-name { font-size: 22px; font-weight: 850; letter-spacing: -.02em; overflow-wrap: anywhere; }
-.feat-dev { color: var(--orange); font-size: 13px; font-weight: 700; margin-top: 2px; }
+
+.feat:hover {
+    transform: translateY(-3px);
+    border-color: var(--orange-line);
+}
+
+.feat:active {
+    transform: scale(.985);
+}
+
+.feat-top {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.feat .icon {
+    width: 92px;
+    height: 92px;
+    border-radius: 21px;
+}
+
+.feat-name {
+    font-size: 22px;
+    font-weight: 850;
+    letter-spacing: -.02em;
+    overflow-wrap: anywhere;
+}
+
+.feat-dev {
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
 .feat-desc {
-    color: var(--text-2); font-size: 14px; line-height: 1.5;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere;
+    color: var(--text-2);
+    font-size: 14px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
 }
-.feat-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; }
-.pkg-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.feat-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.pkg-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
 
 /* ---------- Category nav ---------- */
+
 .cats {
-    position: sticky; top: 0; z-index: 10;
+    position: sticky;
+    top: 0;
+    z-index: 10;
     margin: 0 calc(-16px - env(safe-area-inset-right)) 18px calc(-16px - env(safe-area-inset-left));
     padding: 8px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
     background: linear-gradient(#000 70%, rgba(0,0,0,0));
 }
-.cats-row { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.cats-row::-webkit-scrollbar { display: none; }
-.cat {
-    flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; gap: 8px;
-    padding: 0 18px; background: var(--surface); border: 1px solid var(--line-2); border-radius: 999px;
-    color: var(--text-2); font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer;
-    transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), transform .12s var(--ease);
+
+.cats-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
-.cat:hover { border-color: var(--orange-line); color: #fff; }
-.cat:active { transform: scale(.96); }
-.cat[aria-pressed="true"] { background: var(--orange); border-color: var(--orange); color: #000; }
+
+.cats-row::-webkit-scrollbar {
+    display: none;
+}
+
+.cat {
+    flex: 0 0 auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 18px;
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    color: var(--text-2);
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        background .2s var(--ease),
+        color .2s var(--ease),
+        border-color .2s var(--ease),
+        transform .12s var(--ease);
+}
+
+.cat:hover {
+    border-color: var(--orange-line);
+    color: #fff;
+}
+
+.cat:active {
+    transform: scale(.96);
+}
+
+.cat[aria-pressed="true"] {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #000;
+}
 
 /* ---------- Havoc-style shelf ---------- */
+
 .shelf {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -251,135 +589,825 @@ button { -webkit-tap-highlight-color: transparent; }
     overflow: hidden;
     box-shadow: 0 18px 40px rgba(0,0,0,.45);
 }
-.shelf[hidden] { display: none; }
+
+.shelf[hidden] {
+    display: none;
+}
 
 .list {
     display: grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(3, auto);
     grid-auto-columns: calc(100% - 30px);
-    overflow-x: auto; overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory; scrollbar-width: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     padding: 6px 0;
 }
-.list::-webkit-scrollbar { display: none; }
+
+.list::-webkit-scrollbar {
+    display: none;
+}
 
 .pkg {
-    position: relative; scroll-snap-align: start;
-    display: flex; align-items: center; gap: 14px;
-    padding: 14px 16px; min-height: 92px;
+    position: relative;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    min-height: 92px;
     transition: background .18s var(--ease);
 }
-.pkg[hidden] { display: none; }
-.pkg:hover { background: rgba(255,122,0,.05); }
-.pkg:active { background: rgba(255,122,0,.09); }
+
+.pkg[hidden] {
+    display: none;
+}
+
+.pkg:hover {
+    background: rgba(255,122,0,.05);
+}
+
+.pkg:active {
+    background: rgba(255,122,0,.09);
+}
+
 .pkg::after {
-    content: ""; position: absolute; left: 92px; right: 16px; bottom: 0;
-    height: 1px; background: var(--line);
+    content: "";
+    position: absolute;
+    left: 92px;
+    right: 16px;
+    bottom: 0;
+    height: 1px;
+    background: var(--line);
 }
-.pkg .icon { width: 62px; height: 62px; border-radius: 14px; }
-.pkg-main { flex: 1; min-width: 0; }
-.pkg-name { font-size: 17px; font-weight: 800; letter-spacing: -.015em; overflow-wrap: anywhere; }
+
+.pkg .icon {
+    width: 62px;
+    height: 62px;
+    border-radius: 14px;
+}
+
+.pkg-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.pkg-name {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -.015em;
+    overflow-wrap: anywhere;
+}
+
 .pkg-desc {
-    color: var(--text-2); font-size: 13px; line-height: 1.4; margin-top: 2px;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere;
+    color: var(--text-2);
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
 }
-.pkg-sub { color: var(--muted); font-size: 12px; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.dots { display: flex; justify-content: center; gap: 7px; padding: 4px 0 14px; min-height: 22px; }
-.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line-2); transition: background .2s var(--ease), width .2s var(--ease); }
-.dots i.on { background: var(--orange); width: 18px; border-radius: 99px; }
+.pkg-sub {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-/* Shared bits */
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    padding: 4px 0 14px;
+    min-height: 22px;
+}
+
+.dots i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--line-2);
+    transition:
+        background .2s var(--ease),
+        width .2s var(--ease);
+}
+
+.dots i.on {
+    background: var(--orange);
+    width: 18px;
+    border-radius: 99px;
+}
+
+/* ---------- Shared bits ---------- */
+
 .icon {
-    flex-shrink: 0; object-fit: cover; background: var(--surface-2);
-    border: 1px solid var(--line-2); box-shadow: 0 8px 20px rgba(0,0,0,.45); display: block;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: var(--surface-2);
+    border: 1px solid var(--line-2);
+    box-shadow: 0 8px 20px rgba(0,0,0,.45);
+    display: block;
 }
+
 .icon.ph {
-    display: grid; place-items: center; font-weight: 900; font-size: 26px; color: var(--orange);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    font-size: 26px;
+    color: var(--orange);
     background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
 }
+
 .chip {
-    display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px;
-    font-size: 12px; font-weight: 700; line-height: 1.2; color: var(--text-2);
-    background: var(--surface-2); border: 1px solid var(--line);
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-2);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
 }
-.chip.cat-chip { color: var(--orange); background: var(--orange-soft); border-color: var(--orange-line); }
+
+.chip.cat-chip {
+    color: var(--orange);
+    background: var(--orange-soft);
+    border-color: var(--orange-line);
+}
 
 .cta {
-    flex-shrink: 0; min-width: 68px; min-height: 36px; display: inline-grid; place-items: center;
-    padding: 0 16px; border-radius: 999px;
-    background: var(--orange-soft); border: 1px solid var(--orange-line);
-    color: var(--orange); font-size: 14px; font-weight: 850; letter-spacing: .01em;
-    transition: background .18s var(--ease), color .18s var(--ease);
+    flex-shrink: 0;
+    min-width: 68px;
+    min-height: 36px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: var(--orange-soft);
+    border: 1px solid var(--orange-line);
+    color: var(--orange);
+    font-size: 14px;
+    font-weight: 850;
+    letter-spacing: .01em;
+    transition:
+        background .18s var(--ease),
+        color .18s var(--ease);
 }
-.pkg:hover .cta, .feat:hover .cta { background: var(--orange); color: #000; }
-.cta.paid { font-variant-numeric: tabular-nums; }
+
+.pkg:hover .cta,
+.feat:hover .cta {
+    background: var(--orange);
+    color: #000;
+}
+
+.cta.paid {
+    font-variant-numeric: tabular-nums;
+}
 
 /* ---------- Empty states ---------- */
+
 .state {
-    display: none; text-align: center; padding: 56px 24px;
-    background: var(--surface); border: 1px dashed var(--line-2); border-radius: var(--r-lg);
+    display: none;
+    text-align: center;
+    padding: 56px 24px;
+    background: var(--surface);
+    border: 1px dashed var(--line-2);
+    border-radius: var(--r-lg);
 }
-.state.on { display: block; }
-.state svg { width: 40px; height: 40px; margin-bottom: 14px; fill: none; stroke: var(--orange); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.state strong { display: block; font-size: 18px; margin-bottom: 6px; }
-.state span { color: var(--muted); font-size: 14px; }
+
+.state.on {
+    display: block;
+}
+
+.state svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 14px;
+    fill: none;
+    stroke: var(--orange);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.state strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.state span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
 .state button {
-    margin-top: 18px; min-height: 44px; padding: 0 20px; background: transparent;
-    border: 1px solid var(--orange-line); border-radius: 999px; color: var(--orange); font-weight: 700; cursor: pointer;
+    margin-top: 18px;
+    min-height: 44px;
+    padding: 0 20px;
+    background: transparent;
+    border: 1px solid var(--orange-line);
+    border-radius: 999px;
+    color: var(--orange);
+    font-weight: 700;
+    cursor: pointer;
 }
-.state button[hidden] { display: none; }
+
+.state button[hidden] {
+    display: none;
+}
+
+/* ---------- Lana Product Page ---------- */
+
+.lana-page {
+    display: none;
+    margin-top: 4px;
+    animation: lana-in .28s var(--ease);
+}
+
+.lana-page.on {
+    display: block;
+}
+
+@keyframes lana-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lana-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 0 15px;
+    margin-bottom: 18px;
+
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+
+    background: var(--surface);
+    color: var(--text-2);
+
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+
+    transition:
+        color .18s var(--ease),
+        border-color .18s var(--ease),
+        background .18s var(--ease),
+        transform .12s var(--ease);
+}
+
+.lana-back:hover {
+    color: #fff;
+    border-color: var(--orange-line);
+    background: var(--surface-2);
+}
+
+.lana-back:active {
+    transform: scale(.96);
+}
+
+.lana-back svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lana-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+
+    padding: 20px;
+
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-lg);
+
+    background:
+        radial-gradient(
+            90% 100% at 100% 0%,
+            rgba(255,122,0,.16),
+            transparent 60%
+        ),
+        linear-gradient(145deg, #101010, #080808);
+
+    overflow: hidden;
+}
+
+.lana-preview {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+
+    border-radius: 18px;
+    border: 1px solid var(--line-2);
+
+    background: var(--surface-2);
+
+    box-shadow: 0 18px 45px rgba(0,0,0,.45);
+}
+
+.lana-summary {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.lana-product-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.lana-icon {
+    width: 88px;
+    height: 88px;
+    flex: 0 0 auto;
+
+    border-radius: 21px;
+    object-fit: cover;
+
+    border: 1px solid var(--line-2);
+    box-shadow: 0 12px 30px rgba(0,0,0,.5);
+}
+
+.lana-kicker {
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.lana-title {
+    font-size: clamp(30px, 7vw, 46px);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -.04em;
+    margin-top: 4px;
+}
+
+.lana-by {
+    color: var(--text-2);
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.lana-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+
+    margin-top: 22px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--line);
+}
+
+.lana-price {
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -.03em;
+}
+
+.lana-buy {
+    min-height: 48px;
+    padding: 0 22px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: var(--orange);
+    color: #000;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition:
+        background .18s var(--ease),
+        transform .12s var(--ease);
+}
+
+.lana-buy:hover {
+    background: var(--orange-hi);
+}
+
+.lana-buy:active {
+    transform: scale(.96);
+}
+
+.lana-buy svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lana-section {
+    margin-top: 28px;
+}
+
+.lana-section h2 {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: -.025em;
+    margin-bottom: 12px;
+}
+
+.lana-copy {
+    color: var(--text-2);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 780px;
+}
+
+.lana-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+}
+
+.lana-feature {
+    min-height: 100px;
+    padding: 16px;
+
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+
+    background: var(--surface);
+}
+
+.lana-feature strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.lana-feature span {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.lana-feature .feature-icon {
+    color: var(--orange);
+    font-size: 21px;
+    margin-bottom: 9px;
+}
+
+.lana-compat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 16px;
+
+    border: 1px solid var(--orange-line);
+    border-radius: var(--r-md);
+
+    background: var(--orange-soft);
+}
+
+.lana-compat-icon {
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.07);
+    border: 1px solid var(--line-2);
+}
+
+.lana-compat-icon svg {
+    width: 23px;
+    height: 23px;
+    fill: currentColor;
+}
+
+.lana-compat strong {
+    display: block;
+    font-size: 15px;
+}
+
+.lana-compat span {
+    display: block;
+    color: var(--text-2);
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.lana-developer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+
+    padding: 18px;
+
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-md);
+
+    background: var(--surface);
+}
+
+.lana-developer-name {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.lana-developer-meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.lana-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    min-height: 42px;
+    padding: 0 14px;
+
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+
+    color: var(--text-2);
+
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.lana-social:hover {
+    color: var(--orange);
+    border-color: var(--orange-line);
+}
+
+.lana-social svg {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+}
+
+.lana-note {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+/* Hide normal store while Lana is open */
+body.lana-open .topbar,
+body.lana-open .featured,
+body.lana-open .cats,
+body.lana-open main,
+body.lana-open .footer {
+    display: none;
+}
+
+@media (min-width: 700px) {
+
+    .lana-hero {
+        grid-template-columns:
+            minmax(0, 1.2fr)
+            minmax(360px, .8fr);
+
+        padding: 24px;
+        align-items: center;
+    }
+
+    .lana-grid {
+        grid-template-columns: repeat(4, minmax(0,1fr));
+    }
+}
+
+@media (max-width: 520px) {
+
+    .lana-price-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .lana-buy {
+        width: 100%;
+    }
+
+    .lana-developer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .lana-social {
+        width: 100%;
+        justify-content: center;
+    }
+}
 
 /* ---------- Footer ---------- */
-.footer { margin-top: 56px; padding-top: 30px; border-top: 1px solid var(--line); }
-.footer-grid { display: grid; gap: 26px 20px; grid-template-columns: repeat(2, 1fr); }
-.footer h3 { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+
+.footer {
+    margin-top: 56px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+}
+
+.footer-grid {
+    display: grid;
+    gap: 26px 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.footer h3 {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
 .flink {
-    display: block; width: 100%; text-align: left; padding: 8px 0; min-height: 36px;
-    font-size: 14px; color: var(--muted); background: none; border: 0; cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 0;
+    min-height: 36px;
+    font-size: 14px;
+    color: var(--muted);
+    background: none;
+    border: 0;
+    cursor: pointer;
     transition: color .18s var(--ease);
 }
-.flink:hover { color: var(--orange); }
-.footer-bottom {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
-    margin-top: 28px; padding: 18px 0 6px; border-top: 1px solid var(--line);
-    color: var(--muted); font-size: 12px;
-}
-.x-link {
-    width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%;
-    background: var(--surface); border: 1px solid var(--line-2); color: var(--text-2);
-    transition: color .18s var(--ease), border-color .18s var(--ease), transform .12s var(--ease);
-}
-.x-link:hover { color: var(--orange); border-color: var(--orange); }
-.x-link:active { transform: scale(.94); }
-.x-link svg { width: 22px; height: 22px; fill: currentColor; }
 
-/* Toast */
-.toast {
-    position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 50;
-    transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
-    background: var(--surface-2); border: 1px solid var(--orange-line); color: var(--text);
-    padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 600;
-    transition: opacity .25s var(--ease), transform .25s var(--ease);
+.flink:hover {
+    color: var(--orange);
 }
-.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 28px;
+    padding: 18px 0 6px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.x-link {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    color: var(--text-2);
+    transition:
+        color .18s var(--ease),
+        border-color .18s var(--ease),
+        transform .12s var(--ease);
+}
+
+.x-link:hover {
+    color: var(--orange);
+    border-color: var(--orange);
+}
+
+.x-link:active {
+    transform: scale(.94);
+}
+
+.x-link svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+/* ---------- Toast ---------- */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    z-index: 50;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    pointer-events: none;
+
+    background: var(--surface-2);
+    border: 1px solid var(--orange-line);
+    color: var(--text);
+
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        opacity .25s var(--ease),
+        transform .25s var(--ease);
+}
+
+.toast.on {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
 
 /* ---------- Larger screens ---------- */
+
 @media (min-width: 700px) {
-    body { padding-left: 28px; padding-right: 28px; }
-    .feat-track { margin: 0; padding-left: 0; padding-right: 0; scroll-padding-inline: 0; }
-    .cats { margin: 0 0 18px; padding-left: 0; padding-right: 0; }
-    .list { grid-auto-columns: 420px; }
-    .footer-grid { grid-template-columns: repeat(5, 1fr); }
-    .head h2 { font-size: 32px; }
+
+    body {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+
+    .feat-track {
+        margin: 0;
+        padding-left: 0;
+        padding-right: 0;
+        scroll-padding-inline: 0;
+    }
+
+    .cats {
+        margin: 0 0 18px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .list {
+        grid-auto-columns: 420px;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .head h2 {
+        font-size: 32px;
+    }
 }
+
 @media (max-width: 420px) {
-    .feat .icon { width: 78px; height: 78px; border-radius: 18px; }
+
+    .feat .icon {
+        width: 78px;
+        height: 78px;
+        border-radius: 18px;
+    }
 }
+
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
 }
 </style>
 </head>
@@ -388,115 +1416,344 @@ button { -webkit-tap-highlight-color: transparent; }
 <div class="page">
 
 <!-- ================= HEADER ================= -->
+
 <header class="topbar">
 
-    <a class="brand" href="https://narf-alt.github.io/" aria-label="NARF home">
+    <a class="brand"
+       href="https://narf-alt.github.io/"
+       aria-label="NARF home">
+
         <!-- Official Narf logo -->
         <span class="brand-logo">
-            <img src="assets/narf-brand.png" alt="Narf" width="1672" height="940" decoding="async">
+
+            <img src="assets/narf-brand.png"
+                 alt="Narf"
+                 width="1672"
+                 height="940"
+                 decoding="async">
+
         </span>
+
     </a>
 
+
     <div class="account-wrap">
-        <button class="icon-btn account-btn" id="account-btn" type="button"
-                aria-label="Account" aria-haspopup="true" aria-expanded="false" aria-controls="account-menu">
+
+        <button class="icon-btn account-btn"
+                id="account-btn"
+                type="button"
+                aria-label="Account"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="account-menu">
+
             <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/>
-                <path d="M5.4 19.4c.9-3.2 3.2-4.9 6.6-4.9s5.7 1.7 6.6 4.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="12"
+                        cy="8"
+                        r="3.6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"/>
+
+                <path d="M5.4 19.4c.9-3.2 3.2-4.9 6.6-4.9s5.7 1.7 6.6 4.9"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"/>
             </svg>
+
         </button>
-        <div class="account-menu" id="account-menu" role="menu" hidden>
+
+
+        <div class="account-menu"
+             id="account-menu"
+             role="menu"
+             hidden>
+
             <div class="account-menu-head">
+
                 <strong>Account</strong>
-                <span>Sign-in is not available yet.</span>
+
+                <span>
+                    Sign-in is not available yet.
+                </span>
+
             </div>
-            <div class="account-item" role="menuitem" aria-disabled="true">Subscription <small>Soon</small></div>
-            <div class="account-item" role="menuitem" aria-disabled="true">Purchases <small>Soon</small></div>
-            <div class="account-item" role="menuitem" aria-disabled="true">Entitlements <small>Soon</small></div>
-            <div class="account-item" role="menuitem" aria-disabled="true">Settings <small>Soon</small></div>
+
+            <div class="account-item"
+                 role="menuitem"
+                 aria-disabled="true">
+
+                Subscription
+                <small>Soon</small>
+
+            </div>
+
+            <div class="account-item"
+                 role="menuitem"
+                 aria-disabled="true">
+
+                Purchases
+                <small>Soon</small>
+
+            </div>
+
+            <div class="account-item"
+                 role="menuitem"
+                 aria-disabled="true">
+
+                Entitlements
+                <small>Soon</small>
+
+            </div>
+
+            <div class="account-item"
+                 role="menuitem"
+                 aria-disabled="true">
+
+                Settings
+                <small>Soon</small>
+
+            </div>
+
         </div>
+
     </div>
 
-    <!-- Search (same form and ids as before; only moved into the header) -->
+
+    <!-- Search -->
+
     <section class="search" aria-label="Search">
-        <form id="search-form" class="search-box" role="search">
-            <label class="sr-only" for="search-input">Search packages</label>
-            <input id="search-input" class="search-input" type="search"
+
+        <form id="search-form"
+              class="search-box"
+              role="search">
+
+            <label class="sr-only"
+                   for="search-input">
+                Search packages
+            </label>
+
+            <input id="search-input"
+                   class="search-input"
+                   type="search"
                    placeholder="Search themes, tweaks, developers"
-                   autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search">
-            <button class="search-btn" type="submit" aria-label="Search">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.2"/><path d="M15.5 15.5L21 21"/></svg>
+                   autocomplete="off"
+                   autocapitalize="none"
+                   autocorrect="off"
+                   spellcheck="false"
+                   enterkeyhint="search">
+
+            <button class="search-btn"
+                    type="submit"
+                    aria-label="Search">
+
+                <svg viewBox="0 0 24 24"
+                     aria-hidden="true">
+
+                    <circle cx="10.8"
+                            cy="10.8"
+                            r="6.2"/>
+
+                    <path d="M15.5 15.5L21 21"/>
+
+                </svg>
+
                 <span>Search</span>
+
             </button>
+
         </form>
+
     </section>
 
 </header>
 
+
 <!-- ================= FEATURED ================= -->
-<section class="featured" id="featured" aria-labelledby="featured-title">
+
+<section class="featured"
+         id="featured"
+         aria-labelledby="featured-title">
+
     <div class="head">
+
         <div>
-            <h2 id="featured-title">Featured</h2>
-            <p>Hand-picked from the Source</p>
+
+            <h2 id="featured-title">
+                Featured
+            </h2>
+
+            <p>
+                Hand-picked from the Source
+            </p>
+
         </div>
+
+
         <div class="arrows">
-            <button class="icon-btn arrow" id="feat-prev" type="button" aria-label="Previous">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+
+            <button class="icon-btn arrow"
+                    id="feat-prev"
+                    type="button"
+                    aria-label="Previous">
+
+                <svg viewBox="0 0 24 24"
+                     aria-hidden="true">
+
+                    <path d="M15 5l-7 7 7 7"/>
+
+                </svg>
+
             </button>
-            <button class="icon-btn arrow" id="feat-next" type="button" aria-label="Next">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+
+
+            <button class="icon-btn arrow"
+                    id="feat-next"
+                    type="button"
+                    aria-label="Next">
+
+                <svg viewBox="0 0 24 24"
+                     aria-hidden="true">
+
+                    <path d="M9 5l7 7-7 7"/>
+
+                </svg>
+
             </button>
+
         </div>
+
     </div>
 
-    <div class="feat-track" id="feat-track" tabindex="0" aria-label="Featured packages">
+
+    <div class="feat-track"
+         id="feat-track"
+         tabindex="0"
+         aria-label="Featured packages">
+
 {{#sections}}
 {{#packages}}
-        <a class="feat" href="depiction/web/{{bundle_id}}.html">
+
+        <a class="feat"
+           href="depiction/web/{{bundle_id}}.html"
+           data-bundle="{{bundle_id}}">
+
             <div class="feat-top">
-                <img class="icon" src="assets/{{bundle_id}}/icon.png" alt="" width="92" height="92" loading="lazy">
+
+                <img class="icon"
+                     src="assets/{{bundle_id}}/icon.png"
+                     alt=""
+                     width="92"
+                     height="92"
+                     loading="lazy">
+
                 <div>
-                    <div class="feat-name">{{name}}</div>
-                    <div class="feat-dev">{{developer.name}}</div>
+
+                    <div class="feat-name">
+                        {{name}}
+                    </div>
+
+                    <div class="feat-dev">
+                        {{developer.name}}
+                    </div>
+
                 </div>
+
             </div>
-            <div class="feat-desc">{{summary}}</div>
+
+
+            <div class="feat-desc">
+                {{summary}}
+            </div>
+
+
             <div class="feat-foot">
+
                 <div class="pkg-meta">
-                    <span class="chip cat-chip">{{section}}</span>
-                    <span class="chip">v{{version}}</span>
+
+                    <span class="chip cat-chip">
+                        {{section}}
+                    </span>
+
+                    <span class="chip">
+                        v{{version}}
+                    </span>
+
                 </div>
-                <span class="cta {{#price}}paid{{/price}}">{{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}</span>
+
+
+                <span class="cta {{#price}}paid{{/price}}">
+                    {{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}
+                </span>
+
             </div>
+
         </a>
+
 {{/packages}}
 {{/sections}}
+
     </div>
+
 </section>
 
+
 <!-- ================= CATEGORIES ================= -->
-<nav class="cats" aria-label="Categories">
-    <div class="cats-row" id="cats-row">
-        <button class="cat" type="button" data-cat="popular" aria-pressed="true">
-            <span aria-hidden="true">🔥</span>Popular
+
+<nav class="cats"
+     aria-label="Categories">
+
+    <div class="cats-row"
+         id="cats-row">
+
+        <button class="cat"
+                type="button"
+                data-cat="popular"
+                aria-pressed="true">
+
+            <span aria-hidden="true">
+                🔥
+            </span>
+
+            Popular
+
         </button>
+
     </div>
+
 </nav>
 
+
 <!-- ================= PRODUCTS ================= -->
+
 <main>
+
     <div class="head">
+
         <div>
-            <h2 id="view-title">Popular</h2>
+
+            <h2 id="view-title">
+                Popular
+            </h2>
+
             <p id="view-sub"></p>
+
         </div>
+
     </div>
 
-    <div class="shelf" id="shelf">
-        <div class="list" id="list" aria-live="polite">
+
+    <div class="shelf"
+         id="shelf">
+
+        <div class="list"
+             id="list"
+             aria-live="polite">
+
 {{#sections}}
 {{#packages}}
+
             <a class="pkg"
                href="depiction/web/{{bundle_id}}.html"
                data-name="{{name}}"
@@ -504,287 +1761,1479 @@ button { -webkit-tap-highlight-color: transparent; }
                data-developer="{{developer.name}}"
                data-section="{{section}}"
                data-summary="{{summary}}">
-                <img class="icon" src="assets/{{bundle_id}}/icon.png" alt="" width="62" height="62" loading="lazy">
+
+                <img class="icon"
+                     src="assets/{{bundle_id}}/icon.png"
+                     alt=""
+                     width="62"
+                     height="62"
+                     loading="lazy">
+
+
                 <div class="pkg-main">
-                    <div class="pkg-name">{{name}}</div>
-                    <div class="pkg-desc">{{summary}}</div>
-                    <div class="pkg-sub">{{developer.name}} · v{{version}} · iOS {{works_min}}–{{works_max}}</div>
+
+                    <div class="pkg-name">
+                        {{name}}
+                    </div>
+
+                    <div class="pkg-desc">
+                        {{summary}}
+                    </div>
+
+                    <div class="pkg-sub">
+                        {{developer.name}} · v{{version}} · iOS {{works_min}}–{{works_max}}
+                    </div>
+
                 </div>
-                <span class="cta {{#price}}paid{{/price}}">{{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}</span>
+
+
+                <span class="cta {{#price}}paid{{/price}}">
+                    {{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}
+                </span>
+
             </a>
+
 {{/packages}}
 {{/sections}}
+
         </div>
-        <div class="dots" id="dots" aria-hidden="true"></div>
+
+
+        <div class="dots"
+             id="dots"
+             aria-hidden="true">
+        </div>
+
     </div>
 
-    <div class="state" id="state">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/>
+
+    <div class="state"
+         id="state">
+
+        <svg viewBox="0 0 24 24"
+             aria-hidden="true">
+
+            <path d="M21 8l-9-5-9 5 9 5 9-5z"/>
+            <path d="M3 8v8l9 5 9-5V8"/>
+            <path d="M12 13v8"/>
+
         </svg>
-        <strong id="state-title">No products yet</strong>
-        <span id="state-text">This category is ready for future releases.</span>
-        <div><button type="button" id="state-clear" hidden>Clear search</button></div>
+
+
+        <strong id="state-title">
+            No products yet
+        </strong>
+
+
+        <span id="state-text">
+            This category is ready for future releases.
+        </span>
+
+
+        <div>
+
+            <button type="button"
+                    id="state-clear"
+                    hidden>
+
+                Clear search
+
+            </button>
+
+        </div>
+
     </div>
+
 </main>
 
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-    <div class="footer-grid">
-        <div class="footer-col">
-            <h3>Store</h3>
-            <a class="flink" href="https://narf-alt.github.io/">Home</a>
+
+<!-- ================= LANA PRODUCT PAGE ================= -->
+
+<section class="lana-page"
+         id="lana-product"
+         aria-labelledby="lana-title">
+
+
+    <button class="lana-back"
+            id="lana-back"
+            type="button"
+            aria-label="Back to products">
+
+        <svg viewBox="0 0 24 24"
+             aria-hidden="true">
+
+            <path d="M15 5l-7 7 7 7"/>
+
+        </svg>
+
+        Back
+
+    </button>
+
+
+    <div class="lana-hero">
+
+
+        <img class="lana-preview"
+             src="assets/com.narf.lana/banner.png"
+             alt="Lana theme preview"
+             width="1200"
+             height="675">
+
+
+        <div class="lana-summary">
+
+
+            <div class="lana-product-head">
+
+
+                <img class="lana-icon"
+                     src="assets/com.narf.lana/icon.png"
+                     alt="Lana icon"
+                     width="88"
+                     height="88">
+
+
+                <div>
+
+                    <div class="lana-kicker">
+                        Premium Theme
+                    </div>
+
+
+                    <h1 class="lana-title"
+                        id="lana-title">
+
+                        Lana
+
+                    </h1>
+
+
+                    <div class="lana-by">
+                        Designed and maintained by Narf
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="lana-price-row">
+
+
+                <div class="lana-price">
+                    $2.99
+                </div>
+
+
+                <a class="lana-buy"
+                   href="https://narf-store.narf-ios26.workers.dev/checkout/lana">
+
+                    Buy Now
+
+                    <svg viewBox="0 0 24 24"
+                         aria-hidden="true">
+
+                        <path d="M6 6h2l1.5 9h8.8l1.7-6.5H9"/>
+                        <path d="M10 19.5h.01M18 19.5h.01"/>
+
+                    </svg>
+
+                </a>
+
+            </div>
+
         </div>
-        <div class="footer-col">
-            <h3>Account</h3>
-            <button class="flink" type="button" data-open-account>Sign in</button>
-        </div>
-        <div class="footer-col">
-            <h3>Purchases</h3>
-            <button class="flink" type="button" data-open-account>Order history</button>
-        </div>
-        <div class="footer-col">
-            <h3>Support</h3>
-            <a class="flink" href="https://x.com/narf_ios" target="_blank" rel="noopener">Contact us</a>
-        </div>
-        <div class="footer-col">
-            <h3>Developers</h3>
-            <button class="flink" type="button" data-toast="Publishing with NARF is coming soon">Publish with NARF</button>
-        </div>
+
     </div>
 
-    <div class="footer-bottom">
-        <a class="x-link" href="https://x.com/narf_ios" target="_blank" rel="noopener" aria-label="NARF on X">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-        </a>
-        <span>{{footer}}</span>
+
+    <section class="lana-section">
+
+        <h2>
+            About Lana
+        </h2>
+
+        <p class="lana-copy">
+            Lana is a premium iOS theme inspired by the warmth and texture
+            of handcrafted wool. Every detail is designed to give your
+            Home Screen a soft, distinctive visual identity, with custom
+            icon artwork and a consistent textile-inspired aesthetic.
+        </p>
+
+    </section>
+
+
+    <section class="lana-section"
+             aria-label="Lana features">
+
+        <h2>
+            What's included
+        </h2>
+
+
+        <div class="lana-grid">
+
+
+            <div class="lana-feature">
+
+                <div class="feature-icon">
+                    ✦
+                </div>
+
+                <strong>
+                    Wool-inspired style
+                </strong>
+
+                <span>
+                    Soft textile-inspired visual language across the theme.
+                </span>
+
+            </div>
+
+
+            <div class="lana-feature">
+
+                <div class="feature-icon">
+                    ◈
+                </div>
+
+                <strong>
+                    Custom icons
+                </strong>
+
+                <span>
+                    Carefully crafted icon artwork with more support over time.
+                </span>
+
+            </div>
+
+
+            <div class="lana-feature">
+
+                <div class="feature-icon">
+                    ↗
+                </div>
+
+                <strong>
+                    iOS 15–26
+                </strong>
+
+                <span>
+                    Designed for the supported iOS versions listed with the package.
+                </span>
+
+            </div>
+
+
+            <div class="lana-feature">
+
+                <div class="feature-icon">
+                    ⌁
+                </div>
+
+                <strong>
+                    Regular updates
+                </strong>
+
+                <span>
+                    Future improvements and additional icon support.
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <section class="lana-section">
+
+        <h2>
+            Compatibility
+        </h2>
+
+
+        <div class="lana-compat">
+
+
+            <div class="lana-compat-icon">
+
+                <svg viewBox="0 0 24 24"
+                     aria-hidden="true">
+
+                    <path d="M16.7 12.7c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.7.8-3.4 2.1-1.5 2.5-.4 6.2 1.1 8.2.7 1 1.6 2 2.7 2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7 1.9-1 2.6-2c.8-1 1.1-2 1.1-2.1-.1 0-2.1-.8-2.1-3.3z"/>
+
+                    <path d="M15.1 6.7c.6-.8 1-1.8.9-2.8-.9 0-2 .6-2.6 1.3-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.2z"/>
+
+                </svg>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Compatible with iOS 15–26
+                </strong>
+
+                <span>
+                    Version 1.3 · Premium edition · Bundle com.narf.lana
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="lana-section">
+
+        <h2>
+            Preview
+        </h2>
+
+
+        <img class="lana-preview"
+             src="assets/com.narf.lana/banner.png"
+             alt="Lana theme screenshots"
+             width="1200"
+             height="675">
+
+    </section>
+
+
+    <section class="lana-section">
+
+        <h2>
+            Developer
+        </h2>
+
+
+        <div class="lana-developer">
+
+
+            <div>
+
+                <div class="lana-developer-name">
+                    Narf
+                </div>
+
+                <div class="lana-developer-meta">
+                    Lana · Version 1.3 · @narf_ios
+                </div>
+
+            </div>
+
+
+            <a class="lana-social"
+               href="https://x.com/narf_ios"
+               target="_blank"
+               rel="noopener"
+               aria-label="Narf on X">
+
+                <svg viewBox="0 0 24 24"
+                     aria-hidden="true">
+
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817-5.964 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+
+                </svg>
+
+                @narf_ios
+
+            </a>
+
+        </div>
+
+
+        <p class="lana-note">
+            Purchase is handled securely through the existing Lana checkout
+            and Sileo payment flow. Buying Lana grants the Lana entitlement only.
+        </p>
+
+    </section>
+
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-grid">
+
+
+        <div class="footer-col">
+
+            <h3>
+                Store
+            </h3>
+
+            <a class="flink"
+               href="https://narf-alt.github.io/">
+
+                Home
+
+            </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h3>
+                Account
+            </h3>
+
+            <button class="flink"
+                    type="button"
+                    data-open-account>
+
+                Sign in
+
+            </button>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h3>
+                Purchases
+            </h3>
+
+            <button class="flink"
+                    type="button"
+                    data-open-account>
+
+                Order history
+
+            </button>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h3>
+                Support
+            </h3>
+
+            <a class="flink"
+               href="https://x.com/narf_ios"
+               target="_blank"
+               rel="noopener">
+
+                Contact us
+
+            </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h3>
+                Developers
+            </h3>
+
+            <button class="flink"
+                    type="button"
+                    data-toast="Publishing with NARF is coming soon">
+
+                Publish with NARF
+
+            </button>
+
+        </div>
+
+
     </div>
+
+
+    <div class="footer-bottom">
+
+
+        <a class="x-link"
+           href="https://x.com/narf_ios"
+           target="_blank"
+           rel="noopener"
+           aria-label="NARF on X">
+
+            <svg viewBox="0 0 24 24"
+                 aria-hidden="true">
+
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+
+            </svg>
+
+        </a>
+
+
+        <span>
+            {{footer}}
+        </span>
+
+    </div>
+
 </footer>
 
 </div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="toast"
+     id="toast"
+     role="status"
+     aria-live="polite">
+</div>
+
 
 <script>
+
 (function () {
-    var cards = [].slice.call(document.querySelectorAll('.pkg'));
+
+    var cards = [].slice.call(
+        document.querySelectorAll('.pkg')
+    );
+
     var list = document.getElementById('list');
+
     var shelf = document.getElementById('shelf');
+
     var dots = document.getElementById('dots');
+
     var state = document.getElementById('state');
+
     var stateTitle = document.getElementById('state-title');
+
     var stateText = document.getElementById('state-text');
+
     var stateClear = document.getElementById('state-clear');
+
     var viewTitle = document.getElementById('view-title');
+
     var viewSub = document.getElementById('view-sub');
+
     var catsRow = document.getElementById('cats-row');
+
     var form = document.getElementById('search-form');
+
     var input = document.getElementById('search-input');
+
     var featured = document.getElementById('featured');
+
     var track = document.getElementById('feat-track');
+
     var toast = document.getElementById('toast');
 
-    /* ---------- Icon fallback ---------- */
-    function placeholder(img) {
-        if (img.dataset.ph) return;
-        img.dataset.ph = '1';
-        var d = document.createElement('div');
-        d.className = img.className + ' ph';
-        d.setAttribute('aria-hidden', 'true');
-        d.style.width = img.getAttribute('width') + 'px';
-        d.style.height = img.getAttribute('height') + 'px';
-        var host = img.closest('.pkg, .feat');
-        var n = host && (host.dataset.name || (host.querySelector('.feat-name') || {}).textContent) || '';
-        d.textContent = (n.trim().charAt(0) || '·').toUpperCase();
-        img.parentNode.replaceChild(d, img);
+
+    /* ---------- Lana Product Page ---------- */
+
+    var lanaPage =
+        document.getElementById('lana-product');
+
+    var lanaBack =
+        document.getElementById('lana-back');
+
+
+    function openLana(push) {
+
+        document.body.classList.add('lana-open');
+
+        lanaPage.classList.add('on');
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+
+        if (push) {
+
+            history.pushState(
+                { lana: true },
+                '',
+                '?product=lana'
+            );
+
+        }
+
     }
-    [].slice.call(document.querySelectorAll('img.icon')).forEach(function (img) {
-        if (img.complete && img.naturalWidth === 0) placeholder(img);
-    });
-    document.addEventListener('error', function (e) {
-        if (e.target && e.target.tagName === 'IMG' && e.target.classList.contains('icon')) placeholder(e.target);
-    }, true);
+
+
+    function closeLana() {
+
+        document.body.classList.remove('lana-open');
+
+        lanaPage.classList.remove('on');
+
+
+        if (
+            new URLSearchParams(window.location.search)
+                .get('product') === 'lana'
+        ) {
+
+            history.pushState(
+                {},
+                '',
+                window.location.pathname
+            );
+
+        }
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+    }
+
+
+    /*
+     * Open Lana when its package card is selected.
+     */
+
+    document.addEventListener(
+        'click',
+        function (e) {
+
+            var link = e.target.closest(
+                'a[data-bundle="com.narf.lana"]'
+            );
+
+            if (!link) return;
+
+            e.preventDefault();
+
+            openLana(true);
+
+        }
+    );
+
+
+    lanaBack.addEventListener(
+        'click',
+        function () {
+            closeLana();
+        }
+    );
+
+
+    /*
+     * Direct URL:
+     * https://narf-alt.github.io/?product=lana
+     */
+
+    if (
+        new URLSearchParams(window.location.search)
+            .get('product') === 'lana'
+    ) {
+
+        openLana(false);
+
+    }
+
+
+    /*
+     * Browser Back / Forward
+     */
+
+    window.addEventListener(
+        'popstate',
+        function () {
+
+            if (
+                new URLSearchParams(window.location.search)
+                    .get('product') === 'lana'
+            ) {
+
+                openLana(false);
+
+            } else {
+
+                document.body.classList.remove(
+                    'lana-open'
+                );
+
+                lanaPage.classList.remove('on');
+
+            }
+
+        }
+    );
+
+
+    /* ---------- Icon fallback ---------- */
+
+    function placeholder(img) {
+
+        if (img.dataset.ph) return;
+
+        img.dataset.ph = '1';
+
+        var d = document.createElement('div');
+
+        d.className = img.className + ' ph';
+
+        d.setAttribute(
+            'aria-hidden',
+            'true'
+        );
+
+        d.style.width =
+            img.getAttribute('width') + 'px';
+
+        d.style.height =
+            img.getAttribute('height') + 'px';
+
+
+        var host =
+            img.closest('.pkg, .feat');
+
+
+        var n =
+            host &&
+            (
+                host.dataset.name ||
+                (
+                    host.querySelector('.feat-name') ||
+                    {}
+                ).textContent
+            ) ||
+            '';
+
+
+        d.textContent =
+            (n.trim().charAt(0) || '·')
+                .toUpperCase();
+
+
+        img.parentNode.replaceChild(
+            d,
+            img
+        );
+
+    }
+
+
+    [].slice.call(
+        document.querySelectorAll('img.icon')
+    ).forEach(
+        function (img) {
+
+            if (
+                img.complete &&
+                img.naturalWidth === 0
+            ) {
+
+                placeholder(img);
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        'error',
+        function (e) {
+
+            if (
+                e.target &&
+                e.target.tagName === 'IMG' &&
+                e.target.classList.contains('icon')
+            ) {
+
+                placeholder(e.target);
+
+            }
+
+        },
+        true
+    );
+
 
     /* ---------- Categories ---------- */
-    var ICONS = { themes: '🪶', tweaks: '🛠️', wallpapers: '🖼️', apps: '📱' };
-    var ORDER = ['Themes', 'Tweaks', 'Wallpapers', 'Apps'];
+
+    var ICONS = {
+        themes: '🪶',
+        tweaks: '🛠️',
+        wallpapers: '🖼️',
+        apps: '📱'
+    };
+
+    var ORDER = [
+        'Themes',
+        'Tweaks',
+        'Wallpapers',
+        'Apps'
+    ];
+
     var cats = [];
+
     var seen = {};
 
-    function addCat(label) {
-        var key = label.toLowerCase();
-        if (!label || seen[key]) return;
-        seen[key] = true;
-        cats.push({ key: key, label: label });
-    }
-    ORDER.forEach(addCat);
-    cards.forEach(function (c) { addCat((c.dataset.section || '').trim()); });
 
-    cats.forEach(function (c) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'cat';
-        b.dataset.cat = c.key;
-        b.setAttribute('aria-pressed', 'false');
-        b.innerHTML = '<span aria-hidden="true">' + (ICONS[c.key] || '📦') + '</span>';
-        b.appendChild(document.createTextNode(c.label));
-        catsRow.appendChild(b);
-    });
+    function addCat(label) {
+
+        var key = label.toLowerCase();
+
+        if (!label || seen[key]) return;
+
+        seen[key] = true;
+
+        cats.push({
+            key: key,
+            label: label
+        });
+
+    }
+
+
+    ORDER.forEach(addCat);
+
+
+    cards.forEach(
+        function (c) {
+            addCat(
+                (c.dataset.section || '').trim()
+            );
+        }
+    );
+
+
+    cats.forEach(
+        function (c) {
+
+            var b =
+                document.createElement('button');
+
+            b.type = 'button';
+
+            b.className = 'cat';
+
+            b.dataset.cat = c.key;
+
+            b.setAttribute(
+                'aria-pressed',
+                'false'
+            );
+
+
+            b.innerHTML =
+                '<span aria-hidden="true">' +
+                (ICONS[c.key] || '📦') +
+                '</span>';
+
+
+            b.appendChild(
+                document.createTextNode(
+                    c.label
+                )
+            );
+
+
+            catsRow.appendChild(b);
+
+        }
+    );
+
 
     function labelFor(key) {
-        for (var i = 0; i < cats.length; i++) if (cats[i].key === key) return cats[i].label;
+
+        for (
+            var i = 0;
+            i < cats.length;
+            i++
+        ) {
+
+            if (
+                cats[i].key === key
+            ) {
+
+                return cats[i].label;
+
+            }
+
+        }
+
         return key;
+
     }
 
-    cards.forEach(function (c) {
-        c.dataset.hay = [c.dataset.name, c.dataset.bundle, c.dataset.developer, c.dataset.section, c.dataset.summary].join(' ').toLowerCase();
-    });
 
-    /* ---------- Page dots for the shelf (3 items per page) ---------- */
+    cards.forEach(
+        function (c) {
+
+            c.dataset.hay = [
+                c.dataset.name,
+                c.dataset.bundle,
+                c.dataset.developer,
+                c.dataset.section,
+                c.dataset.summary
+            ]
+                .join(' ')
+                .toLowerCase();
+
+        }
+    );
+
+
+    /* ---------- Page dots ---------- */
+
     var pages = 0;
+
+
     function buildDots(shown) {
-        pages = Math.ceil(shown / 3);
+
+        pages =
+            Math.ceil(shown / 3);
+
         dots.innerHTML = '';
+
         if (pages < 2) return;
-        for (var i = 0; i < pages; i++) dots.appendChild(document.createElement('i'));
+
+
+        for (
+            var i = 0;
+            i < pages;
+            i++
+        ) {
+
+            dots.appendChild(
+                document.createElement('i')
+            );
+
+        }
+
+
         updateDots();
+
     }
+
+
     function updateDots() {
+
         if (pages < 2) return;
-        var first = cards.filter(function (c) { return !c.hidden; })[0];
+
+
+        var first =
+            cards.filter(
+                function (c) {
+                    return !c.hidden;
+                }
+            )[0];
+
+
         if (!first) return;
-        var w = first.offsetWidth || 1;
-        var idx = Math.min(pages - 1, Math.max(0, Math.round(list.scrollLeft / w)));
-        [].slice.call(dots.children).forEach(function (d, i) { d.className = i === idx ? 'on' : ''; });
+
+
+        var w =
+            first.offsetWidth || 1;
+
+
+        var idx =
+            Math.min(
+                pages - 1,
+                Math.max(
+                    0,
+                    Math.round(
+                        list.scrollLeft / w
+                    )
+                )
+            );
+
+
+        [].slice.call(
+            dots.children
+        ).forEach(
+            function (d, i) {
+
+                d.className =
+                    i === idx ? 'on' : '';
+
+            }
+        );
+
     }
-    list.addEventListener('scroll', function () { window.requestAnimationFrame(updateDots); }, { passive: true });
-    window.addEventListener('resize', updateDots);
+
+
+    list.addEventListener(
+        'scroll',
+        function () {
+
+            window.requestAnimationFrame(
+                updateDots
+            );
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    window.addEventListener(
+        'resize',
+        updateDots
+    );
+
 
     /* ---------- Render ---------- */
+
     var cat = 'popular';
+
     var query = '';
 
+
     function render() {
-        var q = query.toLowerCase();
+
+        var q =
+            query.toLowerCase();
+
         var shown = 0;
 
-        cards.forEach(function (c) {
-            var inCat = cat === 'popular' || cat === 'all' || (c.dataset.section || '').toLowerCase() === cat;
-            var ok = inCat && (!q || c.dataset.hay.indexOf(q) !== -1);
-            c.hidden = !ok;
-            if (ok) shown++;
-        });
 
-        [].slice.call(catsRow.children).forEach(function (b) {
-            b.setAttribute('aria-pressed', String(b.dataset.cat === cat));
-        });
+        cards.forEach(
+            function (c) {
 
-        featured.hidden = !(cat === 'popular' && !q && track && track.children.length);
+                var inCat =
+                    cat === 'popular' ||
+                    cat === 'all' ||
+                    (
+                        c.dataset.section || ''
+                    ).toLowerCase() === cat;
+
+
+                var ok =
+                    inCat &&
+                    (
+                        !q ||
+                        c.dataset.hay.indexOf(q) !== -1
+                    );
+
+
+                c.hidden = !ok;
+
+                if (ok) shown++;
+
+            }
+        );
+
+
+        [].slice.call(
+            catsRow.children
+        ).forEach(
+            function (b) {
+
+                b.setAttribute(
+                    'aria-pressed',
+                    String(
+                        b.dataset.cat === cat
+                    )
+                );
+
+            }
+        );
+
+
+        featured.hidden =
+            !(
+                cat === 'popular' &&
+                !q &&
+                track &&
+                track.children.length
+            );
+
 
         if (q) {
-            viewTitle.textContent = 'Results';
-            viewSub.textContent = shown + (shown === 1 ? ' product' : ' products') + ' for \u201C' + query + '\u201D';
+
+            viewTitle.textContent =
+                'Results';
+
+            viewSub.textContent =
+                shown +
+                (
+                    shown === 1
+                        ? ' product'
+                        : ' products'
+                ) +
+                ' for \u201C' +
+                query +
+                '\u201D';
+
         } else if (cat === 'popular') {
-            viewTitle.textContent = 'Popular';
-            viewSub.textContent = shown ? 'Swipe sideways for more' : '';
+
+            viewTitle.textContent =
+                'Popular';
+
+            viewSub.textContent =
+                shown
+                    ? 'Swipe sideways for more'
+                    : '';
+
         } else {
-            viewTitle.textContent = labelFor(cat);
-            viewSub.textContent = shown ? shown + (shown === 1 ? ' product' : ' products') : '';
+
+            viewTitle.textContent =
+                labelFor(cat);
+
+            viewSub.textContent =
+                shown +
+                (
+                    shown === 1
+                        ? ' product'
+                        : ' products'
+                );
+
         }
 
-        shelf.hidden = shown === 0;
+
+        shelf.hidden =
+            shown === 0;
+
+
         list.scrollLeft = 0;
+
         buildDots(shown);
 
-        state.classList.toggle('on', shown === 0);
+
+        state.classList.toggle(
+            'on',
+            shown === 0
+        );
+
+
         stateClear.hidden = !q;
+
+
         if (shown === 0) {
+
             if (q) {
-                stateTitle.textContent = 'No results';
-                stateText.textContent = 'Check the spelling or try a name, developer or bundle ID.';
+
+                stateTitle.textContent =
+                    'No results';
+
+                stateText.textContent =
+                    'Check the spelling or try a name, developer or bundle ID.';
+
             } else {
-                stateTitle.textContent = 'No products yet';
-                stateText.textContent = cat === 'popular' ? 'New releases will show up here.' : 'This category is ready for future releases.';
+
+                stateTitle.textContent =
+                    'No products yet';
+
+                stateText.textContent =
+                    cat === 'popular'
+                        ? 'New releases will show up here.'
+                        : 'This category is ready for future releases.';
+
             }
+
         }
+
     }
 
-    catsRow.addEventListener('click', function (e) {
-        var b = e.target.closest('.cat');
-        if (!b) return;
-        cat = b.dataset.cat;
-        query = '';
-        input.value = '';
-        render();
-        b.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-    });
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        query = input.value.trim();
-        cat = query ? 'all' : 'popular';
-        render();
-        input.blur();
-    });
+    catsRow.addEventListener(
+        'click',
+        function (e) {
 
-    input.addEventListener('input', function () {
-        if (input.value === '' && query) { query = ''; cat = 'popular'; render(); }
-    });
+            var b =
+                e.target.closest('.cat');
 
-    stateClear.addEventListener('click', function () {
-        query = ''; cat = 'popular'; input.value = ''; render();
-    });
+            if (!b) return;
+
+
+            cat = b.dataset.cat;
+
+            query = '';
+
+            input.value = '';
+
+
+            render();
+
+
+            b.scrollIntoView({
+                block: 'nearest',
+                inline: 'center',
+                behavior: 'smooth'
+            });
+
+        }
+    );
+
+
+    form.addEventListener(
+        'submit',
+        function (e) {
+
+            e.preventDefault();
+
+
+            query =
+                input.value.trim();
+
+            cat =
+                query
+                    ? 'all'
+                    : 'popular';
+
+
+            render();
+
+            input.blur();
+
+        }
+    );
+
+
+    input.addEventListener(
+        'input',
+        function () {
+
+            if (
+                input.value === '' &&
+                query
+            ) {
+
+                query = '';
+
+                cat = 'popular';
+
+                render();
+
+            }
+
+        }
+    );
+
+
+    stateClear.addEventListener(
+        'click',
+        function () {
+
+            query = '';
+
+            cat = 'popular';
+
+            input.value = '';
+
+            render();
+
+        }
+    );
+
 
     /* ---------- Featured arrows ---------- */
+
     function step(dir) {
-        track.scrollBy({ left: dir * Math.max(280, track.clientWidth * 0.8), behavior: 'smooth' });
+
+        track.scrollBy({
+            left:
+                dir *
+                Math.max(
+                    280,
+                    track.clientWidth * 0.8
+                ),
+            behavior: 'smooth'
+        });
+
     }
-    document.getElementById('feat-prev').addEventListener('click', function () { step(-1); });
-    document.getElementById('feat-next').addEventListener('click', function () { step(1); });
+
+
+    document.getElementById(
+        'feat-prev'
+    ).addEventListener(
+        'click',
+        function () {
+            step(-1);
+        }
+    );
+
+
+    document.getElementById(
+        'feat-next'
+    ).addEventListener(
+        'click',
+        function () {
+            step(1);
+        }
+    );
+
 
     /* ---------- Account menu ---------- */
-    var acBtn = document.getElementById('account-btn');
-    var acMenu = document.getElementById('account-menu');
-    function setMenu(open) {
-        acMenu.hidden = !open;
-        acBtn.setAttribute('aria-expanded', String(open));
-        acBtn.classList.toggle('on', open);
-    }
-    acBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        setMenu(acMenu.hidden);
-    });
-    document.addEventListener('click', function (e) {
-        if (!acMenu.hidden && !acMenu.contains(e.target)) setMenu(false);
-    });
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !acMenu.hidden) { setMenu(false); acBtn.focus(); }
-    });
 
-    /* Footer "Sign in" / "Order history": jump to top and open the account menu */
-    [].slice.call(document.querySelectorAll('[data-open-account]')).forEach(function (el) {
-        el.addEventListener('click', function (e) {
+    var acBtn =
+        document.getElementById(
+            'account-btn'
+        );
+
+    var acMenu =
+        document.getElementById(
+            'account-menu'
+        );
+
+
+    function setMenu(open) {
+
+        acMenu.hidden = !open;
+
+        acBtn.setAttribute(
+            'aria-expanded',
+            String(open)
+        );
+
+        acBtn.classList.toggle(
+            'on',
+            open
+        );
+
+    }
+
+
+    acBtn.addEventListener(
+        'click',
+        function (e) {
+
             e.stopPropagation();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(function () { setMenu(true); }, 350);
-        });
-    });
+
+            setMenu(
+                acMenu.hidden
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        'click',
+        function (e) {
+
+            if (
+                !acMenu.hidden &&
+                !acMenu.contains(e.target)
+            ) {
+
+                setMenu(false);
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        'keydown',
+        function (e) {
+
+            if (
+                e.key === 'Escape' &&
+                !acMenu.hidden
+            ) {
+
+                setMenu(false);
+
+                acBtn.focus();
+
+            }
+
+        }
+    );
+
+
+    /* ---------- Footer account ---------- */
+
+    [].slice.call(
+        document.querySelectorAll(
+            '[data-open-account]'
+        )
+    ).forEach(
+        function (el) {
+
+            el.addEventListener(
+                'click',
+                function (e) {
+
+                    e.stopPropagation();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+
+                    setTimeout(
+                        function () {
+                            setMenu(true);
+                        },
+                        350
+                    );
+
+                }
+            );
+
+        }
+    );
+
 
     /* ---------- Toast ---------- */
+
     var tt;
-    [].slice.call(document.querySelectorAll('[data-toast]')).forEach(function (el) {
-        el.addEventListener('click', function () {
-            toast.textContent = el.dataset.toast;
-            toast.classList.add('on');
-            clearTimeout(tt);
-            tt = setTimeout(function () { toast.classList.remove('on'); }, 2200);
-        });
-    });
+
+
+    [].slice.call(
+        document.querySelectorAll(
+            '[data-toast]'
+        )
+    ).forEach(
+        function (el) {
+
+            el.addEventListener(
+                'click',
+                function () {
+
+                    toast.textContent =
+                        el.dataset.toast;
+
+                    toast.classList.add('on');
+
+
+                    clearTimeout(tt);
+
+
+                    tt = setTimeout(
+                        function () {
+
+                            toast.classList.remove(
+                                'on'
+                            );
+
+                        },
+                        2200
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ---------- Initial render ---------- */
 
     render();
+
 })();
+
 </script>
 
+
 <script src="web/index.js"></script>
+
 </body>
 </html>
