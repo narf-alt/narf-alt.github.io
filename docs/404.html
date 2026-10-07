@@ -1,1 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
+<title>Narf Store</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    color-scheme: light dark;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "Helvetica Neue", sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    min-height: 100vh;
+    padding: 18px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.page {
+    max-width: 1120px;
+    margin: auto;
+}
+
+/* HEADER */
+
+.topbar {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.brand img {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    object-fit: cover;
+}
+
+.brand small {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #8e8e93;
+    margin-top: 2px;
+}
+
+.toplinks {
+    display: flex;
+    gap: 10px;
+}
+
+.toplink {
+    padding: 9px 13px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e5e5ea;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+/* HERO */
+
+.hero {
+    border-radius: 30px;
+    padding: 34px;
+    background: linear-gradient(135deg, #6C5CE7, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 20px 55px rgba(108, 92, 231, .22);
+    margin-bottom: 24px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    letter-spacing: -1.2px;
+    margin-bottom: 9px;
+}
+
+.hero p {
+    max-width: 680px;
+    color: rgba(255,255,255,.88);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.hero-meta {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.pill {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.15);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* CATEGORY NAV */
+
+.nav {
+    display: flex;
+    gap: 8px;
+    overflow: auto;
+    padding: 3px 1px 15px;
+    scrollbar-width: none;
+}
+
+.nav::-webkit-scrollbar {
+    display: none;
+}
+
+.nav button {
+    border: 1px solid #e3e3e8;
+    background: #fff;
+    color: #3a3a3c;
+    border-radius: 999px;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 750;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.nav button.active {
+    background: #1d1d1f;
+    color: #fff;
+    border-color: #1d1d1f;
+}
+
+/* SEARCH */
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toolbar input {
+    flex: 1;
+    border: 1px solid #dedee3;
+    border-radius: 15px;
+    background: #fff;
+    padding: 14px 16px;
+    font-size: 14px;
+    outline: none;
+    color: inherit;
+}
+
+/* VIEWS */
+
+.view {
+    display: block;
+}
+
+.view[hidden] {
+    display: none;
+}
+
+/* SECTION */
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 12px;
+}
+
+.section-head h2 {
+    font-size: 23px;
+    letter-spacing: -.4px;
+}
+
+.section-head p {
+    font-size: 13px;
+    color: #8e8e93;
+}
+
+/* PRODUCTS */
+
+.package-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 14px;
+}
+
+.package-card {
+    display: block;
+    background: #fff;
+    border: 1px solid #e7e7ec;
+    border-radius: 20px;
+    padding: 15px;
+    transition: .18s;
+}
+
+.package-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.08);
+}
+
+.package-card[hidden] {
+    display: none;
+}
+
+.package-card-top {
+    display: flex;
+    gap: 14px;
+}
+
+.package-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 17px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #e5e5ea;
+}
+
+.package-main {
+    min-width: 0;
+}
+
+.package-name {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 3px;
+    overflow-wrap: anywhere;
+}
+
+.package-meta {
+    font-size: 12px;
+    color: #8e8e93;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.package-summary {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #4a4a4f;
+    overflow-wrap: anywhere;
+}
+
+.package-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.tag {
+    font-size: 11px;
+    font-weight: 750;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #f0efff;
+    color: #6C5CE7;
+}
+
+/* EMPTY */
+
+.empty {
+    display: none;
+    padding: 28px;
+    text-align: center;
+    color: #8e8e93;
+    background: #fff;
+    border-radius: 18px;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    padding: 30px 10px 15px;
+    color: #8e8e93;
+    font-size: 12px;
+}
+
+/* MOBILE */
+
+@media(max-width:650px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .hero {
+        padding: 25px 20px;
+        border-radius: 24px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .toplinks .toplink:not(:last-child) {
+        display: none;
+    }
+
+    .package-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* DARK MODE */
+
+@media(prefers-color-scheme:dark) {
+
+    body {
+        background: #000;
+        color: #f5f5f7;
+    }
+
+    .toplink,
+    .nav button,
+    .toolbar input,
+    .package-card,
+    .empty {
+        background: #1c1c1e;
+        border-color: #2c2c2e;
+        color: #f5f5f7;
+    }
+
+    .nav button {
+        color: #d1d1d6;
+    }
+
+    .nav button.active {
+        background: #fff;
+        color: #000;
+        border-color: #fff;
+    }
+
+    .package-summary {
+        color: #d1d1d6;
+    }
+
+    .package-meta,
+    .section-head p,
+    .footer {
+        color: #98989d;
+    }
+}
+</style>
+
+<meta name="theme-color" content="#6C5CE7">
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="topbar">
+
+<a class="brand" href="https://narf-alt.github.io">
+
+<img src="icon.png" alt="NARF">
+
+<span>
+NARF
+<small>Official Store</small>
+</span>
+
+</a>
+
+<div class="toplinks">
+
+<a class="toplink" href="https://x.com/narf_ios">
+X @narf_ios
+</a>
+
+<a class="toplink" href="https://narf-alt.github.io">
+Store
+</a>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<h1>Narf Store</h1>
+
+<p>
+Discover themes, tweaks, utilities and future products from Narf
+and independent developers — organized in one modern iOS marketplace.
+</p>
+
+<div class="hero-meta">
+
+<span class="pill">
+3 products
+</span>
+
+<span class="pill">
+iOS 15–26
+</span>
+
+<span class="pill">
+Themes · Tweaks · Utilities
+</span>
+
+</div>
+
+</section>
+
+
+<nav class="nav">
+
+<button
+class="category-btn active"
+data-category="popular">
+
+Popular
+
+</button>
+
+
+<button
+class="category-btn"
+data-category="Tweaks">
+
+Tweaks
+
+</button>
+
+
+<button
+class="category-btn"
+data-category="Themes">
+
+Themes
+
+</button>
+
+
+</nav>
+
+
+<div class="toolbar">
+
+<input
+id="search-input"
+type="search"
+placeholder="Search products, developers or bundle IDs...">
+
+</div>
+
+
+<section id="popular-view" class="view">
+
+<div class="section-head">
+
+<div>
+
+<h2>Popular</h2>
+
+<p>
+Products across the Narf Store
+</p>
+
+</div>
+
+</div>
+
+
+<div class="package-list">
+
+
+
+<a
+class="package-card package-entry"
+href="depiction/web/com.example.package.html"
+
+data-name="Example Package"
+data-bundle="com.example.package"
+data-developer="Example Developer"
+data-section="Tweaks">
+
+<div class="package-card-top">
+
+<img
+class="package-icon"
+src="assets/com.example.package/icon.png"
+alt="Example Package">
+
+<div class="package-main">
+
+<div class="package-name">
+Example Package
+</div>
+
+<div class="package-meta">
+Example Developer · v1.0.0 ·
+iOS 15.0–17.0
+</div>
+
+<div class="package-summary">
+An example package used to demonstrate modern Silex metadata, compatibility labels, and depictions.
+</div>
+
+<div class="package-badges">
+
+<span class="tag">
+Tweaks
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="package-card package-entry"
+href="depiction/web/im.mjh.wclocate.html"
+
+data-name="WCLocate"
+data-bundle="im.mjh.wclocate"
+data-developer="junhong"
+data-section="Tweaks">
+
+<div class="package-card-top">
+
+<img
+class="package-icon"
+src="assets/im.mjh.wclocate/icon.png"
+alt="WCLocate">
+
+<div class="package-main">
+
+<div class="package-name">
+WCLocate
+</div>
+
+<div class="package-meta">
+junhong · v4.0.0 ·
+iOS 15.0–18.0
+</div>
+
+<div class="package-summary">
+微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
+</div>
+
+<div class="package-badges">
+
+<span class="tag">
+Tweaks
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+
+
+
+<a
+class="package-card package-entry"
+href="depiction/web/com.narf.lana.html"
+
+data-name="Lana"
+data-bundle="com.narf.lana"
+data-developer="Narf"
+data-section="Themes">
+
+<div class="package-card-top">
+
+<img
+class="package-icon"
+src="assets/com.narf.lana/icon.png"
+alt="Lana">
+
+<div class="package-main">
+
+<div class="package-name">
+Lana
+</div>
+
+<div class="package-meta">
+Narf · v1.3 ·
+iOS 15.0–26.0
+</div>
+
+<div class="package-summary">
+Lana iOS Theme
+</div>
+
+<div class="package-badges">
+
+<span class="tag">
+Themes
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+
+
+</div>
+
+</section>
+
+
+
+<section
+class="view category-view"
+data-category-view="Tweaks"
+hidden>
+
+<div class="section-head">
+
+<div>
+
+<h2>
+Tweaks
+</h2>
+
+<p>
+Browse Tweaks products
+</p>
+
+</div>
+
+</div>
+
+
+<div class="package-list">
+
+
+<a
+class="package-card package-entry"
+href="depiction/web/com.example.package.html"
+
+data-name="Example Package"
+data-bundle="com.example.package"
+data-developer="Example Developer"
+data-section="Tweaks">
+
+<div class="package-card-top">
+
+<img
+class="package-icon"
+src="assets/com.example.package/icon.png"
+alt="Example Package">
+
+<div class="package-main">
+
+<div class="package-name">
+Example Package
+</div>
+
+<div class="package-meta">
+Example Developer · v1.0.0 ·
+iOS 15.0–17.0
+</div>
+
+<div class="package-summary">
+An example package used to demonstrate modern Silex metadata, compatibility labels, and depictions.
+</div>
+
+<div class="package-badges">
+
+<span class="tag">
+Tweaks
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+
+<a
+class="package-card package-entry"
+href="depiction/web/im.mjh.wclocate.html"
+
+data-name="WCLocate"
+data-bundle="im.mjh.wclocate"
+data-developer="junhong"
+data-section="Tweaks">
+
+<div class="package-card-top">
+
+<img
+class="package-icon"
+src="assets/im.mjh.wclocate/icon.png"
+alt="WCLocate">
+
+<div class="package-main">
+
+<div class="package-name">
+WCLocate
+</div>
+
+<div class="package-meta">
+junhong · v4.0.0 ·
+iOS 15.0–18.0
+</div>
+
+<div class="package-summary">
+微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
+</div>
+
+<div class="package-badges">
+
+<span class="tag">
+Tweaks
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<section
+class="view category-view"
+data-category-view="Themes"
+hidden>
+
+<div class="section-head">
+
+<div>
+
+<h2>
+Themes
+</h2>
+
+<p>
+Browse Themes products
+</p>
+
+</div>
+
+</div>
+
+
+<div class="package-list">
+
+
+<a
+class="package-card package-entry"
+href="depiction/web/com.narf.lana.html"
+
+data-name="Lana"
+data-bundle="com.narf.lana"
+data-developer="Narf"
+data-section="Themes">
+
+<div class="package-card-top">
+
+<img
+class="package-icon"
+src="assets/com.narf.lana/icon.png"
+alt="Lana">
+
+<div class="package-main">
+
+<div class="package-name">
+Lana
+</div>
+
+<div class="package-meta">
+Narf · v1.3 ·
+iOS 15.0–26.0
+</div>
+
+<div class="package-summary">
+Lana iOS Theme
+</div>
+
+<div class="package-badges">
+
+<span class="tag">
+Themes
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+
+<div id="empty-state" class="empty">
+
+No products match your search.
+
+</div>
+
+
+<footer class="footer">
+
+Narf
+· Narf Store ·
+
+<a href="https://x.com/narf_ios">
+@narf_ios
+</a>
+
+</footer>
+
+</div>
+
+
+<script>
+
+(function(){
+
+var buttons =
+[].slice.call(
+document.querySelectorAll('.category-btn')
+);
+
+var popular =
+document.getElementById('popular-view');
+
+var views =
+[].slice.call(
+document.querySelectorAll('.category-view')
+);
+
+var search =
+document.getElementById('search-input');
+
+var empty =
+document.getElementById('empty-state');
+
+
+function activate(category){
+
+buttons.forEach(function(button){
+
+button.classList.toggle(
+'active',
+button.dataset.category === category
+);
+
+});
+
+
+popular.hidden =
+category !== 'popular';
+
+
+views.forEach(function(view){
+
+view.hidden =
+view.dataset.categoryView !== category;
+
+});
+
+
+filter();
+
+}
+
+
+function filter(){
+
+var query =
+(search.value || '')
+.trim()
+.toLowerCase();
+
+var active =
+document.querySelector(
+'.category-btn.active'
+).dataset.category;
+
+
+var root =
+active === 'popular'
+? popular
+: document.querySelector(
+'[data-category-view="' +
+active.replace(/"/g,'&quot;') +
+'"]'
+);
+
+
+if(!root)
+return;
+
+
+var cards =
+[].slice.call(
+root.querySelectorAll('.package-entry')
+);
+
+
+var count = 0;
+
+
+cards.forEach(function(card){
+
+var haystack = [
+
+card.dataset.name,
+card.dataset.bundle,
+card.dataset.developer,
+card.dataset.section
+
+].join(' ').toLowerCase();
+
+
+var show =
+!query ||
+haystack.indexOf(query) !== -1;
+
+
+card.hidden = !show;
+
+
+if(show)
+count++;
+
+});
+
+
+empty.style.display =
+count ? 'none' : 'block';
+
+}
+
+
+buttons.forEach(function(button){
+
+button.addEventListener(
+'click',
+function(){
+
+activate(
+button.dataset.category
+);
+
+});
+
+});
+
+
+search.addEventListener(
+'input',
+filter
+);
+
+
+activate('popular');
+
+})();
+
+</script>
+
+<script src="web/index.js"></script>
+
+</body>
+</html>
