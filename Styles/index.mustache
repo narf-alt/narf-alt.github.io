@@ -14,14 +14,26 @@
 }
 
 :root {
-    color-scheme: light dark;
+    color-scheme: dark;
+    --orange: #ff7a00;
+    --orange-bright: #ff8a00;
+    --black: #000000;
+    --panel: #0b0b0b;
+    --panel-2: #111111;
+    --border: #242424;
+    --text: #ffffff;
+    --muted: #9a9a9a;
+}
+
+html {
+    background: #000;
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
         "Helvetica Neue", sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
+    background: #000;
+    color: var(--text);
     min-height: 100vh;
     padding: 18px;
 }
@@ -31,12 +43,19 @@ a {
     color: inherit;
 }
 
+button,
+input {
+    font-family: inherit;
+}
+
 .page {
     max-width: 1120px;
     margin: auto;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .topbar {
     height: 64px;
@@ -59,6 +78,7 @@ a {
     height: 40px;
     border-radius: 11px;
     object-fit: cover;
+    background: #111;
 }
 
 .brand small {
@@ -77,20 +97,38 @@ a {
 .toplink {
     padding: 9px 13px;
     border-radius: 12px;
-    background: #fff;
-    border: 1px solid #e5e5ea;
+    background: #0b0b0b;
+    border: 1px solid #242424;
+    color: #fff;
     font-size: 13px;
     font-weight: 650;
+    transition: .18s ease;
 }
 
-/* HERO */
+.toplink:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
     border-radius: 30px;
     padding: 34px;
-    background: linear-gradient(135deg, {{tint_color}}, #8b5cf6);
+    background:
+        linear-gradient(
+            145deg,
+            #090909 0%,
+            #050505 55%,
+            #0b0703 100%
+        );
     color: #fff;
-    box-shadow: 0 20px 55px rgba(108, 92, 231, .22);
+    border: 1px solid #252525;
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.025);
     margin-bottom: 24px;
 }
 
@@ -102,7 +140,7 @@ a {
 
 .hero p {
     max-width: 680px;
-    color: rgba(255,255,255,.88);
+    color: rgba(255,255,255,.78);
     line-height: 1.6;
     font-size: 16px;
 }
@@ -117,12 +155,21 @@ a {
 .pill {
     padding: 8px 12px;
     border-radius: 999px;
-    background: rgba(255,255,255,.15);
+    background: #111;
+    border: 1px solid #292929;
+    color: #fff;
     font-size: 12px;
     font-weight: 700;
 }
 
-/* CATEGORY NAV */
+.pill:first-child {
+    border-color: rgba(255,122,0,.45);
+    color: var(--orange-bright);
+}
+
+/* =========================
+   CATEGORY NAV
+========================= */
 
 .nav {
     display: flex;
@@ -137,24 +184,34 @@ a {
 }
 
 .nav button {
-    border: 1px solid #e3e3e8;
-    background: #fff;
-    color: #3a3a3c;
+    border: 1px solid #303030;
+    background: #080808;
+    color: var(--orange);
     border-radius: 999px;
     padding: 10px 15px;
     font-size: 13px;
     font-weight: 750;
     white-space: nowrap;
     cursor: pointer;
+    transition: .18s ease;
+}
+
+.nav button:hover {
+    border-color: var(--orange);
+    background: #120b05;
+    color: var(--orange-bright);
 }
 
 .nav button.active {
-    background: #1d1d1f;
-    color: #fff;
-    border-color: #1d1d1f;
+    background: var(--orange);
+    color: #000;
+    border-color: var(--orange);
+    box-shadow: 0 5px 18px rgba(255,122,0,.16);
 }
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 .toolbar {
     display: flex;
@@ -164,16 +221,28 @@ a {
 
 .toolbar input {
     flex: 1;
-    border: 1px solid #dedee3;
+    border: 1px solid #282828;
     border-radius: 15px;
-    background: #fff;
+    background: #080808;
     padding: 14px 16px;
     font-size: 14px;
     outline: none;
-    color: inherit;
+    color: #fff;
+    transition: .18s ease;
 }
 
-/* VIEWS */
+.toolbar input::placeholder {
+    color: #777;
+}
+
+.toolbar input:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(255,122,0,.08);
+}
+
+/* =========================
+   VIEWS
+========================= */
 
 .view {
     display: block;
@@ -183,7 +252,9 @@ a {
     display: none;
 }
 
-/* SECTION */
+/* =========================
+   SECTION
+========================= */
 
 .section-head {
     display: flex;
@@ -195,14 +266,17 @@ a {
 .section-head h2 {
     font-size: 23px;
     letter-spacing: -.4px;
+    color: var(--orange);
 }
 
 .section-head p {
     font-size: 13px;
-    color: #8e8e93;
+    color: #888;
 }
 
-/* PRODUCTS */
+/* =========================
+   PRODUCTS
+========================= */
 
 .package-list {
     display: grid;
@@ -212,16 +286,19 @@ a {
 
 .package-card {
     display: block;
-    background: #fff;
-    border: 1px solid #e7e7ec;
+    background: #090909;
+    border: 1px solid #242424;
     border-radius: 20px;
     padding: 15px;
-    transition: .18s;
+    transition: .18s ease;
 }
 
 .package-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(0,0,0,.08);
+    border-color: rgba(255,122,0,.55);
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.55),
+        0 0 0 1px rgba(255,122,0,.08);
 }
 
 .package-card[hidden] {
@@ -239,7 +316,8 @@ a {
     border-radius: 17px;
     object-fit: cover;
     flex-shrink: 0;
-    background: #e5e5ea;
+    background: #111;
+    border: 1px solid #242424;
 }
 
 .package-main {
@@ -250,12 +328,13 @@ a {
     font-size: 18px;
     font-weight: 800;
     margin-bottom: 3px;
+    color: #fff;
     overflow-wrap: anywhere;
 }
 
 .package-meta {
     font-size: 12px;
-    color: #8e8e93;
+    color: #858585;
     line-height: 1.5;
     margin-bottom: 8px;
 }
@@ -263,7 +342,7 @@ a {
 .package-summary {
     font-size: 13px;
     line-height: 1.55;
-    color: #4a4a4f;
+    color: #d0d0d0;
     overflow-wrap: anywhere;
 }
 
@@ -279,31 +358,68 @@ a {
     font-weight: 750;
     padding: 6px 8px;
     border-radius: 999px;
-    background: #f0efff;
-    color: {{tint_color}};
+    background: rgba(255,122,0,.10);
+    border: 1px solid rgba(255,122,0,.28);
+    color: var(--orange);
 }
 
-/* EMPTY */
+/* =========================
+   EMPTY
+========================= */
 
 .empty {
     display: none;
     padding: 28px;
     text-align: center;
-    color: #8e8e93;
-    background: #fff;
+    color: #888;
+    background: #090909;
+    border: 1px solid #242424;
     border-radius: 18px;
 }
 
-/* FOOTER */
+.category-empty {
+    display: none;
+    padding: 42px 28px;
+    text-align: center;
+    color: #888;
+    background: #090909;
+    border: 1px solid #242424;
+    border-radius: 20px;
+}
+
+.category-empty strong {
+    display: block;
+    color: var(--orange);
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.category-empty span {
+    font-size: 13px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer {
     text-align: center;
     padding: 30px 10px 15px;
-    color: #8e8e93;
+    color: #777;
     font-size: 12px;
 }
 
-/* MOBILE */
+.footer a {
+    color: var(--orange);
+}
+
+.footer a:hover {
+    color: var(--orange-bright);
+}
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:650px) {
 
@@ -328,49 +444,9 @@ a {
         grid-template-columns: 1fr;
     }
 }
-
-/* DARK MODE */
-
-@media(prefers-color-scheme:dark) {
-
-    body {
-        background: #000;
-        color: #f5f5f7;
-    }
-
-    .toplink,
-    .nav button,
-    .toolbar input,
-    .package-card,
-    .empty {
-        background: #1c1c1e;
-        border-color: #2c2c2e;
-        color: #f5f5f7;
-    }
-
-    .nav button {
-        color: #d1d1d6;
-    }
-
-    .nav button.active {
-        background: #fff;
-        color: #000;
-        border-color: #fff;
-    }
-
-    .package-summary {
-        color: #d1d1d6;
-    }
-
-    .package-meta,
-    .section-head p,
-    .footer {
-        color: #98989d;
-    }
-}
 </style>
 
-<meta name="theme-color" content="{{tint_color}}">
+<meta name="theme-color" content="#000000">
 </head>
 
 <body>
@@ -396,10 +472,6 @@ NARF
 X @narf_ios
 </a>
 
-<a class="toplink" href="https://{{repo_url}}">
-Store
-</a>
-
 </div>
 
 </header>
@@ -410,7 +482,7 @@ Store
 <h1>Narf Store</h1>
 
 <p>
-Discover themes, tweaks, utilities and future products from Narf
+Discover themes, tweaks, apps and wallpapers from Narf
 and independent developers — organized in one modern iOS marketplace.
 </p>
 
@@ -425,7 +497,7 @@ iOS 15–26
 </span>
 
 <span class="pill">
-Themes · Tweaks · Utilities
+Themes · Tweaks · Wallpapers · Apps
 </span>
 
 </div>
@@ -439,21 +511,41 @@ Themes · Tweaks · Utilities
 class="category-btn active"
 data-category="popular">
 
-Popular
+🔥 Popular
 
 </button>
-
-{{#sections}}
 
 <button
 class="category-btn"
-data-category="{{section_name}}">
+data-category="Themes">
 
-{{section_name}}
+🪶 Themes
 
 </button>
 
-{{/sections}}
+<button
+class="category-btn"
+data-category="Tweaks">
+
+🛠️ Tweaks
+
+</button>
+
+<button
+class="category-btn"
+data-category="Wallpapers">
+
+🖼️ Wallpapers
+
+</button>
+
+<button
+class="category-btn"
+data-category="Apps">
+
+📱 Apps
+
+</button>
 
 </nav>
 
@@ -494,7 +586,6 @@ Products across the Narf Store
 <a
 class="package-card package-entry"
 href="depiction/web/{{bundle_id}}.html"
-
 data-name="{{name}}"
 data-bundle="{{bundle_id}}"
 data-developer="{{developer.name}}"
@@ -576,7 +667,6 @@ Browse {{section_name}} products
 <a
 class="package-card package-entry"
 href="depiction/web/{{bundle_id}}.html"
-
 data-name="{{name}}"
 data-bundle="{{bundle_id}}"
 data-developer="{{developer.name}}"
@@ -627,7 +717,24 @@ iOS {{works_min}}–{{works_max}}
 {{/sections}}
 
 
-<div id="empty-state" class="empty">
+<div
+id="category-empty"
+class="category-empty">
+
+<strong id="category-empty-title">
+No products yet
+</strong>
+
+<span id="category-empty-text">
+This category is ready for future products.
+</span>
+
+</div>
+
+
+<div
+id="empty-state"
+class="empty">
 
 No products match your search.
 
@@ -671,122 +778,230 @@ document.getElementById('search-input');
 var empty =
 document.getElementById('empty-state');
 
+var categoryEmpty =
+document.getElementById('category-empty');
+
+var categoryEmptyTitle =
+document.getElementById('category-empty-title');
+
+var categoryEmptyText =
+document.getElementById('category-empty-text');
+
+
+function findView(category){
+
+    var result = null;
+
+    views.forEach(function(view){
+
+        if (
+            view.dataset.categoryView === category
+        ) {
+            result = view;
+        }
+
+    });
+
+    return result;
+}
+
 
 function activate(category){
 
-buttons.forEach(function(button){
+    buttons.forEach(function(button){
 
-button.classList.toggle(
-'active',
-button.dataset.category === category
-);
+        button.classList.toggle(
+            'active',
+            button.dataset.category === category
+        );
 
-});
-
-
-popular.hidden =
-category !== 'popular';
+    });
 
 
-views.forEach(function(view){
-
-view.hidden =
-view.dataset.categoryView !== category;
-
-});
+    popular.hidden =
+        category !== 'popular';
 
 
-filter();
+    var selectedView =
+        findView(category);
+
+
+    views.forEach(function(view){
+
+        view.hidden =
+            view !== selectedView;
+
+    });
+
+
+    if (
+        category !== 'popular' &&
+        !selectedView
+    ) {
+
+        categoryEmpty.style.display = 'block';
+
+        categoryEmptyTitle.textContent =
+            category + ' is coming soon';
+
+        categoryEmptyText.textContent =
+            'This category is ready for future products.';
+
+    } else {
+
+        categoryEmpty.style.display = 'none';
+
+    }
+
+
+    filter();
 
 }
 
 
 function filter(){
 
-var query =
-(search.value || '')
-.trim()
-.toLowerCase();
-
-var active =
-document.querySelector(
-'.category-btn.active'
-).dataset.category;
+    var query =
+        (search.value || '')
+        .trim()
+        .toLowerCase();
 
 
-var root =
-active === 'popular'
-? popular
-: document.querySelector(
-'[data-category-view="' +
-active.replace(/"/g,'&quot;') +
-'"]'
-);
+    var activeButton =
+        document.querySelector(
+            '.category-btn.active'
+        );
 
 
-if(!root)
-return;
+    if (!activeButton) {
+        return;
+    }
 
 
-var cards =
-[].slice.call(
-root.querySelectorAll('.package-entry')
-);
+    var active =
+        activeButton.dataset.category;
 
 
-var count = 0;
+    var root;
 
 
-cards.forEach(function(card){
+    if (active === 'popular') {
 
-var haystack = [
+        root = popular;
 
-card.dataset.name,
-card.dataset.bundle,
-card.dataset.developer,
-card.dataset.section
+    } else {
 
-].join(' ').toLowerCase();
+        root = findView(active);
 
-
-var show =
-!query ||
-haystack.indexOf(query) !== -1;
+    }
 
 
-card.hidden = !show;
+    if (!root) {
+
+        empty.style.display = 'none';
+
+        return;
+
+    }
 
 
-if(show)
-count++;
+    var cards =
+        [].slice.call(
+            root.querySelectorAll('.package-entry')
+        );
 
-});
+
+    var count = 0;
 
 
-empty.style.display =
-count ? 'none' : 'block';
+    cards.forEach(function(card){
+
+        var haystack = [
+
+            card.dataset.name || '',
+            card.dataset.bundle || '',
+            card.dataset.developer || '',
+            card.dataset.section || ''
+
+        ]
+        .join(' ')
+        .toLowerCase();
+
+
+        var show =
+            !query ||
+            haystack.indexOf(query) !== -1;
+
+
+        card.hidden = !show;
+
+
+        if (show) {
+            count++;
+        }
+
+    });
+
+
+    if (count === 0) {
+
+        if (active === 'popular') {
+
+            empty.textContent =
+                query
+                ? 'No products match your search.'
+                : 'No products are available yet.';
+
+            empty.style.display = 'block';
+
+        } else {
+
+            categoryEmpty.style.display = 'block';
+
+            categoryEmptyTitle.textContent =
+                query
+                ? 'No products match your search.'
+                : active + ' is coming soon';
+
+            categoryEmptyText.textContent =
+                query
+                ? 'Try another search term.'
+                : 'This category is ready for future products.';
+
+        }
+
+    } else {
+
+        empty.style.display = 'none';
+
+        if (active !== 'popular') {
+            categoryEmpty.style.display = 'none';
+        }
+
+    }
 
 }
 
 
 buttons.forEach(function(button){
 
-button.addEventListener(
-'click',
-function(){
+    button.addEventListener(
+        'click',
+        function(){
 
-activate(
-button.dataset.category
-);
+            activate(
+                button.dataset.category
+            );
 
-});
+        }
+    );
 
 });
 
 
 search.addEventListener(
-'input',
-filter
+    'input',
+    filter
 );
 
 
@@ -795,6 +1010,7 @@ activate('popular');
 })();
 
 </script>
+
 
 <script src="web/index.js"></script>
 
