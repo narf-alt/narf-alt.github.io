@@ -1080,6 +1080,149 @@ justify-content:center
 }
 }
 
+/* Wallpapers product page + gallery */
+
+.wall-hero{
+padding:20px;
+border:1px solid var(--line-2);
+border-radius:var(--r-lg);
+background:radial-gradient(90% 100% at 100% 0%,rgba(255,122,0,.16),transparent 60%),linear-gradient(145deg,#101010,#080808);
+overflow:hidden
+}
+
+.wall-title{
+font-size:clamp(26px,6vw,42px);
+line-height:1.05;
+font-weight:900;
+letter-spacing:-.04em;
+margin-top:4px;
+overflow-wrap:anywhere
+}
+
+.wall-hero .lana-copy{margin-top:14px}
+
+.wall-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px
+}
+
+.wall-item{
+position:relative;
+display:block;
+width:100%;
+padding:0;
+aspect-ratio:9/19.5;
+overflow:hidden;
+border:1px solid var(--line-2);
+border-radius:var(--r-md);
+background:var(--surface-2);
+box-shadow:0 12px 28px rgba(0,0,0,.45);
+cursor:pointer;
+transition:transform .18s var(--ease),border-color .18s var(--ease)
+}
+
+.wall-item:active{transform:scale(.97)}
+
+@media(hover:hover){
+.wall-item:hover{border-color:var(--orange-line)}
+}
+
+.wall-item img{
+display:block;
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+.wall-item .num{
+position:absolute;
+left:8px;
+bottom:8px;
+padding:3px 9px;
+border-radius:999px;
+background:rgba(0,0,0,.62);
+border:1px solid rgba(255,255,255,.12);
+color:var(--text);
+font-size:11px;
+font-weight:800;
+font-variant-numeric:tabular-nums
+}
+
+.wall-item.missing::before{
+content:"Unavailable";
+position:absolute;
+inset:0;
+display:grid;
+place-items:center;
+color:var(--muted);
+font-size:12px;
+font-weight:700
+}
+
+@media(min-width:560px){
+.wall-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+}
+
+@media(min-width:900px){
+.wall-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+}
+
+.wall-lb{
+position:fixed;
+inset:0;
+z-index:60;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:calc(64px + env(safe-area-inset-top)) 12px calc(64px + env(safe-area-inset-bottom));
+background:rgba(0,0,0,.94)
+}
+
+.wall-lb[hidden]{display:none}
+
+.wall-lb img{
+display:block;
+max-width:100%;
+max-height:calc(100vh - 140px);
+max-height:calc(100dvh - 140px);
+width:auto;
+height:auto;
+object-fit:contain;
+border-radius:14px;
+box-shadow:0 20px 60px rgba(0,0,0,.7)
+}
+
+.wall-lb-btn{
+position:absolute;
+background:rgba(20,20,20,.85)
+}
+
+.wall-lb-close{
+top:calc(12px + env(safe-area-inset-top));
+right:calc(12px + env(safe-area-inset-right))
+}
+
+.wall-lb-prev,.wall-lb-next{
+top:50%;
+margin-top:-22px
+}
+
+.wall-lb-prev{left:calc(10px + env(safe-area-inset-left))}
+.wall-lb-next{right:calc(10px + env(safe-area-inset-right))}
+
+.wall-lb-count{
+position:absolute;
+left:0;
+right:0;
+bottom:calc(20px + env(safe-area-inset-bottom));
+text-align:center;
+color:var(--text-2);
+font-size:13px;
+font-weight:700;
+font-variant-numeric:tabular-nums
+}
+
 /* Footer */
 
 .footer{
@@ -1863,6 +2006,64 @@ Buying Lana grants the Lana entitlement only.
 
 </section>
 
+<!-- WALLPAPERS PRODUCT -->
+
+<section class="lana-page" id="wall-product" aria-labelledby="wall-title">
+
+<button class="lana-back" id="wall-back" type="button" aria-label="Back to products">
+
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M15 5l-7 7 7 7"/>
+</svg>
+
+Back
+
+</button>
+
+<div class="wall-hero">
+
+<div class="lana-kicker">Wallpapers</div>
+
+<h1 class="wall-title" id="wall-title">Lana Wallpapers — Pack 01</h1>
+
+<div class="lana-by" id="wall-sub">18 wallpapers · Narf</div>
+
+<p class="lana-copy" id="wall-desc">
+A curated pack of 18 wallpapers designed by Narf.
+</p>
+
+<div class="lana-price-row">
+
+<div class="lana-price" id="wall-price">$0.99</div>
+
+<a class="lana-buy"
+id="wall-buy"
+href="https://narf-store.narf-ios26.workers.dev/wallpapers/lana-wallpapers-01"
+target="_blank"
+rel="noopener">
+
+Buy Now
+
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M6 6h2l1.5 9h8.8l1.7-6.5H9"/>
+<path d="M10 19.5h.01M18 19.5h.01"/>
+</svg>
+
+</a>
+
+</div>
+</div>
+
+<section class="lana-section" aria-label="Wallpaper previews">
+
+<h2>Preview</h2>
+
+<div class="wall-grid" id="wall-grid"></div>
+
+</section>
+
+</section>
+
 <!-- FOOTER -->
 
 <footer class="footer">
@@ -1952,6 +2153,34 @@ aria-label="NARF on X">
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<!-- Wallpaper lightbox -->
+
+<div class="wall-lb" id="wall-lb" role="dialog" aria-modal="true" aria-label="Wallpaper preview" hidden>
+
+<button class="icon-btn wall-lb-btn wall-lb-close" id="wall-lb-close" type="button" aria-label="Close">
+<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+<path d="M6 6l12 12M18 6L6 18"/>
+</svg>
+</button>
+
+<button class="icon-btn wall-lb-btn wall-lb-prev" id="wall-lb-prev" type="button" aria-label="Previous wallpaper">
+<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M15 5l-7 7 7 7"/>
+</svg>
+</button>
+
+<img id="wall-lb-img" alt="">
+
+<button class="icon-btn wall-lb-btn wall-lb-next" id="wall-lb-next" type="button" aria-label="Next wallpaper">
+<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M9 5l7 7-7 7"/>
+</svg>
+</button>
+
+<div class="wall-lb-count" id="wall-lb-count"></div>
+
+</div>
+
 <script>
 (function(){
 
@@ -1972,13 +2201,318 @@ var featured=document.getElementById('featured');
 var track=document.getElementById('feat-track');
 var toast=document.getElementById('toast');
 
-/* Lana */
+/* Product pages */
 
 var lanaPage=document.getElementById('lana-product');
 var lanaBack=document.getElementById('lana-back');
 
+var wallPage=document.getElementById('wall-product');
+var wallBack=document.getElementById('wall-back');
+var wallGrid=document.getElementById('wall-grid');
+var wallTitle=document.getElementById('wall-title');
+var wallSub=document.getElementById('wall-sub');
+var wallDesc=document.getElementById('wall-desc');
+var wallPrice=document.getElementById('wall-price');
+var wallBuy=document.getElementById('wall-buy');
+
+var lb=document.getElementById('wall-lb');
+var lbImg=document.getElementById('wall-lb-img');
+var lbCount=document.getElementById('wall-lb-count');
+var lbClose=document.getElementById('wall-lb-close');
+var lbPrev=document.getElementById('wall-lb-prev');
+var lbNext=document.getElementById('wall-lb-next');
+
+/* Wallpaper packs
+   Each pack has its own previews, price and purchase route.
+   A store card is matched to a pack by bundle ID (add the package's bundle ID
+   to "bundles") or by its exact name. A Wallpapers package that matches no
+   pack here keeps its normal depiction link and never shows another pack's
+   images.
+   Keep "price" equal to the price configured for the pack in the Cloudflare
+   Worker. Purchases always go through "buyUrl", never straight to Sileo. */
+
+var WALL_PACKS=[
+{
+title:'Lana Wallpapers — Pack 01',
+bundles:[],
+description:'A curated pack of 18 wallpapers designed by Narf.',
+price:'$0.99',
+buyUrl:'https://narf-store.narf-ios26.workers.dev/wallpapers/lana-wallpapers-01',
+base:'assets/wallpapers/lana-01/',
+files:[
+'01.jpg','02.jpg','03.jpg','04.jpg','05.jpg','06.png',
+'07.png','08.jpg','09.jpg','10.jpg','11.jpg','12.jpg',
+'13.jpg','14.jpg','15.jpg','16.png','17.jpg','18.jpg'
+]
+}
+];
+
+function norm(s){
+return String(s||'')
+.toLowerCase()
+.replace(/[\u2012-\u2015\u2212\-]+/g,' ')
+.replace(/\s+/g,' ')
+.trim();
+}
+
+function cardText(c,sel){
+var el=c.querySelector(sel);
+return el?el.textContent.trim():'';
+}
+
+function packFor(card){
+
+if(!card||!card.dataset)return null;
+
+var bundle=card.dataset.bundle||'';
+var name=norm(card.dataset.name||cardText(card,'.feat-name'));
+
+for(var i=0;i<WALL_PACKS.length;i++){
+
+var p=WALL_PACKS[i];
+
+if(
+(bundle&&p.bundles.indexOf(bundle)!==-1)||
+norm(p.title)===name
+){
+return p;
+}
+
+}
+
+return null;
+
+}
+
+function wallCardFor(bundle){
+
+var all=cards.filter(function(c){
+return packFor(c);
+});
+
+if(bundle){
+
+for(var i=0;i<all.length;i++){
+
+if(all[i].dataset.bundle===bundle){
+return all[i];
+}
+
+}
+
+}
+
+return all[0]||null;
+
+}
+
+var wallPack=WALL_PACKS[0];
+var wallBuilt='';
+var lbIdx=0;
+var listScroll=0;
+
+function pad(n){
+return n<10?'0'+n:String(n);
+}
+
+/* Gallery */
+
+function buildWall(){
+
+if(wallBuilt===wallPack.base)return;
+
+wallBuilt=wallPack.base;
+wallGrid.innerHTML='';
+
+wallPack.files.forEach(function(file,i){
+
+var b=document.createElement('button');
+
+b.type='button';
+b.className='wall-item';
+b.dataset.i=String(i);
+b.setAttribute(
+'aria-label',
+'Wallpaper '+(i+1)+' of '+wallPack.files.length
+);
+
+var img=new Image();
+
+img.alt='';
+img.decoding='async';
+
+if(i>=6)img.loading='lazy';
+
+img.addEventListener('error',function(){
+b.classList.add('missing');
+if(img.parentNode)img.parentNode.removeChild(img);
+});
+
+img.src=wallPack.base+file;
+
+var n=document.createElement('span');
+
+n.className='num';
+n.textContent=pad(i+1);
+
+b.appendChild(img);
+b.appendChild(n);
+wallGrid.appendChild(b);
+
+});
+
+}
+
+/* Lightbox */
+
+function showLb(i){
+
+var n=wallPack.files.length;
+
+lbIdx=(i+n)%n;
+
+lbImg.src=wallPack.base+wallPack.files[lbIdx];
+lbImg.alt='Wallpaper '+(lbIdx+1);
+lbCount.textContent=(lbIdx+1)+' / '+n;
+
+}
+
+function openLb(i){
+
+showLb(i);
+
+lb.hidden=false;
+document.body.style.overflow='hidden';
+lbClose.focus();
+
+}
+
+function closeLb(){
+
+if(lb.hidden)return;
+
+lb.hidden=true;
+lbImg.removeAttribute('src');
+document.body.style.overflow='';
+
+}
+
+wallGrid.addEventListener('click',function(e){
+
+var b=e.target.closest('.wall-item');
+
+if(!b||b.classList.contains('missing'))return;
+
+openLb(parseInt(b.dataset.i,10)||0);
+
+});
+
+lbClose.addEventListener('click',closeLb);
+
+lbPrev.addEventListener('click',function(){
+showLb(lbIdx-1);
+});
+
+lbNext.addEventListener('click',function(){
+showLb(lbIdx+1);
+});
+
+lb.addEventListener('click',function(e){
+if(e.target===lb)closeLb();
+});
+
+document.addEventListener('keydown',function(e){
+
+if(lb.hidden)return;
+
+if(e.key==='Escape')closeLb();
+else if(e.key==='ArrowLeft')showLb(lbIdx-1);
+else if(e.key==='ArrowRight')showLb(lbIdx+1);
+
+});
+
+var touchX=null;
+
+lb.addEventListener('touchstart',function(e){
+touchX=e.touches[0].clientX;
+},{passive:true});
+
+lb.addEventListener('touchend',function(e){
+
+if(touchX===null)return;
+
+var dx=e.changedTouches[0].clientX-touchX;
+
+touchX=null;
+
+if(Math.abs(dx)>50)showLb(lbIdx+(dx<0?1:-1));
+
+},{passive:true});
+
+/* Navigation
+   Opening a product from the store pushes ONE history entry
+   (?product=lana or ?product=wallpapers). Closing never pushes:
+   it goes back when that entry is ours, or replaces the URL when the page
+   was opened from a direct link. popstate mirrors the URL into the UI. */
+
+function currentProduct(){
+return new URLSearchParams(window.location.search).get('product');
+}
+
+function hideProducts(){
+
+closeLb();
+
+document.body.classList.remove('lana-open');
+lanaPage.classList.remove('on');
+wallPage.classList.remove('on');
+
+document.title='NARF';
+
+}
+
+function restoreScroll(){
+window.scrollTo(0,listScroll);
+}
+
+function pushProduct(name,bundle){
+
+listScroll=window.pageYOffset||0;
+
+history.pushState(
+{product:name,bundle:bundle||''},
+'',
+'?product='+name
+);
+
+}
+
+function closeProduct(){
+
+var s=history.state;
+
+if(s&&s.product){
+
+/* popstate hides the page */
+history.back();
+return;
+
+}
+
+history.replaceState(null,'',window.location.pathname);
+
+hideProducts();
+restoreScroll();
+
+}
+
 function openLana(push){
 
+if(push)pushProduct('lana');
+
+closeLb();
+
+wallPage.classList.remove('on');
 document.body.classList.add('lana-open');
 lanaPage.classList.add('on');
 
@@ -1987,35 +2521,69 @@ top:0,
 behavior:'smooth'
 });
 
-if(push){
-history.pushState(
-{lana:true},
-'',
-'?product=lana'
-);
-}
-
 }
 
 function closeLana(){
-
-document.body.classList.remove('lana-open');
-lanaPage.classList.remove('on');
-
-if(
-new URLSearchParams(window.location.search).get('product')==='lana'
-){
-history.pushState(
-{},
-'',
-window.location.pathname
-);
+closeProduct();
 }
+
+function openWall(card,push){
+
+card=card||wallCardFor('');
+
+var pack=packFor(card);
+
+if(!pack){
+
+hideProducts();
+
+if(currentProduct()==='wallpapers'){
+history.replaceState(null,'',window.location.pathname);
+}
+
+return false;
+
+}
+
+if(push)pushProduct('wallpapers',card.dataset.bundle);
+
+wallPack=pack;
+
+wallTitle.textContent=pack.title;
+document.title=pack.title+' · NARF';
+
+wallDesc.textContent=
+card.dataset.summary||
+cardText(card,'.feat-desc')||
+pack.description;
+
+wallSub.textContent=
+pack.files.length+' wallpapers · '+
+(card.dataset.developer||cardText(card,'.feat-dev')||'Narf');
+
+wallPrice.textContent=pack.price;
+wallBuy.href=pack.buyUrl;
+
+buildWall();
+closeLb();
+
+lanaPage.classList.remove('on');
+document.body.classList.add('lana-open');
+wallPage.classList.add('on');
 
 window.scrollTo({
 top:0,
 behavior:'smooth'
 });
+
+return true;
+
+}
+
+function closeWall(){
+
+closeLb();
+closeProduct();
 
 }
 
@@ -2032,23 +2600,48 @@ openLana(true);
 
 });
 
-lanaBack.addEventListener('click',closeLana);
+document.addEventListener('click',function(e){
 
-if(
-new URLSearchParams(window.location.search).get('product')==='lana'
-){
+var link=e.target.closest('a.pkg,a.feat');
+
+if(!link||!packFor(link))return;
+
+e.preventDefault();
+openWall(link,true);
+
+});
+
+lanaBack.addEventListener('click',closeLana);
+wallBack.addEventListener('click',closeWall);
+
+/* Direct links */
+
+var initialProduct=currentProduct();
+
+if(initialProduct==='lana'){
 openLana(false);
+}else if(initialProduct==='wallpapers'){
+openWall(null,false);
 }
 
 window.addEventListener('popstate',function(){
 
-if(
-new URLSearchParams(window.location.search).get('product')==='lana'
-){
+var p=currentProduct();
+var s=history.state||{};
+
+if(p==='lana'){
+
 openLana(false);
+
+}else if(p==='wallpapers'){
+
+openWall(wallCardFor(s.bundle),false);
+
 }else{
-document.body.classList.remove('lana-open');
-lanaPage.classList.remove('on');
+
+hideProducts();
+restoreScroll();
+
 }
 
 });
@@ -2065,7 +2658,7 @@ var PRICES={
 document.querySelectorAll('.pkg,.feat')
 ).forEach(function(card){
 
-var price=PRICES[card.dataset.bundle];
+var price=PRICES[card.dataset.bundle]||(packFor(card)||{}).price;
 
 if(!price)return;
 
@@ -2083,6 +2676,20 @@ cta.classList.add('paid');
 function placeholder(img){
 
 if(img.dataset.ph)return;
+
+/* Wallpaper packs without an icon.png use their first wallpaper as the icon */
+
+var wallHost=img.closest('.pkg,.feat');
+var wp=wallHost&&packFor(wallHost);
+
+if(wp&&!img.dataset.cover){
+
+img.dataset.cover='1';
+img.src=wp.base+wp.files[0];
+
+return;
+
+}
 
 img.dataset.ph='1';
 
