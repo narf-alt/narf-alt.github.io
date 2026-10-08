@@ -75,6 +75,11 @@ jobs:
           mkdir -p silex/docs/assets
           cp Styles/narf-brand.png silex/docs/assets/narf-brand.png
 
+      - name: Copy Lana Wallpapers
+        run: |
+          mkdir -p silex/docs/assets/wallpapers/lana-01
+          cp -r Styles/wallpapers/lana-01/. silex/docs/assets/wallpapers/lana-01/
+
       - name: Fix Release architectures
         run: |
           python3 - <<'PY'
