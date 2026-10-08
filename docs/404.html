@@ -1999,6 +1999,31 @@ lanaPage.classList.remove('on');
 
 });
 
+/* Prices
+   The package metadata has no price, so paid packages are listed here.
+   Keep the Lana value equal to PRICE in the Cloudflare Worker. */
+
+var PRICES={
+'com.narf.lana':'$2.99'
+};
+
+[].slice.call(
+document.querySelectorAll('.pkg,.feat')
+).forEach(function(card){
+
+var price=PRICES[card.dataset.bundle];
+
+if(!price)return;
+
+var cta=card.querySelector('.cta');
+
+if(!cta)return;
+
+cta.textContent=price;
+cta.classList.add('paid');
+
+});
+
 /* Icon fallback */
 
 function placeholder(img){
