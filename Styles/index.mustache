@@ -11,1403 +11,1186 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-    color-scheme: dark;
-    --bg: #000;
-    --surface: #0b0b0b;
-    --surface-2: #131313;
-    --line: #222;
-    --line-2: #343434;
-    --text: #f5f5f7;
-    --text-2: #b4b4b9;
-    --muted: #7d7d83;
-    --orange: #ff7a00;
-    --orange-hi: #ff9124;
-    --orange-soft: rgba(255,122,0,.12);
-    --orange-line: rgba(255,122,0,.34);
-    --r-lg: 24px;
-    --r-md: 16px;
-    --ease: cubic-bezier(.2,.8,.2,1);
-}
-
-html {
-    background: var(--bg);
-    -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    background:
-        radial-gradient(70% 38% at 85% 0%, rgba(255,122,0,.12), transparent 70%),
-        var(--bg);
-    background-repeat: no-repeat;
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.4;
-    -webkit-font-smoothing: antialiased;
-    padding:
-        calc(14px + env(safe-area-inset-top))
-        calc(16px + env(safe-area-inset-right))
-        calc(14px + env(safe-area-inset-bottom))
-        calc(16px + env(safe-area-inset-left));
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-    -webkit-tap-highlight-color: transparent;
-}
-
-button,
-input {
-    font: inherit;
-    color: inherit;
-}
-
-button {
-    -webkit-tap-highlight-color: transparent;
-}
-
-:focus-visible {
-    outline: 2px solid var(--orange);
-    outline-offset: 3px;
-}
-
-.page {
-    width: 100%;
-    max-width: 1180px;
-    margin: 0 auto;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-}
-
-/* ---------- Header ---------- */
-
-.topbar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas: "brand account" "search search";
-    grid-template-rows: 60px auto;
-    align-items: center;
-    row-gap: 4px;
-    margin-bottom: 24px;
-    position: relative;
-}
-
-.brand {
-    grid-area: brand;
-    justify-self: start;
-    display: inline-flex;
-    align-items: center;
-    min-height: 48px;
-    border-radius: 12px;
-}
-
-/* Official Narf logo */
-.brand-logo {
-    --logo-h: 36px;
-    position: relative;
-    display: block;
-    overflow: hidden;
-    flex: 0 0 auto;
-    height: var(--logo-h);
-    width: calc(var(--logo-h) * 2.6875);
-}
-
-.brand-logo img {
-    position: absolute;
-    display: block;
-    width: 129.61%;
-    height: auto;
-    max-width: none;
-    left: -14.65%;
-    top: -51.04%;
-}
-
-.account-wrap {
-    position: relative;
-}
-
-.icon-btn {
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--line-2);
-    cursor: pointer;
-    transition:
-        border-color .18s var(--ease),
-        transform .12s var(--ease);
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+color-scheme:dark;
+--bg:#000;
+--surface:#0b0b0b;
+--surface-2:#131313;
+--line:#222;
+--line-2:#343434;
+--text:#f5f5f7;
+--text-2:#b4b4b9;
+--muted:#7d7d83;
+--orange:#ff7a00;
+--orange-hi:#ff9124;
+--orange-soft:rgba(255,122,0,.12);
+--orange-line:rgba(255,122,0,.34);
+--r-lg:24px;
+--r-md:16px;
+--ease:cubic-bezier(.2,.8,.2,1)
+}
+
+html{
+background:var(--bg);
+-webkit-text-size-adjust:100%;
+scroll-behavior:smooth
+}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+background:radial-gradient(70% 38% at 85% 0%,rgba(255,122,0,.12),transparent 70%),var(--bg);
+background-repeat:no-repeat;
+color:var(--text);
+min-height:100vh;
+line-height:1.4;
+-webkit-font-smoothing:antialiased;
+padding:calc(14px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left))
+}
+
+a{
+color:inherit;
+text-decoration:none;
+-webkit-tap-highlight-color:transparent
+}
+
+button,input{font:inherit;color:inherit}
+button{-webkit-tap-highlight-color:transparent}
+
+:focus-visible{
+outline:2px solid var(--orange);
+outline-offset:3px
+}
+
+.page{
+width:100%;
+max-width:1180px;
+margin:0 auto
+}
+
+.sr-only{
+position:absolute;
+width:1px;
+height:1px;
+overflow:hidden;
+clip:rect(0 0 0 0);
+white-space:nowrap
+}
+
+/* Header */
+
+.topbar{
+display:grid;
+grid-template-columns:minmax(0,1fr) auto;
+grid-template-areas:"brand account" "search search";
+grid-template-rows:60px auto;
+align-items:center;
+row-gap:4px;
+margin-bottom:24px;
+position:relative
+}
 
-.icon-btn:hover,
-.icon-btn.on {
-    border-color: var(--orange);
+.brand{
+grid-area:brand;
+justify-self:start;
+display:inline-flex;
+align-items:center;
+min-height:48px;
+border-radius:12px
+}
+
+.brand-logo{
+--logo-h:36px;
+position:relative;
+display:block;
+overflow:hidden;
+flex:0 0 auto;
+height:var(--logo-h);
+width:calc(var(--logo-h) * 2.6875)
 }
 
-.icon-btn:active {
-    transform: scale(.94);
+.brand-logo img{
+position:absolute;
+display:block;
+width:129.61%;
+height:auto;
+max-width:none;
+left:-14.65%;
+top:-51.04%
 }
 
-.icon-btn svg {
-    width: 21px;
-    height: 21px;
-}
+.account-wrap{position:relative}
 
-.account-wrap {
-    grid-area: account;
-    justify-self: end;
+.icon-btn{
+width:44px;
+height:44px;
+display:grid;
+place-items:center;
+border-radius:50%;
+background:var(--surface);
+border:1px solid var(--line-2);
+cursor:pointer;
+transition:border-color .18s var(--ease),transform .12s var(--ease)
 }
 
-.account-btn {
-    background: rgba(255,255,255,.04);
-    border-color: rgba(255,255,255,.10);
-    color: var(--text-2);
-    transition:
-        border-color .18s var(--ease),
-        background .18s var(--ease),
-        color .18s var(--ease),
-        transform .12s var(--ease);
-}
+.icon-btn:hover,.icon-btn.on{border-color:var(--orange)}
+.icon-btn:active{transform:scale(.94)}
+.icon-btn svg{width:21px;height:21px}
 
-.account-btn:active {
-    background: rgba(255,255,255,.08);
-    color: #fff;
+.account-wrap{
+grid-area:account;
+justify-self:end
 }
 
-.account-btn.on {
-    background: var(--orange-soft);
-    border-color: var(--orange-line);
-    color: var(--orange);
+.account-btn{
+background:rgba(255,255,255,.04);
+border-color:rgba(255,255,255,.10);
+color:var(--text-2);
+transition:border-color .18s var(--ease),background .18s var(--ease),color .18s var(--ease),transform .12s var(--ease)
 }
 
-@media (hover: hover) {
-    .account-btn:hover {
-        background: rgba(255,255,255,.07);
-        border-color: var(--orange-line);
-        color: #fff;
-    }
+.account-btn:active{
+background:rgba(255,255,255,.08);
+color:#fff
 }
 
-.account-menu {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    width: 270px;
-    z-index: 30;
-    background: var(--surface-2);
-    border: 1px solid var(--line-2);
-    border-radius: var(--r-md);
-    padding: 8px;
-    box-shadow: 0 18px 40px rgba(0,0,0,.75);
+.account-btn.on{
+background:var(--orange-soft);
+border-color:var(--orange-line);
+color:var(--orange)
+}
+
+@media(hover:hover){
+.account-btn:hover{
+background:rgba(255,255,255,.07);
+border-color:var(--orange-line);
+color:#fff
 }
-
-.account-menu[hidden] {
-    display: none;
 }
 
-.account-menu-head {
-    padding: 10px 10px 12px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 6px;
+.account-menu{
+position:absolute;
+right:0;
+top:calc(100% + 8px);
+width:270px;
+z-index:30;
+background:var(--surface-2);
+border:1px solid var(--line-2);
+border-radius:var(--r-md);
+padding:8px;
+box-shadow:0 18px 40px rgba(0,0,0,.75)
 }
 
-.account-menu-head strong {
-    display: block;
-    font-size: 15px;
-}
+.account-menu[hidden]{display:none}
 
-.account-menu-head span {
-    font-size: 12px;
-    color: var(--muted);
-}
+.account-menu-head{
+padding:10px 10px 12px;
+border-bottom:1px solid var(--line);
+margin-bottom:6px
+}
+
+.account-menu-head strong{display:block;font-size:15px}
+.account-menu-head span{font-size:12px;color:var(--muted)}
 
-.account-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    color: var(--text-2);
+.account-item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 10px;
+border-radius:10px;
+font-size:14px;
+color:var(--text-2)
 }
 
-.account-item small {
-    font-size: 11px;
-    color: var(--muted);
+.account-item small{
+font-size:11px;
+color:var(--muted)
 }
 
-/* ---------- Search ---------- */
+/* Search */
 
-.search {
-    grid-area: search;
-    min-width: 0;
-}
-
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    height: 52px;
-    padding: 0 4px 0 18px;
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.09);
-    border-radius: 999px;
-    transition:
-        border-color .2s var(--ease),
-        box-shadow .2s var(--ease),
-        background .2s var(--ease);
-}
+.search{grid-area:search;min-width:0}
 
-.search-box:focus-within {
-    background: rgba(255,255,255,.06);
-    border-color: rgba(255,122,0,.75);
-    box-shadow: 0 0 0 3px rgba(255,122,0,.14);
+.search-box{
+display:flex;
+align-items:center;
+gap:6px;
+height:52px;
+padding:0 4px 0 18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.09);
+border-radius:999px;
+transition:border-color .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease)
 }
 
-.search-input {
-    flex: 1;
-    min-width: 0;
-    height: 100%;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    font-size: 16px;
-    text-overflow: ellipsis;
+.search-box:focus-within{
+background:rgba(255,255,255,.06);
+border-color:rgba(255,122,0,.75);
+box-shadow:0 0 0 3px rgba(255,122,0,.14)
 }
 
-.search-input::placeholder {
-    color: var(--muted);
+.search-input{
+flex:1;
+min-width:0;
+height:100%;
+background:transparent;
+border:0;
+outline:0;
+font-size:16px;
+text-overflow:ellipsis
 }
 
-.search-input::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-}
+.search-input::placeholder{color:var(--muted)}
+.search-input::-webkit-search-cancel-button{-webkit-appearance:none}
 
-.search-btn {
-    height: 44px;
-    min-width: 44px;
-    padding: 0 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: var(--orange);
-    color: #000;
-    border: 0;
-    border-radius: 999px;
-    font-weight: 800;
-    font-size: 14px;
-    cursor: pointer;
-    transition:
-        background .18s var(--ease),
-        transform .12s var(--ease);
+.search-btn{
+height:44px;
+min-width:44px;
+padding:0 20px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+background:var(--orange);
+color:#000;
+border:0;
+border-radius:999px;
+font-weight:800;
+font-size:14px;
+cursor:pointer;
+transition:background .18s var(--ease),transform .12s var(--ease)
 }
 
-@media (hover: hover) {
-    .search-btn:hover {
-        background: var(--orange-hi);
-    }
+@media(hover:hover){
+.search-btn:hover{background:var(--orange-hi)}
 }
 
-.search-btn:active {
-    transform: scale(.96);
+.search-btn:active{transform:scale(.96)}
+.search-btn svg{
+width:18px;
+height:18px;
+fill:none;
+stroke:currentColor;
+stroke-width:2.6;
+stroke-linecap:round
 }
 
-.search-btn svg {
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.6;
-    stroke-linecap: round;
+@media(max-width:699px){
+.search-btn span{display:none}
+.search-btn{padding:0;width:44px}
 }
-
-@media (max-width: 699px) {
-    .search-btn span {
-        display: none;
-    }
 
-    .search-btn {
-        padding: 0;
-        width: 44px;
-    }
+@media(min-width:700px){
+.topbar{
+grid-template-columns:minmax(110px,1fr) minmax(0,560px) minmax(110px,1fr);
+grid-template-areas:"brand search account";
+grid-template-rows:72px;
+column-gap:20px;
+row-gap:0;
+margin-bottom:28px
 }
 
-@media (min-width: 700px) {
-    .topbar {
-        grid-template-columns: minmax(110px, 1fr) minmax(0, 560px) minmax(110px, 1fr);
-        grid-template-areas: "brand search account";
-        grid-template-rows: 72px;
-        column-gap: 20px;
-        row-gap: 0;
-        margin-bottom: 28px;
-    }
-
-    .brand-logo {
-        --logo-h: 40px;
-    }
+.brand-logo{--logo-h:40px}
 }
 
-/* ---------- Section headers ---------- */
+/* Section headers */
 
-.head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 14px;
+.head{
+display:flex;
+align-items:flex-end;
+justify-content:space-between;
+gap:12px;
+margin-bottom:14px
 }
 
-.head h2 {
-    font-size: 28px;
-    font-weight: 850;
-    letter-spacing: -.03em;
+.head h2{
+font-size:28px;
+font-weight:850;
+letter-spacing:-.03em
 }
 
-.head p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 2px;
+.head p{
+color:var(--muted);
+font-size:13px;
+margin-top:2px
 }
 
-.arrows {
-    display: none;
-    gap: 8px;
+.arrows{
+display:none;
+gap:8px
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .arrows {
-        display: flex;
-    }
+@media(hover:hover) and (pointer:fine){
+.arrows{display:flex}
 }
 
-.arrow {
-    width: 38px;
-    height: 38px;
-}
+.arrow{width:38px;height:38px}
 
-.arrow svg {
-    width: 16px;
-    height: 16px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.arrow svg{
+width:16px;
+height:16px;
+fill:none;
+stroke:currentColor;
+stroke-width:2.4;
+stroke-linecap:round;
+stroke-linejoin:round
 }
 
-/* ---------- Featured ---------- */
+/* Featured */
 
-.featured {
-    margin-bottom: 26px;
-}
-
-.featured[hidden] {
-    display: none;
-}
+.featured{margin-bottom:26px}
+.featured[hidden]{display:none}
 
-.feat-track {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    margin: 0 calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
-    padding: 4px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
-    scroll-padding-inline: 16px;
-    -webkit-overflow-scrolling: touch;
+.feat-track{
+display:flex;
+gap:14px;
+overflow-x:auto;
+overscroll-behavior-x:contain;
+scroll-snap-type:x mandatory;
+scrollbar-width:none;
+margin:0 calc(-16px - env(safe-area-inset-right)) 0 calc(-16px - env(safe-area-inset-left));
+padding:4px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
+scroll-padding-inline:16px;
+-webkit-overflow-scrolling:touch
 }
 
-.feat-track::-webkit-scrollbar {
-    display: none;
-}
+.feat-track::-webkit-scrollbar{display:none}
 
-.feat {
-    position: relative;
-    flex: 0 0 min(86vw, 380px);
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    padding: 20px;
-    min-height: 236px;
-    border-radius: var(--r-lg);
-    border: 1px solid var(--line-2);
-    background:
-        radial-gradient(
-            120% 90% at 100% 100%,
-            rgba(255,122,0,.2),
-            transparent 60%
-        ),
-        var(--surface);
-    overflow: hidden;
-    transition:
-        transform .22s var(--ease),
-        border-color .22s var(--ease);
+.feat{
+position:relative;
+flex:0 0 min(86vw,380px);
+scroll-snap-align:start;
+display:flex;
+flex-direction:column;
+gap:18px;
+padding:20px;
+min-height:236px;
+border-radius:var(--r-lg);
+border:1px solid var(--line-2);
+background:radial-gradient(120% 90% at 100% 100%,rgba(255,122,0,.2),transparent 60%),var(--surface);
+overflow:hidden;
+transition:transform .22s var(--ease),border-color .22s var(--ease)
 }
 
-.feat:hover {
-    transform: translateY(-3px);
-    border-color: var(--orange-line);
+.feat:hover{
+transform:translateY(-3px);
+border-color:var(--orange-line)
 }
 
-.feat:active {
-    transform: scale(.985);
-}
+.feat:active{transform:scale(.985)}
 
-.feat-top {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+.feat-top{
+display:flex;
+gap:16px;
+align-items:center
 }
 
-.feat .icon {
-    width: 92px;
-    height: 92px;
-    border-radius: 21px;
+.feat .icon{
+width:92px;
+height:92px;
+border-radius:21px
 }
 
-.feat-name {
-    font-size: 22px;
-    font-weight: 850;
-    letter-spacing: -.02em;
-    overflow-wrap: anywhere;
+.feat-name{
+font-size:22px;
+font-weight:850;
+letter-spacing:-.02em;
+overflow-wrap:anywhere
 }
 
-.feat-dev {
-    color: var(--orange);
-    font-size: 13px;
-    font-weight: 700;
-    margin-top: 2px;
+.feat-dev{
+color:var(--orange);
+font-size:13px;
+font-weight:700;
+margin-top:2px
 }
 
-.feat-desc {
-    color: var(--text-2);
-    font-size: 14px;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    overflow-wrap: anywhere;
+.feat-desc{
+color:var(--text-2);
+font-size:14px;
+line-height:1.5;
+display:-webkit-box;
+-webkit-line-clamp:3;
+-webkit-box-orient:vertical;
+overflow:hidden;
+overflow-wrap:anywhere
 }
 
-.feat-foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: auto;
+.feat-foot{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-top:auto
 }
 
-.pkg-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+.pkg-meta{
+display:flex;
+flex-wrap:wrap;
+gap:6px
 }
 
-/* ---------- Category nav ---------- */
+/* Categories */
 
-.cats {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    margin: 0 calc(-16px - env(safe-area-inset-right)) 18px calc(-16px - env(safe-area-inset-left));
-    padding: 8px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
-    background: linear-gradient(#000 70%, rgba(0,0,0,0));
+.cats{
+position:sticky;
+top:0;
+z-index:10;
+margin:0 calc(-16px - env(safe-area-inset-right)) 18px calc(-16px - env(safe-area-inset-left));
+padding:8px calc(16px + env(safe-area-inset-right)) 8px calc(16px + env(safe-area-inset-left));
+background:linear-gradient(#000 70%,rgba(0,0,0,0))
 }
 
-.cats-row {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+.cats-row{
+display:flex;
+gap:8px;
+overflow-x:auto;
+scrollbar-width:none;
+-webkit-overflow-scrolling:touch
 }
 
-.cats-row::-webkit-scrollbar {
-    display: none;
-}
+.cats-row::-webkit-scrollbar{display:none}
 
-.cat {
-    flex: 0 0 auto;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 18px;
-    background: var(--surface);
-    border: 1px solid var(--line-2);
-    border-radius: 999px;
-    color: var(--text-2);
-    font-size: 14px;
-    font-weight: 700;
-    white-space: nowrap;
-    cursor: pointer;
-    transition:
-        background .2s var(--ease),
-        color .2s var(--ease),
-        border-color .2s var(--ease),
-        transform .12s var(--ease);
+.cat{
+flex:0 0 auto;
+min-height:44px;
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:0 18px;
+background:var(--surface);
+border:1px solid var(--line-2);
+border-radius:999px;
+color:var(--text-2);
+font-size:14px;
+font-weight:700;
+white-space:nowrap;
+cursor:pointer;
+transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .12s var(--ease)
 }
 
-.cat:hover {
-    border-color: var(--orange-line);
-    color: #fff;
+.cat:hover{
+border-color:var(--orange-line);
+color:#fff
 }
 
-.cat:active {
-    transform: scale(.96);
-}
+.cat:active{transform:scale(.96)}
 
-.cat[aria-pressed="true"] {
-    background: var(--orange);
-    border-color: var(--orange);
-    color: #000;
+.cat[aria-pressed=true]{
+background:var(--orange);
+border-color:var(--orange);
+color:#000
 }
-
-/* ---------- Havoc-style shelf ---------- */
 
-.shelf {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--r-lg);
-    overflow: hidden;
-    box-shadow: 0 18px 40px rgba(0,0,0,.45);
-}
+/* Shelf */
 
-.shelf[hidden] {
-    display: none;
+.shelf{
+background:var(--surface);
+border:1px solid var(--line);
+border-radius:var(--r-lg);
+overflow:hidden;
+box-shadow:0 18px 40px rgba(0,0,0,.45)
 }
 
-.list {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(3, auto);
-    grid-auto-columns: calc(100% - 30px);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding: 6px 0;
-}
+.shelf[hidden]{display:none}
 
-.list::-webkit-scrollbar {
-    display: none;
+.list{
+display:grid;
+grid-auto-flow:column;
+grid-template-rows:repeat(3,auto);
+grid-auto-columns:calc(100% - 30px);
+overflow-x:auto;
+overscroll-behavior-x:contain;
+scroll-snap-type:x mandatory;
+scrollbar-width:none;
+-webkit-overflow-scrolling:touch;
+padding:6px 0
 }
 
-.pkg {
-    position: relative;
-    scroll-snap-align: start;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    min-height: 92px;
-    transition: background .18s var(--ease);
-}
+.list::-webkit-scrollbar{display:none}
 
-.pkg[hidden] {
-    display: none;
+.pkg{
+position:relative;
+scroll-snap-align:start;
+display:flex;
+align-items:center;
+gap:14px;
+padding:14px 16px;
+min-height:92px;
+transition:background .18s var(--ease)
 }
 
-.pkg:hover {
-    background: rgba(255,122,0,.05);
-}
+.pkg[hidden]{display:none}
 
-.pkg:active {
-    background: rgba(255,122,0,.09);
-}
+.pkg:hover{background:rgba(255,122,0,.05)}
+.pkg:active{background:rgba(255,122,0,.09)}
 
-.pkg::after {
-    content: "";
-    position: absolute;
-    left: 92px;
-    right: 16px;
-    bottom: 0;
-    height: 1px;
-    background: var(--line);
+.pkg::after{
+content:"";
+position:absolute;
+left:92px;
+right:16px;
+bottom:0;
+height:1px;
+background:var(--line)
 }
 
-.pkg .icon {
-    width: 62px;
-    height: 62px;
-    border-radius: 14px;
+.pkg .icon{
+width:62px;
+height:62px;
+border-radius:14px
 }
 
-.pkg-main {
-    flex: 1;
-    min-width: 0;
+.pkg-main{
+flex:1;
+min-width:0
 }
 
-.pkg-name {
-    font-size: 17px;
-    font-weight: 800;
-    letter-spacing: -.015em;
-    overflow-wrap: anywhere;
+.pkg-name{
+font-size:17px;
+font-weight:800;
+letter-spacing:-.015em;
+overflow-wrap:anywhere
 }
 
-.pkg-desc {
-    color: var(--text-2);
-    font-size: 13px;
-    line-height: 1.4;
-    margin-top: 2px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    overflow-wrap: anywhere;
+.pkg-desc{
+color:var(--text-2);
+font-size:13px;
+line-height:1.4;
+margin-top:2px;
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+overflow-wrap:anywhere
 }
 
-.pkg-sub {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.pkg-sub{
+color:var(--muted);
+font-size:12px;
+margin-top:3px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis
 }
 
-.dots {
-    display: flex;
-    justify-content: center;
-    gap: 7px;
-    padding: 4px 0 14px;
-    min-height: 22px;
+.dots{
+display:flex;
+justify-content:center;
+gap:7px;
+padding:4px 0 14px;
+min-height:22px
 }
 
-.dots i {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--line-2);
-    transition:
-        background .2s var(--ease),
-        width .2s var(--ease);
+.dots i{
+width:7px;
+height:7px;
+border-radius:50%;
+background:var(--line-2);
+transition:background .2s var(--ease),width .2s var(--ease)
 }
 
-.dots i.on {
-    background: var(--orange);
-    width: 18px;
-    border-radius: 99px;
+.dots i.on{
+background:var(--orange);
+width:18px;
+border-radius:99px
 }
 
-/* ---------- Shared bits ---------- */
+/* Shared */
 
-.icon {
-    flex-shrink: 0;
-    object-fit: cover;
-    background: var(--surface-2);
-    border: 1px solid var(--line-2);
-    box-shadow: 0 8px 20px rgba(0,0,0,.45);
-    display: block;
+.icon{
+flex-shrink:0;
+object-fit:cover;
+background:var(--surface-2);
+border:1px solid var(--line-2);
+box-shadow:0 8px 20px rgba(0,0,0,.45);
+display:block
 }
 
-.icon.ph {
-    display: grid;
-    place-items: center;
-    font-weight: 900;
-    font-size: 26px;
-    color: var(--orange);
-    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+.icon.ph{
+display:grid;
+place-items:center;
+font-weight:900;
+font-size:26px;
+color:var(--orange);
+background:linear-gradient(145deg,#1a1a1a,#0d0d0d)
 }
 
-.chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--text-2);
-    background: var(--surface-2);
-    border: 1px solid var(--line);
+.chip{
+display:inline-flex;
+align-items:center;
+padding:5px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+line-height:1.2;
+color:var(--text-2);
+background:var(--surface-2);
+border:1px solid var(--line)
 }
 
-.chip.cat-chip {
-    color: var(--orange);
-    background: var(--orange-soft);
-    border-color: var(--orange-line);
+.chip.cat-chip{
+color:var(--orange);
+background:var(--orange-soft);
+border-color:var(--orange-line)
 }
 
-.cta {
-    flex-shrink: 0;
-    min-width: 68px;
-    min-height: 36px;
-    display: inline-grid;
-    place-items: center;
-    padding: 0 16px;
-    border-radius: 999px;
-    background: var(--orange-soft);
-    border: 1px solid var(--orange-line);
-    color: var(--orange);
-    font-size: 14px;
-    font-weight: 850;
-    letter-spacing: .01em;
-    transition:
-        background .18s var(--ease),
-        color .18s var(--ease);
+.cta{
+flex-shrink:0;
+min-width:68px;
+min-height:36px;
+display:inline-grid;
+place-items:center;
+padding:0 16px;
+border-radius:999px;
+background:var(--orange-soft);
+border:1px solid var(--orange-line);
+color:var(--orange);
+font-size:14px;
+font-weight:850;
+letter-spacing:.01em;
+transition:background .18s var(--ease),color .18s var(--ease)
 }
 
-.pkg:hover .cta,
-.feat:hover .cta {
-    background: var(--orange);
-    color: #000;
+.pkg:hover .cta,.feat:hover .cta{
+background:var(--orange);
+color:#000
 }
 
-.cta.paid {
-    font-variant-numeric: tabular-nums;
-}
-
-/* ---------- Empty states ---------- */
+.cta.paid{font-variant-numeric:tabular-nums}
 
-.state {
-    display: none;
-    text-align: center;
-    padding: 56px 24px;
-    background: var(--surface);
-    border: 1px dashed var(--line-2);
-    border-radius: var(--r-lg);
-}
-
-.state.on {
-    display: block;
-}
+/* Empty */
 
-.state svg {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 14px;
-    fill: none;
-    stroke: var(--orange);
-    stroke-width: 1.6;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.state{
+display:none;
+text-align:center;
+padding:56px 24px;
+background:var(--surface);
+border:1px dashed var(--line-2);
+border-radius:var(--r-lg)
 }
 
-.state strong {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 6px;
-}
+.state.on{display:block}
 
-.state span {
-    color: var(--muted);
-    font-size: 14px;
+.state svg{
+width:40px;
+height:40px;
+margin-bottom:14px;
+fill:none;
+stroke:var(--orange);
+stroke-width:1.6;
+stroke-linecap:round;
+stroke-linejoin:round
 }
 
-.state button {
-    margin-top: 18px;
-    min-height: 44px;
-    padding: 0 20px;
-    background: transparent;
-    border: 1px solid var(--orange-line);
-    border-radius: 999px;
-    color: var(--orange);
-    font-weight: 700;
-    cursor: pointer;
+.state strong{
+display:block;
+font-size:18px;
+margin-bottom:6px
 }
 
-.state button[hidden] {
-    display: none;
+.state span{
+color:var(--muted);
+font-size:14px
 }
-
-/* ---------- Lana Product Page ---------- */
 
-.lana-page {
-    display: none;
-    margin-top: 4px;
-    animation: lana-in .28s var(--ease);
+.state button{
+margin-top:18px;
+min-height:44px;
+padding:0 20px;
+background:transparent;
+border:1px solid var(--orange-line);
+border-radius:999px;
+color:var(--orange);
+font-weight:700;
+cursor:pointer
 }
 
-.lana-page.on {
-    display: block;
-}
+.state button[hidden]{display:none}
 
-@keyframes lana-in {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
+/* Lana */
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.lana-page{
+display:none;
+margin-top:4px;
+animation:lana-in .28s var(--ease)
 }
-
-.lana-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    min-height: 42px;
-    padding: 0 15px;
-    margin-bottom: 18px;
-
-    border: 1px solid var(--line-2);
-    border-radius: 999px;
 
-    background: var(--surface);
-    color: var(--text-2);
+.lana-page.on{display:block}
 
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-
-    transition:
-        color .18s var(--ease),
-        border-color .18s var(--ease),
-        background .18s var(--ease),
-        transform .12s var(--ease);
-}
-
-.lana-back:hover {
-    color: #fff;
-    border-color: var(--orange-line);
-    background: var(--surface-2);
+@keyframes lana-in{
+from{opacity:0;transform:translateY(10px)}
+to{opacity:1;transform:translateY(0)}
 }
 
-.lana-back:active {
-    transform: scale(.96);
+.lana-back{
+display:inline-flex;
+align-items:center;
+gap:8px;
+min-height:42px;
+padding:0 15px;
+margin-bottom:18px;
+border:1px solid var(--line-2);
+border-radius:999px;
+background:var(--surface);
+color:var(--text-2);
+font-size:14px;
+font-weight:800;
+cursor:pointer;
+transition:color .18s var(--ease),border-color .18s var(--ease),background .18s var(--ease),transform .12s var(--ease)
 }
 
-.lana-back svg {
-    width: 17px;
-    height: 17px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.lana-back:hover{
+color:#fff;
+border-color:var(--orange-line);
+background:var(--surface-2)
 }
-
-.lana-hero {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 22px;
-
-    padding: 20px;
 
-    border: 1px solid var(--line-2);
-    border-radius: var(--r-lg);
+.lana-back:active{transform:scale(.96)}
 
-    background:
-        radial-gradient(
-            90% 100% at 100% 0%,
-            rgba(255,122,0,.16),
-            transparent 60%
-        ),
-        linear-gradient(145deg, #101010, #080808);
-
-    overflow: hidden;
+.lana-back svg{
+width:17px;
+height:17px;
+fill:none;
+stroke:currentColor;
+stroke-width:2.3;
+stroke-linecap:round;
+stroke-linejoin:round
 }
-
-.lana-preview {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
 
-    border-radius: 18px;
-    border: 1px solid var(--line-2);
-
-    background: var(--surface-2);
-
-    box-shadow: 0 18px 45px rgba(0,0,0,.45);
+.lana-hero{
+display:grid;
+grid-template-columns:1fr;
+gap:22px;
+padding:20px;
+border:1px solid var(--line-2);
+border-radius:var(--r-lg);
+background:radial-gradient(90% 100% at 100% 0%,rgba(255,122,0,.16),transparent 60%),linear-gradient(145deg,#101010,#080808);
+overflow:hidden
 }
 
-.lana-summary {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+.lana-preview{
+display:block;
+width:100%;
+aspect-ratio:16/9;
+object-fit:cover;
+border-radius:18px;
+border:1px solid var(--line-2);
+background:var(--surface-2);
+box-shadow:0 18px 45px rgba(0,0,0,.45)
 }
 
-.lana-product-head {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.lana-summary{
+display:flex;
+flex-direction:column;
+min-width:0
 }
-
-.lana-icon {
-    width: 88px;
-    height: 88px;
-    flex: 0 0 auto;
 
-    border-radius: 21px;
-    object-fit: cover;
-
-    border: 1px solid var(--line-2);
-    box-shadow: 0 12px 30px rgba(0,0,0,.5);
+.lana-product-head{
+display:flex;
+align-items:center;
+gap:16px
 }
 
-.lana-kicker {
-    color: var(--orange);
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: .08em;
-    text-transform: uppercase;
+.lana-icon{
+width:88px;
+height:88px;
+flex:0 0 auto;
+border-radius:21px;
+object-fit:cover;
+border:1px solid var(--line-2);
+box-shadow:0 12px 30px rgba(0,0,0,.5)
 }
 
-.lana-title {
-    font-size: clamp(30px, 7vw, 46px);
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: -.04em;
-    margin-top: 4px;
+.lana-kicker{
+color:var(--orange);
+font-size:12px;
+font-weight:900;
+letter-spacing:.08em;
+text-transform:uppercase
 }
 
-.lana-by {
-    color: var(--text-2);
-    font-size: 14px;
-    margin-top: 6px;
+.lana-title{
+font-size:clamp(30px,7vw,46px);
+line-height:1;
+font-weight:900;
+letter-spacing:-.04em;
+margin-top:4px
 }
-
-.lana-price-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
 
-    margin-top: 22px;
-    padding-top: 18px;
-
-    border-top: 1px solid var(--line);
+.lana-by{
+color:var(--text-2);
+font-size:14px;
+margin-top:6px
 }
 
-.lana-price {
-    font-size: 30px;
-    font-weight: 900;
-    letter-spacing: -.03em;
+.lana-price-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:14px;
+margin-top:22px;
+padding-top:18px;
+border-top:1px solid var(--line)
 }
-
-.lana-buy {
-    min-height: 48px;
-    padding: 0 22px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
 
-    border: 0;
-    border-radius: 999px;
-
-    background: var(--orange);
-    color: #000;
-
-    font-size: 15px;
-    font-weight: 900;
-
-    cursor: pointer;
-
-    transition:
-        background .18s var(--ease),
-        transform .12s var(--ease);
+.lana-price{
+font-size:30px;
+font-weight:900;
+letter-spacing:-.03em
 }
 
-.lana-buy:hover {
-    background: var(--orange-hi);
+.lana-buy{
+min-height:48px;
+padding:0 22px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+gap:9px;
+border:0;
+border-radius:999px;
+background:var(--orange);
+color:#000;
+font-size:15px;
+font-weight:900;
+cursor:pointer;
+transition:background .18s var(--ease),transform .12s var(--ease)
 }
 
-.lana-buy:active {
-    transform: scale(.96);
-}
+.lana-buy:hover{background:var(--orange-hi)}
+.lana-buy:active{transform:scale(.96)}
 
-.lana-buy svg {
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.lana-buy svg{
+width:18px;
+height:18px;
+fill:none;
+stroke:currentColor;
+stroke-width:2.2;
+stroke-linecap:round;
+stroke-linejoin:round
 }
 
-.lana-section {
-    margin-top: 28px;
-}
+.lana-section{margin-top:28px}
 
-.lana-section h2 {
-    font-size: 23px;
-    font-weight: 900;
-    letter-spacing: -.025em;
-    margin-bottom: 12px;
+.lana-section h2{
+font-size:23px;
+font-weight:900;
+letter-spacing:-.025em;
+margin-bottom:12px
 }
 
-.lana-copy {
-    color: var(--text-2);
-    font-size: 15px;
-    line-height: 1.7;
-    max-width: 780px;
+.lana-copy{
+color:var(--text-2);
+font-size:15px;
+line-height:1.7;
+max-width:780px
 }
 
-.lana-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 10px;
+.lana-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px
 }
-
-.lana-feature {
-    min-height: 100px;
-    padding: 16px;
 
-    border: 1px solid var(--line);
-    border-radius: var(--r-md);
-
-    background: var(--surface);
+.lana-feature{
+min-height:100px;
+padding:16px;
+border:1px solid var(--line);
+border-radius:var(--r-md);
+background:var(--surface)
 }
 
-.lana-feature strong {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
+.lana-feature strong{
+display:block;
+font-size:14px;
+margin-bottom:5px
 }
 
-.lana-feature span {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.45;
+.lana-feature span{
+color:var(--muted);
+font-size:13px;
+line-height:1.45
 }
 
-.lana-feature .feature-icon {
-    color: var(--orange);
-    font-size: 21px;
-    margin-bottom: 9px;
+.lana-feature .feature-icon{
+color:var(--orange);
+font-size:21px;
+margin-bottom:9px
 }
-
-.lana-compat {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    padding: 16px;
 
-    border: 1px solid var(--orange-line);
-    border-radius: var(--r-md);
-
-    background: var(--orange-soft);
+.lana-compat{
+display:flex;
+align-items:center;
+gap:14px;
+padding:16px;
+border:1px solid var(--orange-line);
+border-radius:var(--r-md);
+background:var(--orange-soft)
 }
-
-.lana-compat-icon {
-    width: 46px;
-    height: 46px;
-    flex: 0 0 auto;
 
-    display: grid;
-    place-items: center;
-
-    border-radius: 13px;
-
-    background: rgba(255,255,255,.07);
-    border: 1px solid var(--line-2);
+.lana-compat-icon{
+width:46px;
+height:46px;
+flex:0 0 auto;
+display:grid;
+place-items:center;
+border-radius:13px;
+background:rgba(255,255,255,.07);
+border:1px solid var(--line-2)
 }
 
-.lana-compat-icon svg {
-    width: 23px;
-    height: 23px;
-    fill: currentColor;
+.lana-compat-icon svg{
+width:23px;
+height:23px;
+fill:currentColor
 }
 
-.lana-compat strong {
-    display: block;
-    font-size: 15px;
+.lana-compat strong{
+display:block;
+font-size:15px
 }
 
-.lana-compat span {
-    display: block;
-    color: var(--text-2);
-    font-size: 13px;
-    margin-top: 3px;
+.lana-compat span{
+display:block;
+color:var(--text-2);
+font-size:13px;
+margin-top:3px
 }
-
-.lana-developer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
 
-    padding: 18px;
-
-    border: 1px solid var(--line-2);
-    border-radius: var(--r-md);
-
-    background: var(--surface);
+.lana-developer{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:18px;
+padding:18px;
+border:1px solid var(--line-2);
+border-radius:var(--r-md);
+background:var(--surface)
 }
 
-.lana-developer-name {
-    font-size: 18px;
-    font-weight: 900;
+.lana-developer-name{
+font-size:18px;
+font-weight:900
 }
 
-.lana-developer-meta {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 3px;
+.lana-developer-meta{
+color:var(--muted);
+font-size:13px;
+margin-top:3px
 }
-
-.lana-social {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    min-height: 42px;
-    padding: 0 14px;
-
-    border: 1px solid var(--line-2);
-    border-radius: 999px;
-
-    color: var(--text-2);
 
-    font-weight: 800;
-    font-size: 13px;
+.lana-social{
+display:inline-flex;
+align-items:center;
+gap:8px;
+min-height:42px;
+padding:0 14px;
+border:1px solid var(--line-2);
+border-radius:999px;
+color:var(--text-2);
+font-weight:800;
+font-size:13px
 }
 
-.lana-social:hover {
-    color: var(--orange);
-    border-color: var(--orange-line);
+.lana-social:hover{
+color:var(--orange);
+border-color:var(--orange-line)
 }
 
-.lana-social svg {
-    width: 17px;
-    height: 17px;
-    fill: currentColor;
+.lana-social svg{
+width:17px;
+height:17px;
+fill:currentColor
 }
 
-.lana-note {
-    margin-top: 16px;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.55;
+.lana-note{
+margin-top:16px;
+color:var(--muted);
+font-size:12px;
+line-height:1.55
 }
 
-/* Hide normal store while Lana is open */
 body.lana-open .topbar,
 body.lana-open .featured,
 body.lana-open .cats,
 body.lana-open main,
-body.lana-open .footer {
-    display: none;
+body.lana-open .footer{
+display:none
 }
 
-@media (min-width: 700px) {
-
-    .lana-hero {
-        grid-template-columns:
-            minmax(0, 1.2fr)
-            minmax(360px, .8fr);
-
-        padding: 24px;
-        align-items: center;
-    }
-
-    .lana-grid {
-        grid-template-columns: repeat(4, minmax(0,1fr));
-    }
+@media(min-width:700px){
+.lana-hero{
+grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr);
+padding:24px;
+align-items:center
 }
 
-@media (max-width: 520px) {
-
-    .lana-price-row {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .lana-buy {
-        width: 100%;
-    }
-
-    .lana-developer {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .lana-social {
-        width: 100%;
-        justify-content: center;
-    }
+.lana-grid{
+grid-template-columns:repeat(4,minmax(0,1fr))
+}
 }
 
-/* ---------- Footer ---------- */
-
-.footer {
-    margin-top: 56px;
-    padding-top: 30px;
-    border-top: 1px solid var(--line);
+@media(max-width:520px){
+.lana-price-row{
+align-items:stretch;
+flex-direction:column
 }
 
-.footer-grid {
-    display: grid;
-    gap: 26px 20px;
-    grid-template-columns: repeat(2, 1fr);
+.lana-buy{width:100%}
+
+.lana-developer{
+align-items:flex-start;
+flex-direction:column
 }
 
-.footer h3 {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 10px;
+.lana-social{
+width:100%;
+justify-content:center
+}
 }
 
-.flink {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 8px 0;
-    min-height: 36px;
-    font-size: 14px;
-    color: var(--muted);
-    background: none;
-    border: 0;
-    cursor: pointer;
-    transition: color .18s var(--ease);
+/* Footer */
+
+.footer{
+margin-top:56px;
+padding-top:30px;
+border-top:1px solid var(--line)
 }
 
-.flink:hover {
-    color: var(--orange);
+.footer-grid{
+display:grid;
+gap:26px 20px;
+grid-template-columns:repeat(2,1fr)
 }
 
-.footer-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    margin-top: 28px;
-    padding: 18px 0 6px;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 12px;
+.footer h3{
+font-size:13px;
+font-weight:800;
+color:var(--text);
+margin-bottom:10px
 }
 
-.x-link {
-    width: 46px;
-    height: 46px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--line-2);
-    color: var(--text-2);
-    transition:
-        color .18s var(--ease),
-        border-color .18s var(--ease),
-        transform .12s var(--ease);
+.flink{
+display:block;
+width:100%;
+text-align:left;
+padding:8px 0;
+min-height:36px;
+font-size:14px;
+color:var(--muted);
+background:none;
+border:0;
+cursor:pointer;
+transition:color .18s var(--ease)
 }
 
-.x-link:hover {
-    color: var(--orange);
-    border-color: var(--orange);
+.flink:hover{color:var(--orange)}
+
+.footer-bottom{
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+justify-content:space-between;
+gap:14px;
+margin-top:28px;
+padding:18px 0 6px;
+border-top:1px solid var(--line);
+color:var(--muted);
+font-size:12px
 }
 
-.x-link:active {
-    transform: scale(.94);
+.x-link{
+width:46px;
+height:46px;
+display:grid;
+place-items:center;
+border-radius:50%;
+background:var(--surface);
+border:1px solid var(--line-2);
+color:var(--text-2);
+transition:color .18s var(--ease),border-color .18s var(--ease),transform .12s var(--ease)
 }
 
-.x-link svg {
-    width: 22px;
-    height: 22px;
-    fill: currentColor;
+.x-link:hover{
+color:var(--orange);
+border-color:var(--orange)
 }
 
-/* ---------- Toast ---------- */
+.x-link:active{transform:scale(.94)}
 
-.toast {
-    position: fixed;
-    left: 50%;
-    bottom: calc(24px + env(safe-area-inset-bottom));
-    z-index: 50;
-    transform: translate(-50%, 20px);
-    opacity: 0;
-    pointer-events: none;
-
-    background: var(--surface-2);
-    border: 1px solid var(--orange-line);
-    color: var(--text);
-
-    padding: 12px 20px;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
-
-    transition:
-        opacity .25s var(--ease),
-        transform .25s var(--ease);
+.x-link svg{
+width:22px;
+height:22px;
+fill:currentColor
 }
 
-.toast.on {
-    opacity: 1;
-    transform: translate(-50%, 0);
+/* Toast */
+
+.toast{
+position:fixed;
+left:50%;
+bottom:calc(24px + env(safe-area-inset-bottom));
+z-index:50;
+transform:translate(-50%,20px);
+opacity:0;
+pointer-events:none;
+background:var(--surface-2);
+border:1px solid var(--orange-line);
+color:var(--text);
+padding:12px 20px;
+border-radius:999px;
+font-size:14px;
+font-weight:600;
+transition:opacity .25s var(--ease),transform .25s var(--ease)
 }
 
-/* ---------- Larger screens ---------- */
-
-@media (min-width: 700px) {
-
-    body {
-        padding-left: 28px;
-        padding-right: 28px;
-    }
-
-    .feat-track {
-        margin: 0;
-        padding-left: 0;
-        padding-right: 0;
-        scroll-padding-inline: 0;
-    }
-
-    .cats {
-        margin: 0 0 18px;
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    .list {
-        grid-auto-columns: 420px;
-    }
-
-    .footer-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
-
-    .head h2 {
-        font-size: 32px;
-    }
+.toast.on{
+opacity:1;
+transform:translate(-50%,0)
 }
 
-@media (max-width: 420px) {
+/* Larger screens */
 
-    .feat .icon {
-        width: 78px;
-        height: 78px;
-        border-radius: 18px;
-    }
+@media(min-width:700px){
+body{
+padding-left:28px;
+padding-right:28px
 }
 
-@media (prefers-reduced-motion: reduce) {
+.feat-track{
+margin:0;
+padding-left:0;
+padding-right:0;
+scroll-padding-inline:0
+}
 
-    *,
-    *::before,
-    *::after {
-        transition: none !important;
-        animation: none !important;
-        scroll-behavior: auto !important;
-    }
+.cats{
+margin:0 0 18px;
+padding-left:0;
+padding-right:0
+}
+
+.list{grid-auto-columns:420px}
+
+.footer-grid{grid-template-columns:repeat(5,1fr)}
+.head h2{font-size:32px}
+}
+
+@media(max-width:420px){
+.feat .icon{
+width:78px;
+height:78px;
+border-radius:18px
+}
+}
+
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{
+transition:none!important;
+animation:none!important;
+scroll-behavior:auto!important
+}
 }
 </style>
 </head>
@@ -1415,1823 +1198,1138 @@ body.lana-open .footer {
 <body>
 <div class="page">
 
-<!-- ================= HEADER ================= -->
-
 <header class="topbar">
 
-    <a class="brand"
-       href="https://narf-alt.github.io/"
-       aria-label="NARF home">
+<a class="brand" href="https://narf-alt.github.io/" aria-label="NARF home">
+<span class="brand-logo">
+<img src="assets/narf-brand.png" alt="Narf" width="1672" height="940" decoding="async">
+</span>
+</a>
 
-        <!-- Official Narf logo -->
-        <span class="brand-logo">
+<div class="account-wrap">
 
-            <img src="assets/narf-brand.png"
-                 alt="Narf"
-                 width="1672"
-                 height="940"
-                 decoding="async">
+<button class="icon-btn account-btn"
+id="account-btn"
+type="button"
+aria-label="Account"
+aria-haspopup="true"
+aria-expanded="false"
+aria-controls="account-menu">
 
-        </span>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="8" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+<path d="M5.4 19.4c.9-3.2 3.2-4.9 6.6-4.9s5.7 1.7 6.6 4.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+</svg>
 
-    </a>
+</button>
 
+<div class="account-menu" id="account-menu" role="menu" hidden>
 
-    <div class="account-wrap">
+<div class="account-menu-head">
+<strong>Account</strong>
+<span>Sign-in is not available yet.</span>
+</div>
 
-        <button class="icon-btn account-btn"
-                id="account-btn"
-                type="button"
-                aria-label="Account"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="account-menu">
+<div class="account-item" role="menuitem" aria-disabled="true">
+Subscription
+<small>Soon</small>
+</div>
 
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12"
-                        cy="8"
-                        r="3.6"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"/>
+<div class="account-item" role="menuitem" aria-disabled="true">
+Purchases
+<small>Soon</small>
+</div>
 
-                <path d="M5.4 19.4c.9-3.2 3.2-4.9 6.6-4.9s5.7 1.7 6.6 4.9"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"/>
-            </svg>
+<div class="account-item" role="menuitem" aria-disabled="true">
+Entitlements
+<small>Soon</small>
+</div>
 
-        </button>
+<div class="account-item" role="menuitem" aria-disabled="true">
+Settings
+<small>Soon</small>
+</div>
 
+</div>
+</div>
 
-        <div class="account-menu"
-             id="account-menu"
-             role="menu"
-             hidden>
+<section class="search" aria-label="Search">
 
-            <div class="account-menu-head">
+<form id="search-form" class="search-box" role="search">
 
-                <strong>Account</strong>
+<label class="sr-only" for="search-input">Search packages</label>
 
-                <span>
-                    Sign-in is not available yet.
-                </span>
+<input id="search-input"
+class="search-input"
+type="search"
+placeholder="Search themes, tweaks, developers"
+autocomplete="off"
+autocapitalize="none"
+autocorrect="off"
+spellcheck="false"
+enterkeyhint="search">
 
-            </div>
+<button class="search-btn" type="submit" aria-label="Search">
 
-            <div class="account-item"
-                 role="menuitem"
-                 aria-disabled="true">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="10.8" cy="10.8" r="6.2"/>
+<path d="M15.5 15.5L21 21"/>
+</svg>
 
-                Subscription
-                <small>Soon</small>
+<span>Search</span>
 
-            </div>
+</button>
+</form>
 
-            <div class="account-item"
-                 role="menuitem"
-                 aria-disabled="true">
-
-                Purchases
-                <small>Soon</small>
-
-            </div>
-
-            <div class="account-item"
-                 role="menuitem"
-                 aria-disabled="true">
-
-                Entitlements
-                <small>Soon</small>
-
-            </div>
-
-            <div class="account-item"
-                 role="menuitem"
-                 aria-disabled="true">
-
-                Settings
-                <small>Soon</small>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Search -->
-
-    <section class="search" aria-label="Search">
-
-        <form id="search-form"
-              class="search-box"
-              role="search">
-
-            <label class="sr-only"
-                   for="search-input">
-                Search packages
-            </label>
-
-            <input id="search-input"
-                   class="search-input"
-                   type="search"
-                   placeholder="Search themes, tweaks, developers"
-                   autocomplete="off"
-                   autocapitalize="none"
-                   autocorrect="off"
-                   spellcheck="false"
-                   enterkeyhint="search">
-
-            <button class="search-btn"
-                    type="submit"
-                    aria-label="Search">
-
-                <svg viewBox="0 0 24 24"
-                     aria-hidden="true">
-
-                    <circle cx="10.8"
-                            cy="10.8"
-                            r="6.2"/>
-
-                    <path d="M15.5 15.5L21 21"/>
-
-                </svg>
-
-                <span>Search</span>
-
-            </button>
-
-        </form>
-
-    </section>
-
+</section>
 </header>
 
+<section class="featured" id="featured" aria-labelledby="featured-title">
 
-<!-- ================= FEATURED ================= -->
+<div class="head">
 
-<section class="featured"
-         id="featured"
-         aria-labelledby="featured-title">
+<div>
+<h2 id="featured-title">Featured</h2>
+<p>Hand-picked from the Source</p>
+</div>
 
-    <div class="head">
+<div class="arrows">
 
-        <div>
+<button class="icon-btn arrow" id="feat-prev" type="button" aria-label="Previous">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M15 5l-7 7 7 7"/>
+</svg>
+</button>
 
-            <h2 id="featured-title">
-                Featured
-            </h2>
+<button class="icon-btn arrow" id="feat-next" type="button" aria-label="Next">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M9 5l7 7-7 7"/>
+</svg>
+</button>
 
-            <p>
-                Hand-picked from the Source
-            </p>
+</div>
+</div>
 
-        </div>
-
-
-        <div class="arrows">
-
-            <button class="icon-btn arrow"
-                    id="feat-prev"
-                    type="button"
-                    aria-label="Previous">
-
-                <svg viewBox="0 0 24 24"
-                     aria-hidden="true">
-
-                    <path d="M15 5l-7 7 7 7"/>
-
-                </svg>
-
-            </button>
-
-
-            <button class="icon-btn arrow"
-                    id="feat-next"
-                    type="button"
-                    aria-label="Next">
-
-                <svg viewBox="0 0 24 24"
-                     aria-hidden="true">
-
-                    <path d="M9 5l7 7-7 7"/>
-
-                </svg>
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="feat-track"
-         id="feat-track"
-         tabindex="0"
-         aria-label="Featured packages">
+<div class="feat-track" id="feat-track" tabindex="0" aria-label="Featured packages">
 
 {{#sections}}
 {{#packages}}
 
-        <a class="feat"
-           href="depiction/web/{{bundle_id}}.html"
-           data-bundle="{{bundle_id}}">
+<a class="feat"
+href="depiction/web/{{bundle_id}}.html"
+data-bundle="{{bundle_id}}">
 
-            <div class="feat-top">
+<div class="feat-top">
 
-                <img class="icon"
-                     src="assets/{{bundle_id}}/icon.png"
-                     alt=""
-                     width="92"
-                     height="92"
-                     loading="lazy">
+<img class="icon"
+src="assets/{{bundle_id}}/icon.png"
+alt=""
+width="92"
+height="92"
+loading="lazy">
 
-                <div>
+<div>
 
-                    <div class="feat-name">
-                        {{name}}
-                    </div>
+<div class="feat-name">{{name}}</div>
+<div class="feat-dev">{{developer.name}}</div>
 
-                    <div class="feat-dev">
-                        {{developer.name}}
-                    </div>
+</div>
+</div>
 
-                </div>
+<div class="feat-desc">{{summary}}</div>
 
-            </div>
+<div class="feat-foot">
 
+<div class="pkg-meta">
 
-            <div class="feat-desc">
-                {{summary}}
-            </div>
+<span class="chip cat-chip">{{section}}</span>
 
+<span class="chip">v{{version}}</span>
 
-            <div class="feat-foot">
+</div>
 
-                <div class="pkg-meta">
+<!-- Paid packages show their package price. Free packages show GET. -->
+<span class="cta {{#price}}paid{{/price}}">
+{{#price}}${{price}}{{/price}}{{^price}}GET{{/price}}
+</span>
 
-                    <span class="chip cat-chip">
-                        {{section}}
-                    </span>
-
-                    <span class="chip">
-                        v{{version}}
-                    </span>
-
-                </div>
-
-
-                <span class="cta {{#price}}paid{{/price}}">
-                    {{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}
-                </span>
-
-            </div>
-
-        </a>
+</div>
+</a>
 
 {{/packages}}
 {{/sections}}
 
-    </div>
-
+</div>
 </section>
 
+<nav class="cats" aria-label="Categories">
 
-<!-- ================= CATEGORIES ================= -->
+<div class="cats-row" id="cats-row">
 
-<nav class="cats"
-     aria-label="Categories">
+<button class="cat"
+type="button"
+data-cat="popular"
+aria-pressed="true">
 
-    <div class="cats-row"
-         id="cats-row">
+<span aria-hidden="true">🔥</span>
+Popular
 
-        <button class="cat"
-                type="button"
-                data-cat="popular"
-                aria-pressed="true">
+</button>
 
-            <span aria-hidden="true">
-                🔥
-            </span>
-
-            Popular
-
-        </button>
-
-    </div>
-
+</div>
 </nav>
-
-
-<!-- ================= PRODUCTS ================= -->
 
 <main>
 
-    <div class="head">
+<div class="head">
 
-        <div>
+<div>
+<h2 id="view-title">Popular</h2>
+<p id="view-sub"></p>
+</div>
 
-            <h2 id="view-title">
-                Popular
-            </h2>
+</div>
 
-            <p id="view-sub"></p>
+<div class="shelf" id="shelf">
 
-        </div>
-
-    </div>
-
-
-    <div class="shelf"
-         id="shelf">
-
-        <div class="list"
-             id="list"
-             aria-live="polite">
+<div class="list" id="list" aria-live="polite">
 
 {{#sections}}
 {{#packages}}
 
-            <a class="pkg"
-               href="depiction/web/{{bundle_id}}.html"
-               data-name="{{name}}"
-               data-bundle="{{bundle_id}}"
-               data-developer="{{developer.name}}"
-               data-section="{{section}}"
-               data-summary="{{summary}}">
+<a class="pkg"
+href="depiction/web/{{bundle_id}}.html"
+data-name="{{name}}"
+data-bundle="{{bundle_id}}"
+data-developer="{{developer.name}}"
+data-section="{{section}}"
+data-summary="{{summary}}">
 
-                <img class="icon"
-                     src="assets/{{bundle_id}}/icon.png"
-                     alt=""
-                     width="62"
-                     height="62"
-                     loading="lazy">
+<img class="icon"
+src="assets/{{bundle_id}}/icon.png"
+alt=""
+width="62"
+height="62"
+loading="lazy">
 
+<div class="pkg-main">
 
-                <div class="pkg-main">
+<div class="pkg-name">{{name}}</div>
 
-                    <div class="pkg-name">
-                        {{name}}
-                    </div>
+<div class="pkg-desc">{{summary}}</div>
 
-                    <div class="pkg-desc">
-                        {{summary}}
-                    </div>
+<div class="pkg-sub">
+{{developer.name}} · v{{version}} · iOS {{works_min}}–{{works_max}}
+</div>
 
-                    <div class="pkg-sub">
-                        {{developer.name}} · v{{version}} · iOS {{works_min}}–{{works_max}}
-                    </div>
+</div>
 
-                </div>
+<!-- Paid packages show their package price. Free packages show GET. -->
+<span class="cta {{#price}}paid{{/price}}">
+{{#price}}${{price}}{{/price}}{{^price}}GET{{/price}}
+</span>
 
-
-                <span class="cta {{#price}}paid{{/price}}">
-                    {{#price}}{{price}}{{/price}}{{^price}}GET{{/price}}
-                </span>
-
-            </a>
+</a>
 
 {{/packages}}
 {{/sections}}
 
-        </div>
+</div>
 
+<div class="dots" id="dots" aria-hidden="true"></div>
 
-        <div class="dots"
-             id="dots"
-             aria-hidden="true">
-        </div>
+</div>
 
-    </div>
+<div class="state" id="state">
 
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M21 8l-9-5-9 5 9 5 9-5z"/>
+<path d="M3 8v8l9 5 9-5V8"/>
+<path d="M12 13v8"/>
+</svg>
 
-    <div class="state"
-         id="state">
+<strong id="state-title">No products yet</strong>
 
-        <svg viewBox="0 0 24 24"
-             aria-hidden="true">
+<span id="state-text">
+This category is ready for future releases.
+</span>
 
-            <path d="M21 8l-9-5-9 5 9 5 9-5z"/>
-            <path d="M3 8v8l9 5 9-5V8"/>
-            <path d="M12 13v8"/>
+<div>
 
-        </svg>
+<button type="button" id="state-clear" hidden>
+Clear search
+</button>
 
-
-        <strong id="state-title">
-            No products yet
-        </strong>
-
-
-        <span id="state-text">
-            This category is ready for future releases.
-        </span>
-
-
-        <div>
-
-            <button type="button"
-                    id="state-clear"
-                    hidden>
-
-                Clear search
-
-            </button>
-
-        </div>
-
-    </div>
+</div>
+</div>
 
 </main>
 
+<!-- LANA PRODUCT -->
 
-<!-- ================= LANA PRODUCT PAGE ================= -->
+<section class="lana-page" id="lana-product" aria-labelledby="lana-title">
 
-<section class="lana-page"
-         id="lana-product"
-         aria-labelledby="lana-title">
+<button class="lana-back" id="lana-back" type="button" aria-label="Back to products">
 
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M15 5l-7 7 7 7"/>
+</svg>
 
-    <button class="lana-back"
-            id="lana-back"
-            type="button"
-            aria-label="Back to products">
+Back
 
-        <svg viewBox="0 0 24 24"
-             aria-hidden="true">
+</button>
 
-            <path d="M15 5l-7 7 7 7"/>
+<div class="lana-hero">
 
-        </svg>
+<img class="lana-preview"
+src="assets/com.narf.lana/banner.png"
+alt="Lana theme preview"
+width="1200"
+height="675">
 
-        Back
+<div class="lana-summary">
 
-    </button>
+<div class="lana-product-head">
 
+<img class="lana-icon"
+src="assets/com.narf.lana/icon.png"
+alt="Lana icon"
+width="88"
+height="88">
 
-    <div class="lana-hero">
+<div>
 
+<div class="lana-kicker">Premium Theme</div>
 
-        <img class="lana-preview"
-             src="assets/com.narf.lana/banner.png"
-             alt="Lana theme preview"
-             width="1200"
-             height="675">
+<h1 class="lana-title" id="lana-title">Lana</h1>
 
+<div class="lana-by">Designed and maintained by Narf</div>
 
-        <div class="lana-summary">
+</div>
+</div>
 
+<div class="lana-price-row">
 
-            <div class="lana-product-head">
+<div class="lana-price">$2.99</div>
 
+<a class="lana-buy"
+href="https://narf-store.narf-ios26.workers.dev/"
+target="_blank"
+rel="noopener">
 
-                <img class="lana-icon"
-                     src="assets/com.narf.lana/icon.png"
-                     alt="Lana icon"
-                     width="88"
-                     height="88">
+Buy Now
 
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M6 6h2l1.5 9h8.8l1.7-6.5H9"/>
+<path d="M10 19.5h.01M18 19.5h.01"/>
+</svg>
 
-                <div>
+</a>
 
-                    <div class="lana-kicker">
-                        Premium Theme
-                    </div>
+</div>
 
+</div>
+</div>
 
-                    <h1 class="lana-title"
-                        id="lana-title">
+<section class="lana-section">
 
-                        Lana
+<h2>About Lana</h2>
 
-                    </h1>
-
-
-                    <div class="lana-by">
-                        Designed and maintained by Narf
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="lana-price-row">
-
-
-                <div class="lana-price">
-                    $2.99
-                </div>
-
-
-                <a class="lana-buy"
-                   href="https://narf-store.narf-ios26.workers.dev/checkout/lana">
-
-                    Buy Now
-
-                    <svg viewBox="0 0 24 24"
-                         aria-hidden="true">
-
-                        <path d="M6 6h2l1.5 9h8.8l1.7-6.5H9"/>
-                        <path d="M10 19.5h.01M18 19.5h.01"/>
-
-                    </svg>
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <section class="lana-section">
-
-        <h2>
-            About Lana
-        </h2>
-
-        <p class="lana-copy">
-            Lana is a premium iOS theme inspired by the warmth and texture
-            of handcrafted wool. Every detail is designed to give your
-            Home Screen a soft, distinctive visual identity, with custom
-            icon artwork and a consistent textile-inspired aesthetic.
-        </p>
-
-    </section>
-
-
-    <section class="lana-section"
-             aria-label="Lana features">
-
-        <h2>
-            What's included
-        </h2>
-
-
-        <div class="lana-grid">
-
-
-            <div class="lana-feature">
-
-                <div class="feature-icon">
-                    ✦
-                </div>
-
-                <strong>
-                    Wool-inspired style
-                </strong>
-
-                <span>
-                    Soft textile-inspired visual language across the theme.
-                </span>
-
-            </div>
-
-
-            <div class="lana-feature">
-
-                <div class="feature-icon">
-                    ◈
-                </div>
-
-                <strong>
-                    Custom icons
-                </strong>
-
-                <span>
-                    Carefully crafted icon artwork with more support over time.
-                </span>
-
-            </div>
-
-
-            <div class="lana-feature">
-
-                <div class="feature-icon">
-                    ↗
-                </div>
-
-                <strong>
-                    iOS 15–26
-                </strong>
-
-                <span>
-                    Designed for the supported iOS versions listed with the package.
-                </span>
-
-            </div>
-
-
-            <div class="lana-feature">
-
-                <div class="feature-icon">
-                    ⌁
-                </div>
-
-                <strong>
-                    Regular updates
-                </strong>
-
-                <span>
-                    Future improvements and additional icon support.
-                </span>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <section class="lana-section">
-
-        <h2>
-            Compatibility
-        </h2>
-
-
-        <div class="lana-compat">
-
-
-            <div class="lana-compat-icon">
-
-                <svg viewBox="0 0 24 24"
-                     aria-hidden="true">
-
-                    <path d="M16.7 12.7c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.7.8-3.4 2.1-1.5 2.5-.4 6.2 1.1 8.2.7 1 1.6 2 2.7 2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7 1.9-1 2.6-2c.8-1 1.1-2 1.1-2.1-.1 0-2.1-.8-2.1-3.3z"/>
-
-                    <path d="M15.1 6.7c.6-.8 1-1.8.9-2.8-.9 0-2 .6-2.6 1.3-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.2z"/>
-
-                </svg>
-
-            </div>
-
-
-            <div>
-
-                <strong>
-                    Compatible with iOS 15–26
-                </strong>
-
-                <span>
-                    Version 1.3 · Premium edition · Bundle com.narf.lana
-                </span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <section class="lana-section">
-
-        <h2>
-            Preview
-        </h2>
-
-
-        <img class="lana-preview"
-             src="assets/com.narf.lana/banner.png"
-             alt="Lana theme screenshots"
-             width="1200"
-             height="675">
-
-    </section>
-
-
-    <section class="lana-section">
-
-        <h2>
-            Developer
-        </h2>
-
-
-        <div class="lana-developer">
-
-
-            <div>
-
-                <div class="lana-developer-name">
-                    Narf
-                </div>
-
-                <div class="lana-developer-meta">
-                    Lana · Version 1.3 · @narf_ios
-                </div>
-
-            </div>
-
-
-            <a class="lana-social"
-               href="https://x.com/narf_ios"
-               target="_blank"
-               rel="noopener"
-               aria-label="Narf on X">
-
-                <svg viewBox="0 0 24 24"
-                     aria-hidden="true">
-
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817-5.964 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
-
-                </svg>
-
-                @narf_ios
-
-            </a>
-
-        </div>
-
-
-        <p class="lana-note">
-            Purchase is handled securely through the existing Lana checkout
-            and Sileo payment flow. Buying Lana grants the Lana entitlement only.
-        </p>
-
-    </section>
-
+<p class="lana-copy">
+Lana is a premium iOS theme inspired by the warmth and texture
+of handcrafted wool. Every detail is designed to give your
+Home Screen a soft, distinctive visual identity, with custom
+icon artwork and a consistent textile-inspired aesthetic.
+</p>
 
 </section>
 
+<section class="lana-section" aria-label="Lana features">
 
-<!-- ================= FOOTER ================= -->
+<h2>What's included</h2>
+
+<div class="lana-grid">
+
+<div class="lana-feature">
+<div class="feature-icon">✦</div>
+<strong>Wool-inspired style</strong>
+<span>Soft textile-inspired visual language across the theme.</span>
+</div>
+
+<div class="lana-feature">
+<div class="feature-icon">◈</div>
+<strong>Custom icons</strong>
+<span>Carefully crafted icon artwork with more support over time.</span>
+</div>
+
+<div class="lana-feature">
+<div class="feature-icon">↗</div>
+<strong>iOS 15–26</strong>
+<span>Designed for the supported iOS versions listed with the package.</span>
+</div>
+
+<div class="lana-feature">
+<div class="feature-icon">⌁</div>
+<strong>Regular updates</strong>
+<span>Future improvements and additional icon support.</span>
+</div>
+
+</div>
+</section>
+
+<section class="lana-section">
+
+<h2>Compatibility</h2>
+
+<div class="lana-compat">
+
+<div class="lana-compat-icon">
+
+<svg viewBox="0 0 24 24" aria-hidden="true">
+
+<path d="M16.7 12.7c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.7-.8-2.8-.8-1.4 0-2.7.8-3.4 2.1-1.5 2.5-.4 6.2 1.1 8.2.7 1 1.6 2 2.7 2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7 1.9-1 2.6-2c.8-1 1.1-2 1.1-2.1-.1 0-2.1-.8-2.1-3.3z"/>
+
+<path d="M15.1 6.7c.6-.8 1-1.8.9-2.8-.9 0-2 .6-2.6 1.3-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.2z"/>
+
+</svg>
+
+</div>
+
+<div>
+
+<strong>Compatible with iOS 15–26</strong>
+
+<span>
+Version 1.3 · Premium edition · Bundle com.narf.lana
+</span>
+
+</div>
+
+</div>
+</section>
+
+<section class="lana-section">
+
+<h2>Preview</h2>
+
+<img class="lana-preview"
+src="assets/com.narf.lana/banner.png"
+alt="Lana theme screenshots"
+width="1200"
+height="675">
+
+</section>
+
+<section class="lana-section">
+
+<h2>Developer</h2>
+
+<div class="lana-developer">
+
+<div>
+
+<div class="lana-developer-name">Narf</div>
+
+<div class="lana-developer-meta">
+Lana · Version 1.3 · @narf_ios
+</div>
+
+</div>
+
+<a class="lana-social"
+href="https://x.com/narf_ios"
+target="_blank"
+rel="noopener"
+aria-label="Narf on X">
+
+<svg viewBox="0 0 24 24" aria-hidden="true">
+
+<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817-5.964 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+
+</svg>
+
+@narf_ios
+
+</a>
+
+</div>
+
+<p class="lana-note">
+Purchase is handled through the payment flow.
+Buying Lana grants the Lana entitlement only.
+</p>
+
+</section>
+
+</section>
+
+<!-- FOOTER -->
 
 <footer class="footer">
 
-    <div class="footer-grid">
+<div class="footer-grid">
 
+<div class="footer-col">
 
-        <div class="footer-col">
+<h3>Store</h3>
 
-            <h3>
-                Store
-            </h3>
+<a class="flink" href="https://narf-alt.github.io/">
+Home
+</a>
 
-            <a class="flink"
-               href="https://narf-alt.github.io/">
+</div>
 
-                Home
+<div class="footer-col">
 
-            </a>
+<h3>Account</h3>
 
-        </div>
+<button class="flink" type="button" data-open-account>
+Sign in
+</button>
 
+</div>
 
-        <div class="footer-col">
+<div class="footer-col">
 
-            <h3>
-                Account
-            </h3>
+<h3>Purchases</h3>
 
-            <button class="flink"
-                    type="button"
-                    data-open-account>
+<button class="flink" type="button" data-open-account>
+Order history
+</button>
 
-                Sign in
+</div>
 
-            </button>
+<div class="footer-col">
 
-        </div>
+<h3>Support</h3>
 
+<a class="flink"
+href="https://x.com/narf_ios"
+target="_blank"
+rel="noopener">
+Contact us
+</a>
 
-        <div class="footer-col">
+</div>
 
-            <h3>
-                Purchases
-            </h3>
+<div class="footer-col">
 
-            <button class="flink"
-                    type="button"
-                    data-open-account>
+<h3>Developers</h3>
 
-                Order history
+<button class="flink"
+type="button"
+data-toast="Publishing with NARF is coming soon">
+Publish with NARF
+</button>
 
-            </button>
+</div>
 
-        </div>
+</div>
 
+<div class="footer-bottom">
 
-        <div class="footer-col">
+<a class="x-link"
+href="https://x.com/narf_ios"
+target="_blank"
+rel="noopener"
+aria-label="NARF on X">
 
-            <h3>
-                Support
-            </h3>
+<svg viewBox="0 0 24 24" aria-hidden="true">
 
-            <a class="flink"
-               href="https://x.com/narf_ios"
-               target="_blank"
-               rel="noopener">
+<path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
 
-                Contact us
+</svg>
 
-            </a>
+</a>
 
-        </div>
+<span>{{footer}}</span>
 
-
-        <div class="footer-col">
-
-            <h3>
-                Developers
-            </h3>
-
-            <button class="flink"
-                    type="button"
-                    data-toast="Publishing with NARF is coming soon">
-
-                Publish with NARF
-
-            </button>
-
-        </div>
-
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-
-        <a class="x-link"
-           href="https://x.com/narf_ios"
-           target="_blank"
-           rel="noopener"
-           aria-label="NARF on X">
-
-            <svg viewBox="0 0 24 24"
-                 aria-hidden="true">
-
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-
-            </svg>
-
-        </a>
-
-
-        <span>
-            {{footer}}
-        </span>
-
-    </div>
+</div>
 
 </footer>
 
 </div>
 
-
-<div class="toast"
-     id="toast"
-     role="status"
-     aria-live="polite">
-</div>
-
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+(function(){
+
+var cards=[].slice.call(document.querySelectorAll('.pkg'));
+var list=document.getElementById('list');
+var shelf=document.getElementById('shelf');
+var dots=document.getElementById('dots');
+var state=document.getElementById('state');
+var stateTitle=document.getElementById('state-title');
+var stateText=document.getElementById('state-text');
+var stateClear=document.getElementById('state-clear');
+var viewTitle=document.getElementById('view-title');
+var viewSub=document.getElementById('view-sub');
+var catsRow=document.getElementById('cats-row');
+var form=document.getElementById('search-form');
+var input=document.getElementById('search-input');
+var featured=document.getElementById('featured');
+var track=document.getElementById('feat-track');
+var toast=document.getElementById('toast');
 
-(function () {
+/* Lana */
 
-    var cards = [].slice.call(
-        document.querySelectorAll('.pkg')
-    );
+var lanaPage=document.getElementById('lana-product');
+var lanaBack=document.getElementById('lana-back');
 
-    var list = document.getElementById('list');
+function openLana(push){
 
-    var shelf = document.getElementById('shelf');
+document.body.classList.add('lana-open');
+lanaPage.classList.add('on');
 
-    var dots = document.getElementById('dots');
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
 
-    var state = document.getElementById('state');
+if(push){
+history.pushState(
+{lana:true},
+'',
+'?product=lana'
+);
+}
 
-    var stateTitle = document.getElementById('state-title');
+}
 
-    var stateText = document.getElementById('state-text');
+function closeLana(){
 
-    var stateClear = document.getElementById('state-clear');
+document.body.classList.remove('lana-open');
+lanaPage.classList.remove('on');
 
-    var viewTitle = document.getElementById('view-title');
+if(
+new URLSearchParams(window.location.search).get('product')==='lana'
+){
+history.pushState(
+{},
+'',
+window.location.pathname
+);
+}
 
-    var viewSub = document.getElementById('view-sub');
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
 
-    var catsRow = document.getElementById('cats-row');
+}
 
-    var form = document.getElementById('search-form');
+document.addEventListener('click',function(e){
 
-    var input = document.getElementById('search-input');
+var link=e.target.closest(
+'a[data-bundle="com.narf.lana"]'
+);
 
-    var featured = document.getElementById('featured');
+if(!link)return;
 
-    var track = document.getElementById('feat-track');
+e.preventDefault();
+openLana(true);
 
-    var toast = document.getElementById('toast');
+});
 
+lanaBack.addEventListener('click',closeLana);
 
-    /* ---------- Lana Product Page ---------- */
+if(
+new URLSearchParams(window.location.search).get('product')==='lana'
+){
+openLana(false);
+}
 
-    var lanaPage =
-        document.getElementById('lana-product');
+window.addEventListener('popstate',function(){
 
-    var lanaBack =
-        document.getElementById('lana-back');
+if(
+new URLSearchParams(window.location.search).get('product')==='lana'
+){
+openLana(false);
+}else{
+document.body.classList.remove('lana-open');
+lanaPage.classList.remove('on');
+}
 
+});
 
-    function openLana(push) {
+/* Icon fallback */
 
-        document.body.classList.add('lana-open');
+function placeholder(img){
 
-        lanaPage.classList.add('on');
+if(img.dataset.ph)return;
 
+img.dataset.ph='1';
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+var d=document.createElement('div');
 
+d.className=img.className+' ph';
+d.setAttribute('aria-hidden','true');
 
-        if (push) {
+d.style.width=img.getAttribute('width')+'px';
+d.style.height=img.getAttribute('height')+'px';
 
-            history.pushState(
-                { lana: true },
-                '',
-                '?product=lana'
-            );
+var host=img.closest('.pkg,.feat');
 
-        }
+var n=host&&(
+host.dataset.name||
+(host.querySelector('.feat-name')||{}).textContent
+)||'';
 
-    }
+d.textContent=(n.trim().charAt(0)||'·').toUpperCase();
 
+img.parentNode.replaceChild(d,img);
 
-    function closeLana() {
+}
 
-        document.body.classList.remove('lana-open');
+[].slice.call(
+document.querySelectorAll('img.icon')
+).forEach(function(img){
 
-        lanaPage.classList.remove('on');
+if(
+img.complete&&
+img.naturalWidth===0
+){
+placeholder(img);
+}
 
+});
 
-        if (
-            new URLSearchParams(window.location.search)
-                .get('product') === 'lana'
-        ) {
+document.addEventListener('error',function(e){
 
-            history.pushState(
-                {},
-                '',
-                window.location.pathname
-            );
+if(
+e.target&&
+e.target.tagName==='IMG'&&
+e.target.classList.contains('icon')
+){
+placeholder(e.target);
+}
 
-        }
+},true);
 
+/* Categories */
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+var ICONS={
+themes:'🪶',
+tweaks:'🛠️',
+wallpapers:'🖼️',
+apps:'📱'
+};
 
-    }
+var ORDER=[
+'Themes',
+'Tweaks',
+'Wallpapers',
+'Apps'
+];
 
+var cats=[];
+var seen={};
 
-    /*
-     * Open Lana when its package card is selected.
-     */
+function addCat(label){
 
-    document.addEventListener(
-        'click',
-        function (e) {
+var key=label.toLowerCase();
 
-            var link = e.target.closest(
-                'a[data-bundle="com.narf.lana"]'
-            );
+if(!label||seen[key])return;
 
-            if (!link) return;
+seen[key]=true;
 
-            e.preventDefault();
+cats.push({
+key:key,
+label:label
+});
 
-            openLana(true);
+}
 
-        }
-    );
+ORDER.forEach(addCat);
 
+cards.forEach(function(c){
+addCat((c.dataset.section||'').trim());
+});
 
-    lanaBack.addEventListener(
-        'click',
-        function () {
-            closeLana();
-        }
-    );
+cats.forEach(function(c){
 
+var b=document.createElement('button');
 
-    /*
-     * Direct URL:
-     * https://narf-alt.github.io/?product=lana
-     */
+b.type='button';
+b.className='cat';
+b.dataset.cat=c.key;
+b.setAttribute('aria-pressed','false');
 
-    if (
-        new URLSearchParams(window.location.search)
-            .get('product') === 'lana'
-    ) {
+b.innerHTML=
+'<span aria-hidden="true">'+
+(ICONS[c.key]||'📦')+
+'</span>';
 
-        openLana(false);
+b.appendChild(
+document.createTextNode(c.label)
+);
 
-    }
+catsRow.appendChild(b);
 
+});
 
-    /*
-     * Browser Back / Forward
-     */
+function labelFor(key){
 
-    window.addEventListener(
-        'popstate',
-        function () {
+for(var i=0;i<cats.length;i++){
 
-            if (
-                new URLSearchParams(window.location.search)
-                    .get('product') === 'lana'
-            ) {
+if(cats[i].key===key){
+return cats[i].label;
+}
 
-                openLana(false);
+}
 
-            } else {
+return key;
+}
 
-                document.body.classList.remove(
-                    'lana-open'
-                );
+cards.forEach(function(c){
 
-                lanaPage.classList.remove('on');
+c.dataset.hay=[
+c.dataset.name,
+c.dataset.bundle,
+c.dataset.developer,
+c.dataset.section,
+c.dataset.summary
+].join(' ').toLowerCase();
 
-            }
+});
 
-        }
-    );
+/* Dots */
 
+var pages=0;
 
-    /* ---------- Icon fallback ---------- */
+function buildDots(shown){
 
-    function placeholder(img) {
+pages=Math.ceil(shown/3);
+dots.innerHTML='';
 
-        if (img.dataset.ph) return;
+if(pages<2)return;
 
-        img.dataset.ph = '1';
+for(var i=0;i<pages;i++){
+dots.appendChild(document.createElement('i'));
+}
 
-        var d = document.createElement('div');
+updateDots();
 
-        d.className = img.className + ' ph';
+}
 
-        d.setAttribute(
-            'aria-hidden',
-            'true'
-        );
+function updateDots(){
 
-        d.style.width =
-            img.getAttribute('width') + 'px';
+if(pages<2)return;
 
-        d.style.height =
-            img.getAttribute('height') + 'px';
+var first=cards.filter(function(c){
+return !c.hidden;
+})[0];
 
+if(!first)return;
 
-        var host =
-            img.closest('.pkg, .feat');
+var w=first.offsetWidth||1;
 
+var idx=Math.min(
+pages-1,
+Math.max(
+0,
+Math.round(list.scrollLeft/w)
+)
+);
 
-        var n =
-            host &&
-            (
-                host.dataset.name ||
-                (
-                    host.querySelector('.feat-name') ||
-                    {}
-                ).textContent
-            ) ||
-            '';
+[].slice.call(dots.children).forEach(function(d,i){
+d.className=i===idx?'on':'';
+});
 
+}
 
-        d.textContent =
-            (n.trim().charAt(0) || '·')
-                .toUpperCase();
+list.addEventListener('scroll',function(){
+window.requestAnimationFrame(updateDots);
+},{passive:true});
 
+window.addEventListener('resize',updateDots);
 
-        img.parentNode.replaceChild(
-            d,
-            img
-        );
+/* Render */
 
-    }
+var cat='popular';
+var query='';
 
+function render(){
 
-    [].slice.call(
-        document.querySelectorAll('img.icon')
-    ).forEach(
-        function (img) {
+var q=query.toLowerCase();
+var shown=0;
 
-            if (
-                img.complete &&
-                img.naturalWidth === 0
-            ) {
+cards.forEach(function(c){
 
-                placeholder(img);
+var inCat=
+cat==='popular'||
+cat==='all'||
+(c.dataset.section||'').toLowerCase()===cat;
 
-            }
+var ok=
+inCat&&
+(!q||c.dataset.hay.indexOf(q)!==-1);
 
-        }
-    );
+c.hidden=!ok;
 
+if(ok)shown++;
 
-    document.addEventListener(
-        'error',
-        function (e) {
+});
 
-            if (
-                e.target &&
-                e.target.tagName === 'IMG' &&
-                e.target.classList.contains('icon')
-            ) {
+[].slice.call(catsRow.children).forEach(function(b){
 
-                placeholder(e.target);
+b.setAttribute(
+'aria-pressed',
+String(b.dataset.cat===cat)
+);
 
-            }
+});
 
-        },
-        true
-    );
+featured.hidden=
+!(
+cat==='popular'&&
+!q&&
+track&&
+track.children.length
+);
 
+if(q){
 
-    /* ---------- Categories ---------- */
+viewTitle.textContent='Results';
 
-    var ICONS = {
-        themes: '🪶',
-        tweaks: '🛠️',
-        wallpapers: '🖼️',
-        apps: '📱'
-    };
+viewSub.textContent=
+shown+
+(shown===1?' product':' products')+
+' for “'+query+'”';
 
-    var ORDER = [
-        'Themes',
-        'Tweaks',
-        'Wallpapers',
-        'Apps'
-    ];
+}else if(cat==='popular'){
 
-    var cats = [];
+viewTitle.textContent='Popular';
 
-    var seen = {};
+viewSub.textContent=
+shown?'Swipe sideways for more':'';
 
+}else{
 
-    function addCat(label) {
+viewTitle.textContent=labelFor(cat);
 
-        var key = label.toLowerCase();
+viewSub.textContent=
+shown+
+(shown===1?' product':' products');
 
-        if (!label || seen[key]) return;
+}
 
-        seen[key] = true;
+shelf.hidden=shown===0;
 
-        cats.push({
-            key: key,
-            label: label
-        });
+list.scrollLeft=0;
 
-    }
+buildDots(shown);
 
+state.classList.toggle(
+'on',
+shown===0
+);
 
-    ORDER.forEach(addCat);
+stateClear.hidden=!q;
 
+if(shown===0){
 
-    cards.forEach(
-        function (c) {
-            addCat(
-                (c.dataset.section || '').trim()
-            );
-        }
-    );
+if(q){
 
+stateTitle.textContent='No results';
 
-    cats.forEach(
-        function (c) {
+stateText.textContent=
+'Check the spelling or try a name, developer or bundle ID.';
 
-            var b =
-                document.createElement('button');
+}else{
 
-            b.type = 'button';
+stateTitle.textContent='No products yet';
 
-            b.className = 'cat';
+stateText.textContent=
+cat==='popular'
+?'New releases will show up here.'
+:'This category is ready for future releases.';
 
-            b.dataset.cat = c.key;
+}
 
-            b.setAttribute(
-                'aria-pressed',
-                'false'
-            );
+}
 
+}
 
-            b.innerHTML =
-                '<span aria-hidden="true">' +
-                (ICONS[c.key] || '📦') +
-                '</span>';
+catsRow.addEventListener('click',function(e){
 
+var b=e.target.closest('.cat');
 
-            b.appendChild(
-                document.createTextNode(
-                    c.label
-                )
-            );
+if(!b)return;
 
+cat=b.dataset.cat;
+query='';
+input.value='';
 
-            catsRow.appendChild(b);
+render();
 
-        }
-    );
+b.scrollIntoView({
+block:'nearest',
+inline:'center',
+behavior:'smooth'
+});
 
+});
 
-    function labelFor(key) {
+form.addEventListener('submit',function(e){
 
-        for (
-            var i = 0;
-            i < cats.length;
-            i++
-        ) {
+e.preventDefault();
 
-            if (
-                cats[i].key === key
-            ) {
+query=input.value.trim();
+cat=query?'all':'popular';
 
-                return cats[i].label;
+render();
+input.blur();
 
-            }
+});
 
-        }
+input.addEventListener('input',function(){
 
-        return key;
+if(input.value===''&&query){
 
-    }
+query='';
+cat='popular';
 
+render();
 
-    cards.forEach(
-        function (c) {
+}
 
-            c.dataset.hay = [
-                c.dataset.name,
-                c.dataset.bundle,
-                c.dataset.developer,
-                c.dataset.section,
-                c.dataset.summary
-            ]
-                .join(' ')
-                .toLowerCase();
+});
 
-        }
-    );
+stateClear.addEventListener('click',function(){
 
+query='';
+cat='popular';
+input.value='';
 
-    /* ---------- Page dots ---------- */
+render();
 
-    var pages = 0;
+});
 
+/* Featured arrows */
 
-    function buildDots(shown) {
+function step(dir){
 
-        pages =
-            Math.ceil(shown / 3);
+track.scrollBy({
+left:dir*Math.max(
+280,
+track.clientWidth*.8
+),
+behavior:'smooth'
+});
 
-        dots.innerHTML = '';
+}
 
-        if (pages < 2) return;
+document.getElementById('feat-prev')
+.addEventListener('click',function(){
+step(-1);
+});
 
+document.getElementById('feat-next')
+.addEventListener('click',function(){
+step(1);
+});
 
-        for (
-            var i = 0;
-            i < pages;
-            i++
-        ) {
+/* Account */
 
-            dots.appendChild(
-                document.createElement('i')
-            );
+var acBtn=document.getElementById('account-btn');
+var acMenu=document.getElementById('account-menu');
 
-        }
+function setMenu(open){
 
+acMenu.hidden=!open;
 
-        updateDots();
+acBtn.setAttribute(
+'aria-expanded',
+String(open)
+);
 
-    }
+acBtn.classList.toggle('on',open);
 
+}
 
-    function updateDots() {
+acBtn.addEventListener('click',function(e){
 
-        if (pages < 2) return;
+e.stopPropagation();
+setMenu(acMenu.hidden);
 
+});
 
-        var first =
-            cards.filter(
-                function (c) {
-                    return !c.hidden;
-                }
-            )[0];
+document.addEventListener('click',function(e){
 
+if(
+!acMenu.hidden&&
+!acMenu.contains(e.target)
+){
+setMenu(false);
+}
 
-        if (!first) return;
+});
 
+document.addEventListener('keydown',function(e){
 
-        var w =
-            first.offsetWidth || 1;
+if(e.key==='Escape'&&!acMenu.hidden){
 
+setMenu(false);
+acBtn.focus();
 
-        var idx =
-            Math.min(
-                pages - 1,
-                Math.max(
-                    0,
-                    Math.round(
-                        list.scrollLeft / w
-                    )
-                )
-            );
+}
 
+});
 
-        [].slice.call(
-            dots.children
-        ).forEach(
-            function (d, i) {
+/* Footer account */
 
-                d.className =
-                    i === idx ? 'on' : '';
+[].slice.call(
+document.querySelectorAll('[data-open-account]')
+).forEach(function(el){
 
-            }
-        );
+el.addEventListener('click',function(e){
 
-    }
+e.stopPropagation();
 
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
 
-    list.addEventListener(
-        'scroll',
-        function () {
+setTimeout(function(){
+setMenu(true);
+},350);
 
-            window.requestAnimationFrame(
-                updateDots
-            );
+});
 
-        },
-        {
-            passive: true
-        }
-    );
+});
 
+/* Toast */
 
-    window.addEventListener(
-        'resize',
-        updateDots
-    );
+var tt;
 
+[].slice.call(
+document.querySelectorAll('[data-toast]')
+).forEach(function(el){
 
-    /* ---------- Render ---------- */
+el.addEventListener('click',function(){
 
-    var cat = 'popular';
+toast.textContent=el.dataset.toast;
+toast.classList.add('on');
 
-    var query = '';
+clearTimeout(tt);
 
+tt=setTimeout(function(){
+toast.classList.remove('on');
+},2200);
 
-    function render() {
+});
 
-        var q =
-            query.toLowerCase();
+});
 
-        var shown = 0;
+/* Initial render */
 
-
-        cards.forEach(
-            function (c) {
-
-                var inCat =
-                    cat === 'popular' ||
-                    cat === 'all' ||
-                    (
-                        c.dataset.section || ''
-                    ).toLowerCase() === cat;
-
-
-                var ok =
-                    inCat &&
-                    (
-                        !q ||
-                        c.dataset.hay.indexOf(q) !== -1
-                    );
-
-
-                c.hidden = !ok;
-
-                if (ok) shown++;
-
-            }
-        );
-
-
-        [].slice.call(
-            catsRow.children
-        ).forEach(
-            function (b) {
-
-                b.setAttribute(
-                    'aria-pressed',
-                    String(
-                        b.dataset.cat === cat
-                    )
-                );
-
-            }
-        );
-
-
-        featured.hidden =
-            !(
-                cat === 'popular' &&
-                !q &&
-                track &&
-                track.children.length
-            );
-
-
-        if (q) {
-
-            viewTitle.textContent =
-                'Results';
-
-            viewSub.textContent =
-                shown +
-                (
-                    shown === 1
-                        ? ' product'
-                        : ' products'
-                ) +
-                ' for \u201C' +
-                query +
-                '\u201D';
-
-        } else if (cat === 'popular') {
-
-            viewTitle.textContent =
-                'Popular';
-
-            viewSub.textContent =
-                shown
-                    ? 'Swipe sideways for more'
-                    : '';
-
-        } else {
-
-            viewTitle.textContent =
-                labelFor(cat);
-
-            viewSub.textContent =
-                shown +
-                (
-                    shown === 1
-                        ? ' product'
-                        : ' products'
-                );
-
-        }
-
-
-        shelf.hidden =
-            shown === 0;
-
-
-        list.scrollLeft = 0;
-
-        buildDots(shown);
-
-
-        state.classList.toggle(
-            'on',
-            shown === 0
-        );
-
-
-        stateClear.hidden = !q;
-
-
-        if (shown === 0) {
-
-            if (q) {
-
-                stateTitle.textContent =
-                    'No results';
-
-                stateText.textContent =
-                    'Check the spelling or try a name, developer or bundle ID.';
-
-            } else {
-
-                stateTitle.textContent =
-                    'No products yet';
-
-                stateText.textContent =
-                    cat === 'popular'
-                        ? 'New releases will show up here.'
-                        : 'This category is ready for future releases.';
-
-            }
-
-        }
-
-    }
-
-
-    catsRow.addEventListener(
-        'click',
-        function (e) {
-
-            var b =
-                e.target.closest('.cat');
-
-            if (!b) return;
-
-
-            cat = b.dataset.cat;
-
-            query = '';
-
-            input.value = '';
-
-
-            render();
-
-
-            b.scrollIntoView({
-                block: 'nearest',
-                inline: 'center',
-                behavior: 'smooth'
-            });
-
-        }
-    );
-
-
-    form.addEventListener(
-        'submit',
-        function (e) {
-
-            e.preventDefault();
-
-
-            query =
-                input.value.trim();
-
-            cat =
-                query
-                    ? 'all'
-                    : 'popular';
-
-
-            render();
-
-            input.blur();
-
-        }
-    );
-
-
-    input.addEventListener(
-        'input',
-        function () {
-
-            if (
-                input.value === '' &&
-                query
-            ) {
-
-                query = '';
-
-                cat = 'popular';
-
-                render();
-
-            }
-
-        }
-    );
-
-
-    stateClear.addEventListener(
-        'click',
-        function () {
-
-            query = '';
-
-            cat = 'popular';
-
-            input.value = '';
-
-            render();
-
-        }
-    );
-
-
-    /* ---------- Featured arrows ---------- */
-
-    function step(dir) {
-
-        track.scrollBy({
-            left:
-                dir *
-                Math.max(
-                    280,
-                    track.clientWidth * 0.8
-                ),
-            behavior: 'smooth'
-        });
-
-    }
-
-
-    document.getElementById(
-        'feat-prev'
-    ).addEventListener(
-        'click',
-        function () {
-            step(-1);
-        }
-    );
-
-
-    document.getElementById(
-        'feat-next'
-    ).addEventListener(
-        'click',
-        function () {
-            step(1);
-        }
-    );
-
-
-    /* ---------- Account menu ---------- */
-
-    var acBtn =
-        document.getElementById(
-            'account-btn'
-        );
-
-    var acMenu =
-        document.getElementById(
-            'account-menu'
-        );
-
-
-    function setMenu(open) {
-
-        acMenu.hidden = !open;
-
-        acBtn.setAttribute(
-            'aria-expanded',
-            String(open)
-        );
-
-        acBtn.classList.toggle(
-            'on',
-            open
-        );
-
-    }
-
-
-    acBtn.addEventListener(
-        'click',
-        function (e) {
-
-            e.stopPropagation();
-
-            setMenu(
-                acMenu.hidden
-            );
-
-        }
-    );
-
-
-    document.addEventListener(
-        'click',
-        function (e) {
-
-            if (
-                !acMenu.hidden &&
-                !acMenu.contains(e.target)
-            ) {
-
-                setMenu(false);
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        'keydown',
-        function (e) {
-
-            if (
-                e.key === 'Escape' &&
-                !acMenu.hidden
-            ) {
-
-                setMenu(false);
-
-                acBtn.focus();
-
-            }
-
-        }
-    );
-
-
-    /* ---------- Footer account ---------- */
-
-    [].slice.call(
-        document.querySelectorAll(
-            '[data-open-account]'
-        )
-    ).forEach(
-        function (el) {
-
-            el.addEventListener(
-                'click',
-                function (e) {
-
-                    e.stopPropagation();
-
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-
-
-                    setTimeout(
-                        function () {
-                            setMenu(true);
-                        },
-                        350
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* ---------- Toast ---------- */
-
-    var tt;
-
-
-    [].slice.call(
-        document.querySelectorAll(
-            '[data-toast]'
-        )
-    ).forEach(
-        function (el) {
-
-            el.addEventListener(
-                'click',
-                function () {
-
-                    toast.textContent =
-                        el.dataset.toast;
-
-                    toast.classList.add('on');
-
-
-                    clearTimeout(tt);
-
-
-                    tt = setTimeout(
-                        function () {
-
-                            toast.classList.remove(
-                                'on'
-                            );
-
-                        },
-                        2200
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* ---------- Initial render ---------- */
-
-    render();
+render();
 
 })();
-
 </script>
-
 
 <script src="web/index.js"></script>
 
