@@ -208,6 +208,23 @@ font-size:11px;
 color:var(--muted)
 }
 
+a.account-item{
+min-height:44px;
+transition:background .18s var(--ease),color .18s var(--ease)
+}
+
+a.account-item:active{
+background:rgba(255,255,255,.06);
+color:#fff
+}
+
+@media(hover:hover){
+a.account-item:hover{
+background:rgba(255,255,255,.05);
+color:#fff
+}
+}
+
 /* Search */
 
 .search{grid-area:search;min-width:0}
@@ -974,6 +991,14 @@ font-size:18px;
 font-weight:900
 }
 
+.lana-dev-logo{--logo-h:34px}
+
+.lana-links{
+display:flex;
+flex-wrap:wrap;
+gap:8px
+}
+
 .lana-developer-meta{
 color:var(--muted);
 font-size:13px;
@@ -984,7 +1009,7 @@ margin-top:3px
 display:inline-flex;
 align-items:center;
 gap:8px;
-min-height:42px;
+min-height:44px;
 padding:0 14px;
 border:1px solid var(--line-2);
 border-radius:999px;
@@ -1041,6 +1066,11 @@ flex-direction:column
 
 .lana-developer{
 align-items:flex-start;
+flex-direction:column
+}
+
+.lana-links{
+width:100%;
 flex-direction:column
 }
 
@@ -1223,32 +1253,32 @@ aria-controls="account-menu">
 
 </button>
 
-<div class="account-menu" id="account-menu" role="menu" hidden>
+<div class="account-menu" id="account-menu" role="menu" aria-label="Account menu" hidden>
 
 <div class="account-menu-head">
 <strong>Account</strong>
-<span>Sign-in is not available yet.</span>
+<span>Purchases and sign-in are handled inside Sileo.</span>
 </div>
 
-<div class="account-item" role="menuitem" aria-disabled="true">
-Subscription
-<small>Soon</small>
-</div>
+<a class="account-item" role="menuitem" href="sileo://source/https://narf-alt.github.io">
+Add Narf to Sileo
+<small>Open</small>
+</a>
 
-<div class="account-item" role="menuitem" aria-disabled="true">
-Purchases
-<small>Soon</small>
-</div>
+<a class="account-item" role="menuitem" href="sileo://package/com.narf.lana">
+Open Lana in Sileo
+<small>Buy / Restore</small>
+</a>
 
-<div class="account-item" role="menuitem" aria-disabled="true">
-Entitlements
-<small>Soon</small>
-</div>
+<a class="account-item" role="menuitem" href="mailto:narf.dev@proton.me">
+Support
+<small>Email</small>
+</a>
 
-<div class="account-item" role="menuitem" aria-disabled="true">
-Settings
-<small>Soon</small>
-</div>
+<a class="account-item" role="menuitem" href="https://x.com/narf_ios" target="_blank" rel="noopener">
+Follow on X
+<small>@narf_ios</small>
+</a>
 
 </div>
 </div>
@@ -1774,29 +1804,53 @@ height="675">
 
 <div>
 
-<div class="lana-developer-name">Narf</div>
+<div class="lana-developer-name">
+<span class="brand-logo lana-dev-logo">
+<img src="assets/narf-brand.png" alt="Narf" width="1672" height="940" loading="lazy" decoding="async">
+</span>
+</div>
 
 <div class="lana-developer-meta">
-Lana · Version 1.3 · @narf_ios
+Lana · Version 1.3
 </div>
 
 </div>
+
+<div class="lana-links">
 
 <a class="lana-social"
 href="https://x.com/narf_ios"
 target="_blank"
 rel="noopener"
-aria-label="Narf on X">
+aria-label="Narf on X (@narf_ios)">
 
 <svg viewBox="0 0 24 24" aria-hidden="true">
 
-<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817-5.964 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+<path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
 
 </svg>
 
 @narf_ios
 
 </a>
+
+<a class="lana-social"
+href="mailto:narf.dev@proton.me"
+aria-label="Email Narf at narf.dev@proton.me">
+
+<svg viewBox="0 0 24 24" aria-hidden="true">
+
+<rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+
+<path d="M3.8 7.6l8.2 5.9 8.2-5.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+</svg>
+
+narf.dev@proton.me
+
+</a>
+
+</div>
 
 </div>
 
