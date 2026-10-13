@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=0">
+    <title>NarPill</title>
+    <link rel="stylesheet" type="text/css" href="../../web/index.css">
+    <style>
+        a, .tint, .table-btn:after { color: #6C5CE7; }
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0 6px;
+        }
+        .meta-badge {
+            background: rgba(0,0,0,0.05);
+            color: inherit;
+        }
+        .meta-badge-stable { background: rgba(48, 209, 88, 0.14); color: #30d158; }
+        .meta-badge-beta { background: rgba(255, 159, 10, 0.14); color: #ff9f0a; }
+        .meta-badge-experimental { background: rgba(191, 90, 242, 0.14); color: #bf5af2; }
+        .meta-badge-deprecated { background: rgba(255, 69, 58, 0.14); color: #ff453a; }
+        .meta-badge-nightly { background: rgba(90, 200, 250, 0.14); color: #5ac8fa; }
+        /* Tabs styling */
+        .nav {
+            display: flex;
+            margin: 20px 0;
+            background: rgba(0,0,0,0.04);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+        }
+        .nav_btn {
+            flex: 1;
+            text-align: center;
+            color: #8e8e93;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: none;
+        }
+        .nav_btn.active {
+            background: #fff;
+            color: #6C5CE7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-bottom: none;
+        }
+        .nav_btn:not(.active):hover {
+            color: #3c3c43;
+            background: rgba(0,0,0,0.03);
+        }
+        .summary-box {
+            background: rgba(0,0,0,0.03);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin: 14px 0 10px;
+            line-height: 1.7;
+        }
+        .table { margin-bottom: 10px; }
+        .resource-grid, .info-list, .badge-row {
+            display: grid;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .social-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 9px 14px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.05);
+            color: inherit;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .meta-note {
+            color: #8e8e93;
+            font-size: 13px;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+        .info-list-item, .matrix-item {
+            background: rgba(0,0,0,0.03);
+            border-radius: 14px;
+            padding: 12px 14px;
+            line-height: 1.65;
+        }
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+            margin-bottom: 14px;
+        }
+        .matrix-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #8e8e93;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+        .matrix-text { font-size: 14px; }
+        /* Changelog card styling */
+        .changelog_entry {
+            background: rgba(0,0,0,0.03);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+        }
+        .changelog_entry h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #6C5CE7;
+            margin-bottom: 10px;
+        }
+        /* Description markdown beautification */
+        .md_view h1 {
+            font-size: 22px;
+            font-weight: 800;
+            margin: 18px 0 10px;
+        }
+        .md_view h2 {
+            font-size: 17px;
+            font-weight: 700;
+            margin: 16px 0 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .md_view h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 14px 0 6px;
+        }
+        .md_view p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #3c3c43;
+            margin: 8px 0;
+        }
+        .md_view ul, .md_view ol {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+        .md_view li {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #3c3c43;
+            margin-bottom: 4px;
+        }
+        .md_view code {
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: "SF Mono", Menlo, monospace;
+        }
+        .md_view strong {
+            font-weight: 700;
+        }
+        @media (prefers-color-scheme: dark) {
+            .nav {
+                background: rgba(255,255,255,0.06);
+            }
+            .nav_btn.active {
+                background: rgba(255,255,255,0.12);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            .nav_btn:not(.active):hover {
+                color: #d2d2d7;
+                background: rgba(255,255,255,0.04);
+            }
+            .summary-box,
+            .social-pill,
+            .info-list-item,
+            .matrix-item,
+            .meta-badge,
+            .changelog_entry {
+                background: rgba(255,255,255,0.08);
+            }
+            .meta-note, .matrix-title {
+                color: #98989d;
+            }
+            .md_view p, .md_view li {
+                color: #d2d2d7;
+            }
+            .md_view h2 {
+                border-bottom-color: rgba(255,255,255,0.1);
+            }
+            .md_view code {
+                background: rgba(255,255,255,0.1);
+            }
+        }
+    </style>
+    <script src="../../web/index.js"></script>
+    <meta name="description" content="NarPill by Narf · 15.0 to 26.0.1">
+    <meta property="og:title" content="NarPill">
+    <meta property="og:description" content="NarPill by Narf · 15.0 to 26.0.1">
+    <meta property="og:image" content="../../assets/com.narf.narpill/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NarPill">
+    <meta name="twitter:description" content="NarPill by Narf · 15.0 to 26.0.1">
+    <meta name="twitter:image" content="https://narf-alt.github.io/assets/com.narf.narpill/banner.png">
+    <meta name="theme-color" content="#6C5CE7">
+</head>
+<body>
+    <div class="body">
+        <div style="background-image: url(../../assets/com.narf.narpill/banner.png)" class="banner_underlay"></div>
+        <div class="package package_head">
+            <img src="../../assets/com.narf.narpill/icon.png">
+            <div class="package_info">
+                <h1 class="package_name">NarPill</h1>
+                <p class="package_caption">Narf</p>
+                
+            </div>
+        </div>
+        <div class="nav">
+            <div class="nav_btn active tweak_info_btn" onclick="swap('.changelog','.tweak_info');">详情 Details</div>
+            <div class="nav_btn changelog_btn" onclick="swap('.tweak_info','.changelog');">更新日志 Changelog</div>
+        </div>
+        <div class="tweak_info">
+            
+            <div class="summary-box">NarPill Status Bar Utility</div>
+            <div class="md_view"></div>
+            
+            
+            
+            
+            <h3>插件信息 Info</h3>
+            <div class="table">
+                <div class="cell">
+                    <div class="title">开发者 Developer</div>
+                    <div class="text">Narf</div>
+                    <br><br>
+                </div>
+                <div class="cell">
+                    <div class="title">版本 Version</div>
+                    <div class="text">1.4.0-2</div>
+                    <br><br>
+                </div>
+                <div class="cell">
+                    <div class="title">兼容性 Compatibility</div>
+                    <div class="text">15.0 to 26.0.1</div>
+                    <br><br>
+                </div>
+                <div class="cell">
+                    <div class="title">分类 Section</div>
+                    <div class="text">Tweaks</div>
+                    <br><br>
+                </div>
+            </div>
+            <div class="resource-grid">
+            </div>
+        </div>
+        <div class="changelog">
+            <div class="changelog_entry">
+                <h4>1.4.0-2</h4>
+                <div class="md_view"><p>Initial release.</p>
+</div>
+            </div>
+        </div>
+        <div class="caption center footer">Narf</div>
+    </div>
+</body>
+<script>compatible("15.0","26.0.1","15.0 to 26.0.1");externalize()</script>
+</html>

@@ -5,9 +5,9 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.narf.lana.deb
 Size: 5087596
-MD5sum: ed3557c9416bba7a00e6f0d3d37f3411
-SHA1: 677e72dd0b3a3fb36c53802f1f2aff327bac22e8
-SHA256: 69e6b5c51927df9c1b7ca0dc933b1260d7fcc1089e0b63c461c69be5d1bb7cc5
+MD5sum: 7f66f003a2d17f801eb60a9904f4a774
+SHA1: de0afd80aa88bc8a256ad13ee40fc32f199cdfc9
+SHA256: 881b221c88bc9882240e0c177e659c430e642cb2e3d64ac2136f73972884ea0e
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -25,9 +25,9 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64e.deb
 Size: 5079420
-MD5sum: a8713c3f8f66b53753c4e4fca3c83d17
-SHA1: 9b7a9cc85b6f1f2c3eb7bf39274a1c2c30f2d04c
-SHA256: 329252bee2c77406026789b33e64c398749536689f82ec2648131cfa58b5498b
+MD5sum: 1fc0c87ae5090a94b6e094c0899e65d1
+SHA1: 9ea65589a4d4ed3e1e3efd6ee5dac6305828574b
+SHA256: 60147f808a4ebb5311ed2c22df697039994371d1e79256899203ea7a79de323e
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -38,6 +38,26 @@ SileoDepiction: https://narf-alt.github.io/depiction/native/com.narf.lana.json
 ModernDepiction: https://narf-alt.github.io/depiction/native/com.narf.lana.json
 Icon: https://narf-alt.github.io/assets/com.narf.lana/icon.png
 
+Package: com.narf.narpill
+Version: 1.4.0-2+debug
+Architecture: iphoneos-arm64
+Maintainer: Narf
+Installed-Size: 668
+Depends: mobilesubstrate, preferenceloader
+Filename: ./pkg/com.narf.narpill.deb
+Size: 76544
+MD5sum: 9ffd4320b5494bcd996aafdae40112d4
+SHA1: a974e82253bae10da2111f562f9c2e573a17d8a7
+SHA256: 507505df3e2f0c5b65748788f13ed69e67a5d960b836b7bf7939fa94e9073f54
+Section: Tweaks
+Description: NarPill Status Bar Utility
+Author: Narf
+Name: NarPill
+Depiction: https://narf-alt.github.io/depiction/web/com.narf.narpill.html
+SileoDepiction: https://narf-alt.github.io/depiction/native/com.narf.narpill.json
+ModernDepiction: https://narf-alt.github.io/depiction/native/com.narf.narpill.json
+Icon: https://narf-alt.github.io/assets/com.narf.narpill/icon.png
+
 Package: im.mjh.wclocate
 Version: 4.0.0
 Architecture: iphoneos-arm64
@@ -45,10 +65,10 @@ Maintainer: junhong
 Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
-Size: 34794
-MD5sum: 45b6699a8332dd3ec1a51c1cc5683853
-SHA1: 4e94c73e9eebdeebb18f62b81799633d95dc05db
-SHA256: 132f66964e369278d127cbd0805474d7ed8e49f30f688167dcfdef360feaecfe
+Size: 34798
+MD5sum: f6cf8405035db9a8611acb71b63cf741
+SHA1: 9b767a6edc302645ae2b482c9e286e4d4354e3b2
+SHA256: a8cad5e482ce19b9bba84460a33c33de05323755e9d2290d832ddb3bc06d072b
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
