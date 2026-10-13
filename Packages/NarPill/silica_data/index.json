@@ -1,1 +1,26 @@
-
+{
+  "bundle_id": "com.narf.narpill",
+  "name": "NarPill",
+  "version": "1.4.0-2",
+  "tagline": "NarPill Status Bar Utility",
+  "section": "Tweaks",
+  "architecture": "iphoneos-arm64",
+  "works_min": "15.0",
+  "works_max": "26.0.1",
+  "developer": {
+    "name": "Narf"
+  },
+  "maintainer": {
+    "name": "Narf"
+  },
+  "dependencies": "",
+  "conflicts": "",
+  "replaces": "",
+  "provides": "",
+  "changelog": [
+    {
+      "version": "1.4.0-2",
+      "changes": "Initial release."
+    }
+  ]
+}
