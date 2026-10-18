@@ -5,9 +5,9 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.narf.lana.deb
 Size: 5087596
-MD5sum: c5080ea5b0c4f955b8bf7cb1806458ca
-SHA1: d44f34fdef5e3cb2aa6f460c217f71051db39c25
-SHA256: d1af5348f03ba1fbb2c24ef95b6adb8bca2950c51e3e008ef5cba0f0758cc6f9
+MD5sum: c476392d5bd6c698db439c87ddf8e7c9
+SHA1: ec77edc7bab6f061fc4f5b0543fe73b2c500c919
+SHA256: 3a67a8df6193a03304689fcc52e5da7180a8ea6227e7a7bee48925eba5ade3b3
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -24,10 +24,10 @@ Architecture: iphoneos-arm64e
 Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64e.deb
-Size: 5079420
-MD5sum: 1e359963ee4b7632f978fc1d826ea0ea
-SHA1: 2e762af072a6b4be9ed5937a7f64e9a251ccd522
-SHA256: 7749a999db7084425a243a5777dd621d118cd4936ec19a2e312ce05cb40a3e7d
+Size: 5079424
+MD5sum: 1ec5e66ee120d14548ec880610f2316b
+SHA1: 382929bc3279ee05b7ff7361dac069a8777233af
+SHA256: bd4c2aeb620412e5682998a123fc8d34c8acf683da6af71002f14748cbb4f158
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -46,9 +46,9 @@ Installed-Size: 668
 Depends: mobilesubstrate, preferenceloader
 Filename: ./pkg/com.narf.narpill.deb
 Size: 76546
-MD5sum: 375277b9d634d5529902fb94a609e863
-SHA1: 9aa8e56b8565d2715faa769904dcfe2bf2826652
-SHA256: 1f76302c8762467877d6d5af2274b9d9ed9eb660af16df4d9b23af84c08d3c35
+MD5sum: 38dc2d7b057e09c7ceccdceb20344bcb
+SHA1: ffdea055c8a361a3b6802895f7aab2da4d10e2f8
+SHA256: 3af4aa60b3bcd098fdc30db48b0f470826d914b3a8ebc14c44f9082b1fd041d1
 Section: Tweaks
 Tag: cydia::commercial
 Description: NarPill Status Bar Utility
@@ -66,10 +66,10 @@ Maintainer: junhong
 Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
-Size: 34798
-MD5sum: e27f51922ef040d4fdf4ede8c36134b7
-SHA1: deaa8f2ade91c19eb7628f7c4758a0f3ef3b5ca4
-SHA256: 6409687e8ab85e438b3a5a1098d1b9f6e6f48d92ef3a23442627951216f92e58
+Size: 34796
+MD5sum: 581bea66040ea115b11f04d034ee5d96
+SHA1: d55384b81a3889f03fe331f03e0c4f96279386f0
+SHA256: eaff515a79c1fbd71931797742092516408e363887e0c04c65d1adc9927c5453
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
