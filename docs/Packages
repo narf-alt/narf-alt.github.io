@@ -88,9 +88,9 @@ Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
 Size: 34796
-MD5sum: 507d7877e24baa04fea4c07ae9858737
-SHA1: d5c90d48522eeea10fb4959c70e694ebb0b9296f
-SHA256: 6880680e58ba7df46f320d144fe53fb061a589037cdec42db942ae5f93c1c68f
+MD5sum: 2b3959cd78438f7a92ba9cb9eca217ee
+SHA1: 7a8c383b41449bd5c83268ec123ce29dd8596a3e
+SHA256: 147b1506a4f82100a21a591652cbcbd529be943ffc55b2f5108d7efb8f6bbd4c
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
