@@ -72,9 +72,16 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
-          python3 -m pip install --break-system-packages boto3
+          # Dedicated virtual environment: boto3/botocore/OpenSSL bindings come
+          # from here, never from the system dist-packages (the system
+          # pyOpenSSL/cryptography mismatch caused "module 'lib' has no
+          # attribute 'GEN_EMAIL'"). It lives in RUNNER_TEMP, outside the
+          # repository and outside anything that gets published.
+          R2_VENV="$RUNNER_TEMP/r2-venv"
+          python3 -m venv "$R2_VENV"
+          "$R2_VENV/bin/python" -m pip install --disable-pip-version-check --upgrade boto3
 
-          python3 - <<'PY'
+          "$R2_VENV/bin/python" - <<'PY'
           import hashlib
           import json
           import os
