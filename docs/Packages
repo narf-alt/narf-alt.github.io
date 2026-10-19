@@ -87,10 +87,10 @@ Maintainer: junhong
 Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
-Size: 34798
-MD5sum: 90b04125793e721da5632f66c68c4eab
-SHA1: fb819b4917283fcf235c775765f20302a15987df
-SHA256: 6476b068ae1e87f26cb3b52608a142e9fe24a594f4329314bc0dbc0baff25bea
+Size: 34796
+MD5sum: e2dd0e0adf3dc28ad250cb7153ca9d36
+SHA1: 74d09c8cb47c95ba2ab0271b985bdb1f29f8b880
+SHA256: 791d26da4f2f553ddb8cf9b35879091057b3ddfbdf95ed8f355208dc60b44222
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
