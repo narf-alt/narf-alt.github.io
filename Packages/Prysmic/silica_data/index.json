@@ -1,0 +1,14 @@
+{
+  "name": "Prysmic",
+  "bundleId": "com.narf.prysmic",
+  "version": "1.0.0",
+  "tagline": "Custom Control Center panel for iOS devices",
+  "developer": {
+    "name": "Narf"
+  },
+  "tintColor": "#2A5298",
+  "description": "Prysmic brings a modern, sleek, and fully customizable Control Center experience to your iOS device. Designed with elegance and fluid performance.",
+  "screenshots": [
+    "screenshot1.png"
+  ]
+}
