@@ -2,6 +2,7 @@
   "name": "Prysmic",
   "bundle_id": "com.narf.prysmic",
   "version": "1.0.0",
+  "section": "Tweaks",
   "tagline": "Custom Control Center panel for iOS interface",
   "icon": "icon.png",
   "developer": {
@@ -33,7 +34,7 @@
               { "url": "screenshot6.png", "accessibilityText": "Screenshot 6" },
               { "url": "screenshot7.png", "accessibilityText": "Screenshot 7" },
               { "url": "screenshot8.png", "accessibilityText": "Screenshot 8" },
-              { "url": "screenshot9.png", "accessibilityTest": "Screenshot 9" },
+              { "url": "screenshot9.png", "accessibilityText": "Screenshot 9" },
               { "url": "screenshot10.png", "accessibilityText": "Screenshot 10" },
               { "url": "screenshot11.png", "accessibilityText": "Screenshot 11" },
               { "url": "screenshot12.png", "accessibilityText": "Screenshot 12" },
