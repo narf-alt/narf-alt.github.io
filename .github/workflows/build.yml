@@ -65,6 +65,119 @@ jobs:
           cp -r Packages silex/
           cp -r Styles silex/
 
+      - name: Fetch private paid DEBs into the build environment
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          python3 -m pip install --break-system-packages boto3
+
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          import boto3
+          from botocore.exceptions import ClientError
+
+          # The paid builds. This mirrors the Worker's PRODUCTS / *_BUILDS
+          # (same bucket, same R2 keys, same architectures). The DEBs are
+          # downloaded into silex/Packages/<folder>/ ONLY: that directory is
+          # part of the temporary build tree and is never copied to docs/.
+          #
+          #  (Packages folder, bundle id, architecture, R2 object key)
+          PAID = [
+              ("Lana",    "com.narf.lana",    "iphoneos-arm64",  "pkg/com.lana.theme_1.3_iphoneos-arm64.deb"),
+              ("Lana",    "com.narf.lana",    "iphoneos-arm64e", "pkg/com.lana.theme_1.3_iphoneos-arm64e.deb"),
+              ("NarPill", "com.narf.narpill", "iphoneos-arm64",  "pkg/com.narf.narpill_1.4.0-2+debug_iphoneos-arm64.deb"),
+              ("Prysmic", "com.narf.prysmic", "iphoneos-arm64",  "pkg/com.narf.prysmic_1.0.0_iphoneos-arm64.deb"),
+          ]
+
+          need = ["R2_ACCOUNT_ID", "R2_BUCKET", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"]
+          missing = [n for n in need if not os.environ.get(n, "").strip()]
+          if missing:
+              raise SystemExit(
+                  "Missing GitHub Actions secret(s): " + ", ".join(missing)
+                  + ". Add them under Settings > Secrets and variables > Actions."
+              )
+
+          s3 = boto3.client(
+              "s3",
+              endpoint_url=f"https://{os.environ['R2_ACCOUNT_ID'].strip()}.r2.cloudflarestorage.com",
+              aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"].strip(),
+              aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"].strip(),
+              region_name="auto",
+          )
+          bucket = os.environ["R2_BUCKET"].strip()
+
+          def control(path, field):
+              return subprocess.run(
+                  ["dpkg-deb", "-f", str(path), field],
+                  check=True, capture_output=True, text=True,
+              ).stdout.strip()
+
+          def digests(path):
+              h = {"md5": hashlib.md5(), "sha1": hashlib.sha1(), "sha256": hashlib.sha256()}
+              with path.open("rb") as f:
+                  for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                      for x in h.values():
+                          x.update(chunk)
+              return {k: v.hexdigest() for k, v in h.items()}
+
+          manifest = []
+
+          for folder, bundle, arch, key in PAID:
+              dest_dir = Path("silex/Packages") / folder
+              if not dest_dir.is_dir():
+                  raise SystemExit(f"Packages/{folder} does not exist in the repository.")
+
+              dest = dest_dir / Path(key).name
+
+              try:
+                  s3.download_file(bucket, key, str(dest))
+              except ClientError as e:
+                  raise SystemExit(
+                      f"Could not download private DEB '{key}' from R2 "
+                      f"({e.response.get('Error', {}).get('Code', 'error')}). "
+                      "Check the object key and the R2 token permissions."
+                  )
+
+              # The file must be a real DEB for the architecture the Worker
+              # will hand out for this key.
+              try:
+                  got_arch = control(dest, "Architecture")
+                  version = control(dest, "Version")
+              except subprocess.CalledProcessError:
+                  raise SystemExit(f"{key} is not a valid .deb file.")
+
+              if got_arch != arch:
+                  raise SystemExit(
+                      f"{key}: control says Architecture '{got_arch}', expected '{arch}'."
+                  )
+
+              d = digests(dest)
+              manifest.append({
+                  "folder": folder,
+                  "bundle": bundle,
+                  "arch": arch,
+                  "key": key,
+                  "file": dest.name,
+                  "version": version,
+                  "size": dest.stat().st_size,
+                  **d,
+              })
+              print(f"fetched {bundle} [{arch}] {version}  {dest.stat().st_size} bytes  sha256={d['sha256']}")
+
+          # Checksums of the ORIGINAL files (the exact bytes the Worker serves).
+          # Used later to make the index describe those bytes, and to verify
+          # that no private DEB leaks into the published site.
+          Path("silex/.private-debs.json").write_text(json.dumps(manifest, indent=2))
+          PY
+
       - name: Build with Silex
         run: |
           cd silex
@@ -157,7 +270,7 @@ jobs:
         run: |
           xz -d -c silex/docs/Packages.xz > silex/docs/Packages
 
-      - name: Mark Lana and NarPill as commercial
+      - name: Mark Lana, NarPill and Prysmic as commercial
         run: |
           python3 - <<'PY'
           from pathlib import Path
@@ -166,7 +279,7 @@ jobs:
           text = path.read_text()
 
           TAG = "cydia::commercial"
-          targets = ["com.narf.lana", "com.narf.narpill"]
+          targets = ["com.narf.lana", "com.narf.narpill", "com.narf.prysmic"]
 
           found = {pkg: 0 for pkg in targets}
           tagged = {pkg: 0 for pkg in targets}
@@ -261,6 +374,103 @@ jobs:
               print(f"{pkg} marked as {TAG} ({with_tag}/{total} stanza(s)).")
           PY
 
+      - name: Align paid checksums with served DEBs and remove private DEBs from public output
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          import subprocess
+          from pathlib import Path
+
+          docs = Path("silex/docs")
+          manifest = json.loads(Path("silex/.private-debs.json").read_text())
+
+          paid_ids = {m["bundle"] for m in manifest}
+          by_key = {(m["bundle"], m["arch"]): m for m in manifest}
+
+          packages = docs / "Packages"
+          stanzas = [s for s in re.split(r"\n\n+", packages.read_text().strip()) if s.strip()]
+
+          def field(lines, name):
+              for i, line in enumerate(lines):
+                  if line.startswith(name + ":"):
+                      return i, line.split(":", 1)[1].strip()
+              return None, None
+
+          matched = set()
+          private_files = set()
+          out = []
+
+          for stanza in stanzas:
+              lines = stanza.splitlines()
+              _, pkg = field(lines, "Package")
+
+              if pkg in paid_ids:
+                  _, arch = field(lines, "Architecture")
+                  m = by_key.get((pkg, arch))
+                  if m is None:
+                      raise SystemExit(
+                          f"Index lists {pkg} [{arch}] but no private build was fetched for it."
+                      )
+                  if (pkg, arch) in matched:
+                      raise SystemExit(f"Duplicate index entry for {pkg} [{arch}].")
+                  matched.add((pkg, arch))
+
+                  # Size / MD5sum / SHA1 / SHA256 must describe the file that
+                  # the Worker really serves (the original R2 object), not the
+                  # copy Silex re-wrote its control file into.
+                  for name, value in (
+                      ("Size", str(m["size"])),
+                      ("MD5sum", m["md5"]),
+                      ("SHA1", m["sha1"]),
+                      ("SHA256", m["sha256"]),
+                  ):
+                      i, _ = field(lines, name)
+                      if i is None:
+                          raise SystemExit(f"{pkg} [{arch}]: stanza has no {name} field.")
+                      lines[i] = f"{name}: {value}"
+
+                  _, fn = field(lines, "Filename")
+                  if fn:
+                      private_files.add(fn)
+
+                  stanza = "\n".join(lines)
+
+              out.append(stanza)
+
+          expected = set(by_key)
+          if matched != expected:
+              raise SystemExit(
+                  "Private builds missing from the generated index: "
+                  + ", ".join(f"{b} [{a}]" for b, a in sorted(expected - matched))
+              )
+
+          packages.write_text("\n\n".join(out) + "\n")
+
+          # Private DEBs must not be published. The index entries stay (Sileo
+          # gets the real download URL from the Worker's authorize_download).
+          removed = []
+
+          for fn in sorted(private_files):
+              p = (docs / fn).resolve()
+              if docs.resolve() in p.parents and p.is_file():
+                  p.unlink()
+                  removed.append(str(p.relative_to(docs.resolve())))
+
+          # Belt and braces: anything left in the output whose control file
+          # says it is a paid package goes too, whatever it is called.
+          for p in sorted(docs.rglob("*.deb")):
+              r = subprocess.run(
+                  ["dpkg-deb", "-f", str(p), "Package"],
+                  capture_output=True, text=True,
+              )
+              if r.returncode == 0 and r.stdout.strip() in paid_ids:
+                  p.unlink()
+                  removed.append(str(p.relative_to(docs)))
+
+          print("Removed from public output:", removed)
+          PY
+
       - name: Regenerate compressed Packages files
         run: |
           xz -c -9 silex/docs/Packages > silex/docs/Packages.xz
@@ -319,6 +529,142 @@ jobs:
       - name: Add Sileo Payment Endpoint
         run: |
           printf '%s\n' 'https://narf-store.narf-ios26.workers.dev/' > docs/payment_endpoint
+
+      - name: Verify repository index and private DEB protection
+        run: |
+          python3 - <<'PY'
+          import bz2
+          import hashlib
+          import json
+          import lzma
+          import re
+          import subprocess
+          from pathlib import Path
+
+          docs = Path("docs")
+          manifest = json.loads(Path("silex/.private-debs.json").read_text())
+
+          paid_ids = {m["bundle"] for m in manifest}
+          by_key = {(m["bundle"], m["arch"]): m for m in manifest}
+          errors = []
+
+          def fail(msg):
+              errors.append(msg)
+
+          def field(lines, name):
+              for line in lines:
+                  if line.startswith(name + ":"):
+                      return line.split(":", 1)[1].strip()
+              return None
+
+          # 1. Payment endpoint
+          if (docs / "payment_endpoint").read_text().strip() != "https://narf-store.narf-ios26.workers.dev/":
+              fail("payment_endpoint is wrong.")
+
+          # 2. Index entries
+          packages_bytes = (docs / "Packages").read_bytes()
+          stanzas = [s for s in re.split(r"\n\n+", packages_bytes.decode().strip()) if s.strip()]
+          seen = set()
+          archs = set()
+
+          for stanza in stanzas:
+              lines = stanza.splitlines()
+              pkg = field(lines, "Package")
+              arch = field(lines, "Architecture")
+              fn = field(lines, "Filename")
+              archs.add(arch)
+
+              if pkg in paid_ids:
+                  m = by_key.get((pkg, arch))
+                  if m is None:
+                      fail(f"{pkg} [{arch}] is in the index without a private build.")
+                      continue
+                  seen.add((pkg, arch))
+
+                  tags = [t.strip() for t in (field(lines, "Tag") or "").split(",")]
+                  if "cydia::commercial" not in tags:
+                      fail(f"{pkg} [{arch}] is not tagged cydia::commercial (would be listed as free).")
+
+                  for name, key in (("Size", "size"), ("MD5sum", "md5"), ("SHA1", "sha1"), ("SHA256", "sha256")):
+                      if field(lines, name) != str(m[key]):
+                          fail(f"{pkg} [{arch}] {name} does not match the served DEB.")
+
+                  if fn and (docs / fn).exists():
+                      fail(f"{pkg} [{arch}] DEB is publicly reachable at {fn}.")
+              else:
+                  # Free packages: Filename must exist and match Size/SHA256.
+                  p = docs / (fn or "")
+                  if not fn or not p.is_file():
+                      fail(f"{pkg} [{arch}]: Filename '{fn}' is not in the published site.")
+                  else:
+                      if str(p.stat().st_size) != field(lines, "Size"):
+                          fail(f"{pkg} [{arch}]: Size does not match {fn}.")
+                      if hashlib.sha256(p.read_bytes()).hexdigest() != field(lines, "SHA256"):
+                          fail(f"{pkg} [{arch}]: SHA256 does not match {fn}.")
+
+          for k in sorted(set(by_key) - seen):
+              fail(f"{k[0]} [{k[1]}] is missing from the index.")
+
+          # 3. No paid DEB anywhere in the published tree
+          served = {m["file"] for m in manifest}
+          for p in docs.rglob("*.deb"):
+              r = subprocess.run(["dpkg-deb", "-f", str(p), "Package"], capture_output=True, text=True)
+              if p.name in served or (r.returncode == 0 and r.stdout.strip() in paid_ids):
+                  fail(f"Private DEB is published: {p}")
+
+          # 4. Compressed indexes decode to exactly Packages
+          decoded = {
+              "Packages": packages_bytes,
+              "Packages.xz": lzma.decompress((docs / "Packages.xz").read_bytes()),
+              "Packages.bz2": bz2.decompress((docs / "Packages.bz2").read_bytes()),
+              "Packages.zst": subprocess.run(
+                  ["zstd", "-dc", str(docs / "Packages.zst")],
+                  check=True, capture_output=True,
+              ).stdout,
+          }
+          for name, data in decoded.items():
+              if data != packages_bytes:
+                  fail(f"{name} does not decompress to Packages.")
+
+          # 5. Release checksums and architectures
+          release = (docs / "Release").read_text()
+          listed = {}
+          in_sha = False
+          for line in release.splitlines():
+              if line.strip() == "SHA256:":
+                  in_sha = True
+                  continue
+              if in_sha and line.startswith(" "):
+                  parts = line.split()
+                  if len(parts) == 3:
+                      listed[parts[2]] = (parts[0], int(parts[1]))
+              elif in_sha and line.strip():
+                  in_sha = False
+
+          for name in ("Packages", "Packages.bz2", "Packages.xz", "Packages.zst"):
+              data = (docs / name).read_bytes()
+              want = (hashlib.sha256(data).hexdigest(), len(data))
+              if listed.get(name) != want:
+                  fail(f"Release SHA256/size for {name} is wrong or missing.")
+
+          rel_archs = set((re.search(r"^Architectures:\s*(.*)$", release, re.M) or [None, ""])[1].split())
+          for a in archs:
+              if a not in rel_archs:
+                  fail(f"Release Architectures is missing {a}.")
+
+          # 6. Depictions / assets still generated for every paid product
+          for b in paid_ids:
+              for rel in (f"depiction/native/{b}.json", f"depiction/web/{b}.html", f"assets/{b}/icon.png"):
+                  if not (docs / rel).is_file():
+                      fail(f"Missing {rel}")
+
+          if errors:
+              raise SystemExit("Repository verification failed:\n - " + "\n - ".join(errors))
+
+          print("Repository verified: index valid, checksums correct, no private DEB published.")
+          for m in manifest:
+              print(f"  {m['bundle']} [{m['arch']}] {m['version']}  sha256={m['sha256']}")
+          PY
 
       - name: Commit generated files
         run: |
