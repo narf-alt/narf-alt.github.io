@@ -5,9 +5,9 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.narf.lana.deb
 Size: 5087596
-MD5sum: 8d82e292f2fb62a71d7652dbc033c3f3
-SHA1: a20d942dbbd8707fb194c6c1d82e3a3b4115d923
-SHA256: 2d3d1d31e38c69824623368222d2c1901096a20047a14a29e7895a4abbea77d3
+MD5sum: 1aae0c8f9ceaf62828b16b253ccb3a97
+SHA1: 2295c89c2bf614138a081d7d351869adc4d695df
+SHA256: 06b56190cb069fb3870d6c178b4dab4c7358a071de327ed3f906fce7d1a8616b
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -25,9 +25,9 @@ Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
 Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64e.deb
 Size: 5079420
-MD5sum: b16fbdc8292dba2f25fbca06a13d1bf7
-SHA1: f0b25130f45ea68c19b680091f81a9f30f3453f9
-SHA256: 15f030f01405354cc2310e944e942ed585c8be59cb0dd05b2167f23ecd62d0bf
+MD5sum: 45f94b1e1a2d4939e15da60af3c30f8f
+SHA1: df9a8a3134e0330c4a0353c74f0f293d4e0240a9
+SHA256: fef55169e48573e1e31369ca72af6b5327ccc91cf4a156bd674d659c2c863cfd
 Section: Themes
 Tag: cydia::commercial
 Description: Lana iOS Theme
@@ -46,9 +46,9 @@ Installed-Size: 668
 Depends: mobilesubstrate, preferenceloader
 Filename: ./pkg/com.narf.narpill.deb
 Size: 76546
-MD5sum: 67e2ebdf4d3432e8c98ac277feb43c4b
-SHA1: cb583ddd4d2e2ac626eddce8e22f512e4c2c72d1
-SHA256: de5893769e6538023087ae7fd886c7b6fc876c2cd5123f2da9ff2551ce9694d7
+MD5sum: fcca737675099d41e0bf4150f0909e55
+SHA1: 9fb3bfc2693b5a720692530b42a2cb853b672c14
+SHA256: 3933e28d4f00203c314e0c7eb52ffd4aa1392bf3421856cbe44f7254fc97cc70
 Section: Tweaks
 Tag: cydia::commercial
 Description: NarPill Status Bar Utility
@@ -66,10 +66,10 @@ Maintainer: junhong
 Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
-Size: 34798
-MD5sum: 61b68dc67b1e4c32c6404cda2fe9bb7f
-SHA1: 84e028b9856e5189721ffa51992e2cea2283ad98
-SHA256: e2942a0a09ba49f697522871aa86855858e356c11bc00d4eaa5a209d18d0ec3f
+Size: 34796
+MD5sum: 2c677606a141d5c2bfe9dc76e1035008
+SHA1: ad945a19f4fc504fcbba87dda140fe9a86e43bd1
+SHA256: d6713a3533eb9ed8bc21b6fe8c844dc0e433c70f64a4bb71e24e551902807391
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
