@@ -1,13 +1,12 @@
 {
-  "name": "Prysmic",
   "bundle_id": "com.narf.prysmic",
+  "name": "Prysmic",
   "version": "1.0.0",
   "tagline": "Custom Control Center panel for iOS interface",
   "section": "Tweaks",
   "architecture": "iphoneos-arm64",
   "works_min": "15.0",
   "works_max": "26.0.1",
-  "icon": "icon.png",
   "developer": {
     "name": "Narf"
   },
@@ -18,56 +17,10 @@
   "conflicts": "",
   "replaces": "",
   "provides": "",
-  "tintColor": "#6C5CE7",
-  "sileoDepiction": {
-    "title": "Prysmic",
-    "subtitle": "Elevate your iOS experience with custom dynamic interface styling.",
-    "icon": "icon.png",
-    "headerImage": "screenshot1.png",
-    "tintColor": "#6C5CE7",
-    "tabs": [
-      {
-        "tabname": "Details",
-        "views": [
-          {
-            "class": "DepictionMarkdownView",
-            "markdown": "### 💎 About Prysmic\n**Prysmic** is a premium, powerful customization tweak designed to completely transform your iOS interface elements. Packed with dynamic color engine support, smooth animations, and ultra-sleek UI design.\n\n---\n\n### ⚡ Key Features\n* 🎨 **Dynamic Color Engine:** Automatically adapts theme accents to match your wallpaper or active app.\n* 🎛️ **Custom Control Modules:** Reshape and restyle toggles, sliders, and status elements.\n* 🔲 **Glassmorphic & Flat Styles:** Choose between modern frosted glass or crisp flat aesthetics.\n* 🚀 **Lightweight & Fast:** Optimized for smooth performance without battery drain.\n* 📱 **iOS 15 to 26 Compatibility:** Full support for rootless jailbreak environments.\n\n---\n\n### 🖼️ Screenshots Gallery\n"
-          },
-          {
-            "class": "DepictionScreenshotsView",
-            "screenshots": [
-              { "url": "screenshot1.png", "accessibilityText": "Screenshot 1" },
-              { "url": "screenshot2.png", "accessibilityText": "Screenshot 2" },
-              { "url": "screenshot3.png", "accessibilityText": "Screenshot 3" },
-              { "url": "screenshot4.png", "accessibilityText": "Screenshot 4" },
-              { "url": "screenshot5.png", "accessibilityText": "Screenshot 5" },
-              { "url": "screenshot6.png", "accessibilityText": "Screenshot 6" },
-              { "url": "screenshot7.png", "accessibilityText": "Screenshot 7" },
-              { "url": "screenshot8.png", "accessibilityText": "accessibilityText": "Screenshot 8" },
-              { "url": "screenshot9.png", "accessibilityText": "Screenshot 9" },
-              { "url": "screenshot10.png", "accessibilityText": "Screenshot 10" },
-              { "url": "screenshot11.png", "accessibilityText": "Screenshot 11" },
-              { "url": "screenshot12.png", "accessibilityText": "Screenshot 12" },
-              { "url": "screenshot13.png", "accessibilityText": "Screenshot 13" }
-            ],
-            "itemCornerRadius": 12,
-            "itemSize": "{160, 346}"
-          },
-          {
-            "class": "DepictionMarkdownView",
-            "markdown": "\n---\n\n### 🌐 Connect & Support\nStay updated with the latest releases, tweak updates, and support:\n\n* 𝕏 **Developer X:** [@narf_ios](https://x.com/narf_ios)\n* 🛡️ **Repository:** [Narf Repo](https://narf-alt.github.io/)\n\n---\n\n### ℹ️ Technical Info\n* **Developer:** Narf\n* **Category:** Tweaks\n* **Version:** 1.0.0\n* **Compatibility:** iOS 15.0 - 26.0\n\n*Made with passion by Narf.*"
-          }
-        ]
-      },
-      {
-        "tabname": "Changelog",
-        "views": [
-          {
-            "class": "DepictionMarkdownView",
-            "markdown": "### 🚀 Version 1.0.0\n* ✨ **Initial Official Release:** Prysmic is now live!\n* 🔒 Integrated secure licensing via Cloudflare Worker.\n* 🎨 Added full customization suite."
-          }
-        ]
-      }
-    ]
-  }
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "changes": "Initial release."
+    }
+  ]
 }
