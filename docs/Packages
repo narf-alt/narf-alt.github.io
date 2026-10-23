@@ -39,16 +39,16 @@ ModernDepiction: https://narf-alt.github.io/depiction/native/com.narf.lana.json
 Icon: https://narf-alt.github.io/assets/com.narf.lana/icon.png
 
 Package: com.narf.narpill
-Version: 1.4.0-2+debug
+Version: 2.0.0
 Architecture: iphoneos-arm64
 Maintainer: Narf
-Installed-Size: 668
+Installed-Size: 544
 Depends: mobilesubstrate, preferenceloader
 Filename: ./pkg/com.narf.narpill.deb
-Size: 76546
-MD5sum: 8ccc325a078fc08d8b73154029eb921b
-SHA1: c0eaa61bfb9592cadd56625937ba7851f90a523a
-SHA256: 882b3a266484a25443b0de6ea603e042919745c585bf85b4dfb6c8a54ad24353
+Size: 70512
+MD5sum: 57b289b7c5bc1dbff845ac504b6988ca
+SHA1: 4447d74eb3194f2b3e4dc72d7eaeafda203e4bef
+SHA256: ed4652d6e57e84e9a29f6969f0a4457e655424de8551f6915cf281daefc710ce
 Section: Tweaks
 Tag: cydia::commercial
 Description: NarPill Status Bar Utility
@@ -60,16 +60,16 @@ ModernDepiction: https://narf-alt.github.io/depiction/native/com.narf.narpill.js
 Icon: https://narf-alt.github.io/assets/com.narf.narpill/icon.png
 
 Package: com.narf.prysmic
-Version: 1.0.0
+Version: 1.0.1
 Architecture: iphoneos-arm64
 Maintainer: Narf
-Installed-Size: 664
+Installed-Size: 756
 Depends: mobilesubstrate, preferenceloader
 Filename: ./pkg/com.narf.prysmic.deb
-Size: 106462
-MD5sum: 46b421a1d57d97596deb49eaa5357e38
-SHA1: 20e21ae3294c7f57b2e39b08598c19c561c8c950
-SHA256: 3d672df24d87ab29dcef598dd8bd17d7cecbde4d76433616dec7371a3d07b384
+Size: 135078
+MD5sum: ab29c35cee4e4e1b6473584adbcaadbf
+SHA1: 159a8835a390e37be4be47ce6ff56d94c23148ef
+SHA256: 869b92a40e006c7a6e91e40fcc6346ed7a2d4f08007374957cdd7870520848bd
 Section: Tweaks
 Tag: cydia::commercial
 Description: Custom Control Center panel for iOS interface
@@ -88,9 +88,9 @@ Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
 Size: 34796
-MD5sum: dddd8d4bcc45f4bd4d9db6a176ab0463
-SHA1: b73ca10179f669e5ac2316e97772fe847e80469f
-SHA256: 7394c58b9fde58711a89838c883b5ab96dbeeaeda7e501f5d146bbc9b9416c63
+MD5sum: 4a4aaaa8710ee1cca6cf42084f048c30
+SHA1: eb2fffa93bf1a59888e60b68259b672ebea662a2
+SHA256: 99af63043405ad60d7b3445df3ca6255b6a8922957df2d93bc75473d0b0fb7b0
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
