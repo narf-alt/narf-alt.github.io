@@ -100,8 +100,8 @@ jobs:
           PAID = [
               ("Lana",    "com.narf.lana",    "iphoneos-arm64",  "pkg/com.lana.theme_1.3_iphoneos-arm64.deb"),
               ("Lana",    "com.narf.lana",    "iphoneos-arm64e", "pkg/com.lana.theme_1.3_iphoneos-arm64e.deb"),
-              ("NarPill", "com.narf.narpill", "iphoneos-arm64",  "pkg/com.narf.narpill_1.4.0-2+debug_iphoneos-arm64.deb"),
-              ("Prysmic", "com.narf.prysmic", "iphoneos-arm64",  "pkg/com.narf.prysmic_1.0.0_iphoneos-arm64.deb"),
+              ("NarPill", "com.narf.narpill", "iphoneos-arm64",  "pkg/com.narf.narpill_2.0.0_iphoneos-arm64.deb"),
+              ("Prysmic", "com.narf.prysmic", "iphoneos-arm64",  "pkg/com.narf.prysmic_1.0.1_iphoneos-arm64.deb"),
           ]
 
           need = ["R2_ACCOUNT_ID", "R2_BUCKET", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY"]
