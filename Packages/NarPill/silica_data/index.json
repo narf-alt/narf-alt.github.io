@@ -1,7 +1,7 @@
 {
   "bundle_id": "com.narf.narpill",
   "name": "NarPill",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "tagline": "NarPill Status Bar Utility",
   "section": "Tweaks",
   "architecture": "iphoneos-arm64",
@@ -19,7 +19,7 @@
   "provides": "",
   "changelog": [
     {
-      "version": "1.4.0",
+      "version": "2.0.0",
       "changes": "Initial release."
     }
   ]
