@@ -1,7 +1,7 @@
 {
   "bundle_id": "com.narf.prysmic",
   "name": "Prysmic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "tagline": "Custom Control Center panel for iOS interface",
   "section": "Tweaks",
   "architecture": "iphoneos-arm64",
@@ -19,7 +19,7 @@
   "provides": "",
   "changelog": [
     {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "changes": "Initial release."
     }
   ]
