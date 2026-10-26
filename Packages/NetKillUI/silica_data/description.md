@@ -1,15 +1,15 @@
 NetKillUI
 
-Scan your home network and manage connected devices.
+Scan your network. Discover connected devices. Manage internet access.
 
-NetKillUI is a network management tweak that scans your home router’s local network to identify connected devices and lets you manage their internet access directly from your device.
+NetKillUI is an iOS tweak that helps you scan your home router’s local network, discover connected devices, and manage their internet access through supported network-control methods.
 
 Features
 
-* Network Scanning: Scan your local network to discover connected devices.
-* Connected Devices: View devices detected on your home network.
-* Internet Access Control: Disconnect selected devices from internet access through the supported network-control method.
-* Simple Interface: Manage network devices from a convenient interface.
+* Network Scanner: Scan your local network to discover connected devices.
+* Device Detection: View devices detected on your home network.
+* Internet Access Control: Manage internet access for selected devices where supported.
+* Router Password Access (In Development): Quickly open your router’s password settings page or redirect to Safari, making it easier to find and change your Wi-Fi password without searching for instructions manually.
 
 Compatibility
 
@@ -18,3 +18,7 @@ Compatibility
 * Rootless
 
 Developer: Narf
+
+⸻
+
+Disclaimer: NetKillUI is intended for use only on your own router and home network, or on networks you are explicitly authorized to manage. Do not use this tool to interfere with other people’s networks or devices.
