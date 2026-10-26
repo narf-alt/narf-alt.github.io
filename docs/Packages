@@ -3,7 +3,7 @@ Version: 1.3
 Architecture: iphoneos-arm64
 Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
-Filename: ./pkg/com.narf.lana.deb
+Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64.deb
 Size: 5087596
 MD5sum: 4f2189e5a78979ab8fd5bc022bc13cbb
 SHA1: 7beafb3cd2a3f31d5718395ce0b40efd4a8721df
@@ -23,7 +23,7 @@ Version: 1.3
 Architecture: iphoneos-arm64e
 Maintainer: Narf
 Depends: com.m4fn3.mikkyy | com.spark.snowboard, firmware (>= 15.0)
-Filename: ./pkg/com.lana.theme_1.3_iphoneos-arm64e.deb
+Filename: ./pkg/com.narf.lana.deb
 Size: 5079432
 MD5sum: 5a31b04bedb824b44f8e97615e019875
 SHA1: aa7d217c5d52a9ab5052cbb1d7c1fbef78a6b15a
@@ -87,10 +87,10 @@ Maintainer: junhong
 Installed-Size: 272
 Depends: firmware (>=15.0), mobilesubstrate, firmware (>= 15.0)
 Filename: ./pkg/im.mjh.wclocate.deb
-Size: 34796
-MD5sum: 4a4aaaa8710ee1cca6cf42084f048c30
-SHA1: eb2fffa93bf1a59888e60b68259b672ebea662a2
-SHA256: 99af63043405ad60d7b3445df3ca6255b6a8922957df2d93bc75473d0b0fb7b0
+Size: 34798
+MD5sum: 7b33ad15f8ef2d2f3754a9e950f1e37a
+SHA1: 6128e5311dc97d3c7883d172be12fe20ebc8a9a5
+SHA256: cdb06e734f991fe0e63818dceeb03c0270ebc358562905b163a3f5687e0c5e4f
 Section: Tweaks
 Description: 微信虚拟定位插件 — 地图选点、地点搜索、拖拽定位、海拔伪装、坐标纠偏
 Author: junhong
